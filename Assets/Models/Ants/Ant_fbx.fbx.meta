@@ -1,0 +1,223 @@
+fileFormatVersion: 2
+guid: c437a55d22870c844817dd4fa86b7aa5
+timeCreated: 1523590471
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: '__ant '
+    100002: __ant .2
+    100004: __ant .3
+    100006: __ant .4
+    100008: //RootNode
+    100010: Back
+    100012: Back.2
+    100014: Back.3
+    100016: Camera
+    100018: controllers
+    100020: front
+    100022: Head
+    100024: Head.2
+    100026: Head.3
+    100028: 'housing '
+    100030: Joint
+    100032: Joint.2
+    100034: Joint.3
+    100036: Joint.4
+    100038: Joint.5
+    100040: Joint.6
+    100042: Joint1
+    100044: Joint1.2
+    100046: Joint1.3
+    100048: Joint1.4
+    100050: Joint1.5
+    100052: Joint1.6
+    100054: Joint2
+    100056: Joint2.2
+    100058: Joint2.3
+    100060: Joint2.4
+    100062: Joint2.5
+    100064: Joint2.6
+    100066: Joint3
+    100068: Joint3.2
+    100070: Joint3.3
+    100072: Joint3.4
+    100074: Joint3.5
+    100076: Joint3.6
+    100078: L_Front_Foot
+    100080: L_Front_Foot.2
+    100082: left middle foot
+    100084: left middle foot.2
+    100086: left middle foot.3
+    100088: left rear foot
+    100090: left rear foot.2
+    100092: left rear foot.3
+    100094: Left_Front_Foot
+    100096: 'middle '
+    100098: middle .2
+    100100: Null
+    100102: Null.2
+    100104: Null.3
+    100106: Null.4
+    100108: Occlusion
+    100110: Righr rear foot
+    100112: Righr rear foot.2
+    100114: Righr rear foot.3
+    100116: right middle foot
+    100118: right middle foot.2
+    100120: right middle foot.3
+    100122: Right_Front_foot
+    100124: Right_Front_foot.2
+    100126: Right_Front_foot.3
+    100128: 'skeleton '
+    400000: '__ant '
+    400002: __ant .2
+    400004: __ant .3
+    400006: __ant .4
+    400008: //RootNode
+    400010: Back
+    400012: Back.2
+    400014: Back.3
+    400016: Camera
+    400018: controllers
+    400020: front
+    400022: Head
+    400024: Head.2
+    400026: Head.3
+    400028: 'housing '
+    400030: Joint
+    400032: Joint.2
+    400034: Joint.3
+    400036: Joint.4
+    400038: Joint.5
+    400040: Joint.6
+    400042: Joint1
+    400044: Joint1.2
+    400046: Joint1.3
+    400048: Joint1.4
+    400050: Joint1.5
+    400052: Joint1.6
+    400054: Joint2
+    400056: Joint2.2
+    400058: Joint2.3
+    400060: Joint2.4
+    400062: Joint2.5
+    400064: Joint2.6
+    400066: Joint3
+    400068: Joint3.2
+    400070: Joint3.3
+    400072: Joint3.4
+    400074: Joint3.5
+    400076: Joint3.6
+    400078: L_Front_Foot
+    400080: L_Front_Foot.2
+    400082: left middle foot
+    400084: left middle foot.2
+    400086: left middle foot.3
+    400088: left rear foot
+    400090: left rear foot.2
+    400092: left rear foot.3
+    400094: Left_Front_Foot
+    400096: 'middle '
+    400098: middle .2
+    400100: Null
+    400102: Null.2
+    400104: Null.3
+    400106: Null.4
+    400108: Occlusion
+    400110: Righr rear foot
+    400112: Righr rear foot.2
+    400114: Righr rear foot.3
+    400116: right middle foot
+    400118: right middle foot.2
+    400120: right middle foot.3
+    400122: Right_Front_foot
+    400124: Right_Front_foot.2
+    400126: Right_Front_foot.3
+    400128: 'skeleton '
+    2000000: Camera
+    2100000: Ant
+    4300000: __ant .4
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: __ant .4
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
