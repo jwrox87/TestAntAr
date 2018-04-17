@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *  Ant class in charge of 1 ant. Does its own rotation.
+ * 
+ * 
+ */
 public class Ant : MonoBehaviour
 {
-
     public enum State
     {
         idle,
@@ -18,30 +22,28 @@ public class Ant : MonoBehaviour
     float animationSpeed = 1f;
 
     [SerializeField]
-    float walkSpeed = 1f;
-
-    [SerializeField]
     State antState = State.walk;
 
     Transform []checkPoints;
-
     Animator ant_animator;
 
-    public float WalkSpeed
+    AntGroup antgroup;
+
+    int indexPt = 0;
+    float movePercentage;
+    int currentPath_id;
+
+    public int CurrentPathId
     {
-        get { return walkSpeed; }
+        get { return currentPath_id; }
+        set { currentPath_id = CurrentPathId; }
     }
-
-    public int indexPt = 0;
-    public float movePercentage = 0;
-
-    public int currentPath_id;
 
     public IEnumerator FirstRun()
     {
         yield return new WaitForSeconds(1f);
 
-        StartCoroutine(MoveIncrement());
+        StartCoroutine(RotateIncrement());
     }
 
     public IEnumerator RotateBody()
@@ -52,12 +54,10 @@ public class Ant : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
     }
 
-    public IEnumerator MoveIncrement()
+    public IEnumerator RotateIncrement()
     {
         while (movePercentage < 1)
         {
-            movePercentage += walkSpeed * Time.deltaTime;
-
             StartCoroutine(RotateBody());
 
             yield return new WaitForSeconds(0.03f);
@@ -81,8 +81,13 @@ public class Ant : MonoBehaviour
     public void Initialize()
     {
         ant_animator = GetComponent<Animator>();
+        antgroup = this.transform.parent.GetComponent<AntGroup>();
 
         ant_animator.speed = animationSpeed;
+
+        movePercentage = antgroup.movePercentage;
+
+        currentPath_id = antgroup.path_id;
 
         checkPoints = Global.Instance.Path_Finder.paths[currentPath_id].points;
 
@@ -114,8 +119,10 @@ public class Ant : MonoBehaviour
         if (indexPt + 1 >= checkPoints.Length)
             return;
 
-        float dist = Vector3.Distance(transform.position, checkPoints[indexPt + 1].position);
+        //float dist = Vector3.Distance(transform.position, checkPoints[indexPt + 1].position);
+         float dist = Vector3.Distance(this.transform.parent.position, checkPoints[indexPt + 1].position);
 
+        //float dist = checkPoints[indexPt + 1].position.x - this.transform.position.x;
         if (dist < 0.5f)
         {
             indexPt += 1;
@@ -123,16 +130,9 @@ public class Ant : MonoBehaviour
         }
     }
 
-    void PathUpdate()
-    {
-        movePercentage = Mathf.Clamp(movePercentage, 0, 1);
-        iTween.PutOnPath(this.gameObject, checkPoints, movePercentage);
-    }
-
     public void MoveUpdate()
     {
         CheckCurrentPoint();
-        PathUpdate();
     }
 
 }

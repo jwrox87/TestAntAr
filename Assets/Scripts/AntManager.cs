@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*
+ *  AntManager class. Does the update for all ants.
+ * 
+ * 
+ */
 public class AntManager : MonoBehaviour
 {
-
     public Ant[] ants;
 
     Pathfinder pathfinder;
@@ -16,12 +21,12 @@ public class AntManager : MonoBehaviour
 
         foreach (Ant ant in ants)
         {
-            ant.currentPath_id = Mathf.Clamp(ant.currentPath_id, 0, pathfinder.paths.Length - 1);
+            ant.CurrentPathId = Mathf.Clamp(ant.CurrentPathId, 0, pathfinder.paths.Length - 1);
 
             ant.Initialize();
             
-            ant.CorrectFacing(pathfinder.paths[ant.currentPath_id].points[1].position
-                - pathfinder.paths[ant.currentPath_id].points[0].position);
+            ant.CorrectFacing(pathfinder.paths[ant.CurrentPathId].points[1].position
+                - pathfinder.paths[ant.CurrentPathId].points[0].position);
 
             StartCoroutine(ant.FirstRun());
         }
@@ -33,6 +38,7 @@ public class AntManager : MonoBehaviour
     {
 	    foreach (Ant ant in ants)
         {
+     
             ant.DetectSurface();
             ant.MoveUpdate();
         }
