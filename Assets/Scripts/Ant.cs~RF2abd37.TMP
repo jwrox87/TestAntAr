@@ -22,9 +22,6 @@ public class Ant : MonoBehaviour
     float animationSpeed = 1f;
 
     [SerializeField]
-    float delayTurn = 0.01f;
-
-    [SerializeField]
     State antState = State.walk;
 
     Transform []checkPoints;
@@ -54,9 +51,7 @@ public class Ant : MonoBehaviour
         if (indexPt + 1 < checkPoints.Length)
             this.CorrectFacing(checkPoints[indexPt + 1].position - checkPoints[indexPt].position);
 
-        // this.CorrectFacing(antgroup.transform.position - transform.position);
-
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.1f);
     }
 
     public IEnumerator RotateIncrement()
@@ -65,7 +60,7 @@ public class Ant : MonoBehaviour
         {
             StartCoroutine(RotateBody());
 
-            yield return new WaitForSeconds(delayTurn);
+            yield return new WaitForSeconds(0.03f);
         }
     }
 
@@ -90,6 +85,8 @@ public class Ant : MonoBehaviour
 
         ant_animator.speed = animationSpeed;
 
+        movePercentage = antgroup.movePercentage;
+
         currentPath_id = antgroup.path_id;
 
         checkPoints = Global.Instance.Path_Finder.paths[currentPath_id].points;
@@ -104,12 +101,6 @@ public class Ant : MonoBehaviour
         if (Physics.Raycast(ray,out hit, 5f))
         {
             var slope = hit.normal;
-
-            var distanceToGround = hit.distance;
-            var currPos = transform.position;
-            var newY = (currPos.y - distanceToGround) + transform.localScale.y*6f;
-
-            transform.position = new Vector3(currPos.x, newY, currPos.z);
 
             transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
         }
@@ -128,7 +119,11 @@ public class Ant : MonoBehaviour
         if (indexPt + 1 >= checkPoints.Length)
             return;
 
-       float dist = Vector3.Distance(this.transform.parent.position, checkPoints[indexPt + 1].position);
+        //float dist = Vector3.Distance(transform.position, checkPoints[indexPt + 1].position);
+         float dist = Vector3.Distance(this.transform.parent.position, checkPoints[indexPt + 1].position);
+
+        iTween.PointOnPath(checkPoints, movePercentage );
+
 
         //float dist = checkPoints[indexPt + 1].position.x - this.transform.position.x;
         if (dist < 0.5f)
@@ -140,19 +135,6 @@ public class Ant : MonoBehaviour
 
     public void MoveUpdate()
     {
-        movePercentage = antgroup.movePercentage;
-
-        AntState();
-
-        if (movePercentage > 0 && movePercentage < 1)
-        {
-            antState = State.walk;
-        }
-        else
-        {
-            antState = State.idle;
-        }
-
         CheckCurrentPoint();
     }
 

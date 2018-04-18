@@ -42,7 +42,7 @@ public class Global : MonoBehaviour
     }
 
     // Use this for initialization
-    void Start ()
+    void Awake ()
     {
         pathfinder = GameObject.Find("PathFinder").GetComponent<Pathfinder>();
         antmanager = GameObject.Find("AntManager").GetComponent<AntManager>();    

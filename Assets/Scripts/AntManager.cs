@@ -10,14 +10,16 @@ using UnityEngine;
  */
 public class AntManager : MonoBehaviour
 {
-    public Ant[] ants;
+    Ant[] ants;
 
     Pathfinder pathfinder;
 
 	// Use this for initialization
 	void Start ()
     {
-        pathfinder = Global.Instance.Path_Finder;
+        ants = GameObject.FindObjectsOfType<Ant>();
+
+        pathfinder = Global.Instance.Path_Finder; 
 
         foreach (Ant ant in ants)
         {
@@ -38,9 +40,9 @@ public class AntManager : MonoBehaviour
     {
 	    foreach (Ant ant in ants)
         {
-     
             ant.DetectSurface();
             ant.MoveUpdate();
+
         }
 	}
 }

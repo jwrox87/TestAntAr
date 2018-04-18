@@ -55,6 +55,7 @@ public class AntGroup : MonoBehaviour
     void Start ()
     {
         StartCoroutine(FirstRun());
+        path_id = Mathf.Clamp(path_id, 0, Global.Instance.Path_Finder.paths.Length - 1);
         checkPoints = Global.Instance.Path_Finder.paths[path_id].points;
 	}
 	
