@@ -49,16 +49,6 @@ public class Ant : MonoBehaviour
         StartCoroutine(RotateIncrement());
     }
 
-    public IEnumerator RotateBody()
-    {
-        if (indexPt + 1 < checkPoints.Length)
-            this.CorrectFacing(checkPoints[indexPt + 1].position - checkPoints[indexPt].position);
-
-        // this.CorrectFacing(antgroup.transform.position - transform.position);
-
-        yield return new WaitForSeconds(0.01f);
-    }
-
     public IEnumerator RotateIncrement()
     {
         while (movePercentage < 1)
@@ -67,6 +57,15 @@ public class Ant : MonoBehaviour
 
             yield return new WaitForSeconds(delayTurn);
         }
+    }
+
+    public IEnumerator RotateBody()
+    {
+        if (indexPt + 1 < checkPoints.Length)
+            this.CorrectFacing(checkPoints[indexPt + 1].position - checkPoints[indexPt].position);
+
+        // this.CorrectFacing(antgroup.transform.position - transform.position);
+        yield return new WaitForSeconds(0.01f);
     }
 
     void AntState()
@@ -97,19 +96,22 @@ public class Ant : MonoBehaviour
         AntState();
     }
 
+    void MapToSurface(float distance)
+    {
+        var distanceToGround = distance;
+        var currPos = transform.position;
+        var newY = (currPos.y - distanceToGround) + transform.localScale.y * 6f;
+
+        transform.position = new Vector3(currPos.x, newY, currPos.z);
+    }
+
     public void DetectSurface()
     {
         RaycastHit hit;
         var ray = new Ray(transform.position, Vector3.down);
         if (Physics.Raycast(ray,out hit, 5f))
         {
-            var slope = hit.normal;
-
-            var distanceToGround = hit.distance;
-            var currPos = transform.position;
-            var newY = (currPos.y - distanceToGround) + transform.localScale.y*6f;
-
-            transform.position = new Vector3(currPos.x, newY, currPos.z);
+            MapToSurface(hit.distance);
 
             transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
         }

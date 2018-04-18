@@ -51,6 +51,17 @@ public class AntGroup : MonoBehaviour
         }
     }
 
+    void Loop()
+    {
+        if (movePercentage >= 1 
+            && Global.Instance.Path_Finder.paths[path_id].type == Path.Type.Loop)
+        {
+            Path p = Global.Instance.Path_Finder.paths[path_id];
+
+           // print("Length: " +p.points.Length + " loop point: "+ p.loopPoint + " move percent: " +movePercentage);
+        }
+    }
+
     // Use this for initialization
     void Start ()
     {
@@ -63,5 +74,6 @@ public class AntGroup : MonoBehaviour
 	void Update ()
     {
         PathUpdate();
+        Loop();
 	}
 }
