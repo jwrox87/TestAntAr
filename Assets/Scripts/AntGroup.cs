@@ -10,6 +10,7 @@ using UnityEngine;
  */
 public class AntGroup : MonoBehaviour
 {
+    [Range(0,1)]
     public float movePercentage = 0;
 
     public int path_id;
@@ -18,7 +19,6 @@ public class AntGroup : MonoBehaviour
     float walkSpeed = 1f;
 
     Transform[] checkPoints;
-
     Ant[] OwnGroupAnts;
 
     public float WalkSpeed
@@ -83,7 +83,6 @@ public class AntGroup : MonoBehaviour
         checkPoints = Global.Instance.Path_Finder.paths[path_id].points;
 
         OwnGroupAnts = transform.GetComponentsInChildren<Ant>();
-
     }
 	
 	// Update is called once per frame
