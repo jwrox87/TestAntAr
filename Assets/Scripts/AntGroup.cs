@@ -19,6 +19,8 @@ public class AntGroup : MonoBehaviour
 
     Transform[] checkPoints;
 
+    Ant[] OwnGroupAnts;
+
     public float WalkSpeed
     {
         get { return walkSpeed; }
@@ -58,7 +60,18 @@ public class AntGroup : MonoBehaviour
         {
             Path p = Global.Instance.Path_Finder.paths[path_id];
 
-           // print("Length: " +p.points.Length + " loop point: "+ p.loopPoint + " move percent: " +movePercentage);
+            p.points[0] = p.points[p.points.Length - 1];
+            p.points[1] = p.loopPoint;
+            movePercentage = 0;
+            ResetAllAnts(0);
+        }
+    }
+
+    void ResetAllAnts(int resetIndexValue)
+    {
+        foreach (Ant ant in OwnGroupAnts)
+        {
+            ant.ResetIndex(resetIndexValue);
         }
     }
 
@@ -68,7 +81,10 @@ public class AntGroup : MonoBehaviour
         StartCoroutine(FirstRun());
         path_id = Mathf.Clamp(path_id, 0, Global.Instance.Path_Finder.paths.Length - 1);
         checkPoints = Global.Instance.Path_Finder.paths[path_id].points;
-	}
+
+        OwnGroupAnts = transform.GetComponentsInChildren<Ant>();
+
+    }
 	
 	// Update is called once per frame
 	void Update ()

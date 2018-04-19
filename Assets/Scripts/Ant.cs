@@ -96,6 +96,11 @@ public class Ant : MonoBehaviour
         AntState();
     }
 
+    public void ResetIndex(int resetValue)
+    {
+        indexPt = resetValue;
+    }
+
     void MapToSurface(float distance)
     {
         var distanceToGround = distance;
