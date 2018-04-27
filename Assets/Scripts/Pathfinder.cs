@@ -31,11 +31,20 @@ public class Pathfinder : MonoBehaviour
 
     void OnDrawGizmos()
     {
+        //for (int x = 0; x < paths.Length; x++)
+        //{
+        //    iTween.DrawPathGizmos(paths[x].points,paths[x].color);         
+        //}
+
         for (int x = 0; x < paths.Length; x++)
         {
-            iTween.DrawPathGizmos(paths[x].points,paths[x].color);         
+            for (int i = 0, j = 1; i < paths[x].points.Length - 1; i++, j++)
+            {
+                Gizmos.color = paths[x].color;
+                Gizmos.DrawLine(paths[x].points[i].position, paths[x].points[j].position);
+            }
         }
-        
+
     }
 	
 	// Update is called once per frame
