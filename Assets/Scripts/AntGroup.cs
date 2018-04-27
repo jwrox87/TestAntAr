@@ -12,15 +12,24 @@ public class AntGroup : MonoBehaviour
 {
     [Range(0,1)]
     public float movePercentage = 0;
-
     public int path_id;
 
     [SerializeField]
     float walkSpeed = 1f;
 
-    Transform[] checkPoints;
-    Ant[] OwnGroupAnts;
 
+    Transform[] checkPoints;
+
+    //Ant relation variables
+    Ant[] AntTeam;
+    Ant AntLeader;
+
+
+    //Split path logic
+    int curr_checkPt;
+    float splitVal;
+
+    //Getter Setters
     public float WalkSpeed
     {
         get { return walkSpeed; }
@@ -69,10 +78,15 @@ public class AntGroup : MonoBehaviour
 
     void ResetAllAnts(int resetIndexValue)
     {
-        foreach (Ant ant in OwnGroupAnts)
+        foreach (Ant ant in AntTeam)
         {
             ant.ResetIndex(resetIndexValue);
         }
+    }
+
+    void Split()
+    {
+
     }
 
     // Use this for initialization
@@ -82,7 +96,11 @@ public class AntGroup : MonoBehaviour
         path_id = Mathf.Clamp(path_id, 0, Global.Instance.Path_Finder.paths.Length - 1);
         checkPoints = Global.Instance.Path_Finder.paths[path_id].points;
 
-        OwnGroupAnts = transform.GetComponentsInChildren<Ant>();
+        AntTeam = transform.GetComponentsInChildren<Ant>();
+        AntLeader = AntTeam[0];
+
+        curr_checkPt = AntLeader.CurrentIndexPt;
+
     }
 	
 	// Update is called once per frame
@@ -90,5 +108,13 @@ public class AntGroup : MonoBehaviour
     {
         PathUpdate();
         Loop();
+
+        if (curr_checkPt != AntLeader.CurrentIndexPt)
+        {
+            curr_checkPt = AntLeader.CurrentIndexPt;
+            splitVal = Random.value;
+        }
+        
+        
 	}
 }

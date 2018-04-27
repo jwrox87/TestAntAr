@@ -27,7 +27,7 @@ public class Ant : MonoBehaviour
     [SerializeField]
     State antState = State.walk;
 
-    Transform []checkPoints;
+    Transform[] checkPoints;
     Animator ant_animator;
 
     AntGroup antgroup;
@@ -40,6 +40,10 @@ public class Ant : MonoBehaviour
     {
         get { return currentPath_id; }
         set { currentPath_id = CurrentPathId; }
+    }
+    public int CurrentIndexPt
+    {
+        get { return indexPt; }
     }
 
     public IEnumerator FirstRun()
