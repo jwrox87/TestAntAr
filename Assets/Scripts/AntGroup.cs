@@ -69,8 +69,7 @@ public class AntGroup : MonoBehaviour
         {
             Path p = Global.Instance.Path_Finder.paths[path_id];
 
-            p.points[0] = p.points[p.points.Length - 1];
-            p.points[1] = p.loopPoint;
+            p.Loop();
             movePercentage = 0;
             ResetAllAnts(0);
         }
@@ -86,7 +85,23 @@ public class AntGroup : MonoBehaviour
 
     void Split()
     {
+        if (splitVal > 0.5f)
+        {
 
+        }
+        else
+        {
+
+        }
+    }
+
+    void AtCheckPoint()
+    {
+        if (curr_checkPt != AntLeader.CurrentIndexPt)
+        {
+            curr_checkPt = AntLeader.CurrentIndexPt;
+            splitVal = Random.value;
+        }
     }
 
     // Use this for initialization
@@ -109,12 +124,7 @@ public class AntGroup : MonoBehaviour
         PathUpdate();
         Loop();
 
-        if (curr_checkPt != AntLeader.CurrentIndexPt)
-        {
-            curr_checkPt = AntLeader.CurrentIndexPt;
-            splitVal = Random.value;
-        }
-        
+        AtCheckPoint();
         
 	}
 }

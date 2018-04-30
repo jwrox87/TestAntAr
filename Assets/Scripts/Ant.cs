@@ -141,7 +141,6 @@ public class Ant : MonoBehaviour
 
        float dist = Vector3.Distance(this.transform.parent.position, checkPoints[indexPt + 1].position);
 
-        //float dist = checkPoints[indexPt + 1].position.x - this.transform.position.x;
         if (dist < 0.5f)
         {
             indexPt += 1;
