@@ -27,7 +27,6 @@ public class Ant : MonoBehaviour
     [SerializeField]
     State antState = State.walk;
 
-    Transform[] checkPoints;
     Animator ant_animator;
 
     AntGroup antgroup;
@@ -65,10 +64,9 @@ public class Ant : MonoBehaviour
 
     public IEnumerator RotateBody()
     {
-        if (indexPt + 1 < checkPoints.Length)
-            this.CorrectFacing(checkPoints[indexPt + 1].position - checkPoints[indexPt].position);
+        if (indexPt + 1 < antgroup.CheckPoints.Count)
+            this.CorrectFacing(antgroup.CheckPoints[indexPt + 1].position - antgroup.CheckPoints[indexPt].position);
 
-        // this.CorrectFacing(antgroup.transform.position - transform.position);
         yield return new WaitForSeconds(0.01f);
     }
 
@@ -94,8 +92,6 @@ public class Ant : MonoBehaviour
         ant_animator.speed = animationSpeed;
 
         currentPath_id = antgroup.path_id;
-
-        checkPoints = Global.Instance.Path_Finder.paths[currentPath_id].points;
 
         AntState();
     }
@@ -136,10 +132,10 @@ public class Ant : MonoBehaviour
 
     void CheckCurrentPoint()
     {
-        if (indexPt + 1 >= checkPoints.Length)
+        if (indexPt + 1 >= antgroup.CheckPoints.Count)
             return;
 
-       float dist = Vector3.Distance(this.transform.parent.position, checkPoints[indexPt + 1].position);
+       float dist = Vector3.Distance(this.transform.parent.position, antgroup.CheckPoints[indexPt + 1].position);
 
         if (dist < 0.5f)
         {
@@ -155,13 +151,9 @@ public class Ant : MonoBehaviour
         AntState();
 
         if (movePercentage > 0 && movePercentage < 1)
-        {
             antState = State.walk;
-        }
-        else
-        {
+        else      
             antState = State.idle;
-        }
 
         CheckCurrentPoint();
     }

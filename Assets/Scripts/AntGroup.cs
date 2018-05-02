@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 /*
  *  Ant group class. Does movement for a group of ants
  * 
@@ -17,32 +16,22 @@ public class AntGroup : MonoBehaviour
     [SerializeField]
     float walkSpeed = 1f;
 
-
-    Transform[] checkPoints;
+    List<Transform> checkPoints;
 
     //Ant relation variables
     Ant[] AntTeam;
     Ant AntLeader;
 
-
-    //Split path logic
-    int curr_checkPt;
-    float splitVal;
+    Path path;
 
     //Getter Setters
     public float WalkSpeed
     {
         get { return walkSpeed; }
     }
-    public Transform [] CheckPoints
+    public List<Transform> CheckPoints
     {
         get { return checkPoints; }
-    }
-
-    void PathUpdate()
-    {
-        movePercentage = Mathf.Clamp(movePercentage, 0, 1);
-        iTween.PutOnPath(this.gameObject, checkPoints, movePercentage);
     }
 
     public IEnumerator FirstRun()
@@ -57,22 +46,15 @@ public class AntGroup : MonoBehaviour
         while (movePercentage < 1)
         {
             movePercentage += walkSpeed * Time.deltaTime;
-
             yield return new WaitForSeconds(0.03f);
         }
     }
 
     void Loop()
     {
-        if (movePercentage >= 1 
-            && Global.Instance.Path_Finder.paths[path_id].type == Path.Type.Loop)
-        {
-            Path p = Global.Instance.Path_Finder.paths[path_id];
-
-            p.Loop();
-            movePercentage = 0;
-            ResetAllAnts(0);
-        }
+       path.InitLoop();
+       movePercentage = 0;
+       ResetAllAnts(0);
     }
 
     void ResetAllAnts(int resetIndexValue)
@@ -85,46 +67,57 @@ public class AntGroup : MonoBehaviour
 
     void Split()
     {
+        float splitVal = Random.value;
+
         if (splitVal > 0.5f)
         {
-
+            checkPoints = path.points;
+            return;
         }
         else
         {
-
+            checkPoints = path.points2;
+            return;
         }
     }
 
-    void AtCheckPoint()
+    void PathUpdate()
     {
-        if (curr_checkPt != AntLeader.CurrentIndexPt)
-        {
-            curr_checkPt = AntLeader.CurrentIndexPt;
-            splitVal = Random.value;
-        }
+        movePercentage = Mathf.Clamp(movePercentage, 0, 1);
+        iTween.PutOnPath(this.gameObject, checkPoints.ToArray(), movePercentage);
     }
 
     // Use this for initialization
-    void Start ()
+    public void Initialize()
     {
         StartCoroutine(FirstRun());
+
+        path = Global.Instance.Path_Finder.paths[path_id];
+
         path_id = Mathf.Clamp(path_id, 0, Global.Instance.Path_Finder.paths.Length - 1);
         checkPoints = Global.Instance.Path_Finder.paths[path_id].points;
 
         AntTeam = transform.GetComponentsInChildren<Ant>();
         AntLeader = AntTeam[0];
-
-        curr_checkPt = AntLeader.CurrentIndexPt;
-
     }
 	
 	// Update is called once per frame
-	void Update ()
+	public void Update ()
     {
         PathUpdate();
-        Loop();
 
-        AtCheckPoint();
-        
+        switch (path.type)
+        {
+            case Path.Type.Loop:
+            {
+                    if (movePercentage >= 1f)
+                    {
+                        Loop();
+                        Split();
+                    }
+            }
+            break;
+
+        }
 	}
 }

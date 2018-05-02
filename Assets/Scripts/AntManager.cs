@@ -11,6 +11,7 @@ using UnityEngine;
 public class AntManager : MonoBehaviour
 {
     Ant[] ants;
+    AntGroup[] antgroups;
 
     Pathfinder pathfinder;
 
@@ -18,6 +19,7 @@ public class AntManager : MonoBehaviour
 	void Start ()
     {
         ants = GameObject.FindObjectsOfType<Ant>();
+        antgroups = GameObject.FindObjectsOfType<AntGroup>();
 
         pathfinder = Global.Instance.Path_Finder; 
 
@@ -32,6 +34,12 @@ public class AntManager : MonoBehaviour
 
             StartCoroutine(ant.FirstRun());
         }
+
+
+        foreach (AntGroup antgroup in antgroups)
+        {
+            antgroup.Initialize();
+        }
 		
 	}
 
@@ -42,7 +50,12 @@ public class AntManager : MonoBehaviour
         {
             ant.DetectSurface();
             ant.MoveUpdate();
-
         }
+
+        foreach (AntGroup antgroup in antgroups)
+        {
+            //antgroup.MoveUpdate();
+        }
+
 	}
 }
