@@ -247,6 +247,7 @@
     <Compile Include="Assets\Scripts\Ant.cs" />
     <Compile Include="Assets\Scripts\AntGroup.cs" />
     <Compile Include="Assets\Scripts\AntManager.cs" />
+    <Compile Include="Assets\Scripts\CameraFocusController.cs" />
     <Compile Include="Assets\Scripts\Global.cs" />
     <Compile Include="Assets\Scripts\Pathfinder.cs" />
     <Compile Include="Assets\Vuforia\Scripts\DefaultInitializationErrorHandler.cs" />

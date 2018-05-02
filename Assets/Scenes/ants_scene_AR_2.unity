@@ -1029,6 +1029,7 @@ GameObject:
   - component: {fileID: 593526096}
   - component: {fileID: 593526095}
   - component: {fileID: 593526094}
+  - component: {fileID: 593526099}
   m_Layer: 0
   m_Name: ARCamera
   m_TagString: Untagged
@@ -1116,6 +1117,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &593526099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 593526093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0203a49b869c574c833f39f452cc727, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &735435335
 GameObject:
   m_ObjectHideFlags: 0
@@ -2098,7 +2110,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: bummarkerMaterial
+  m_Name: 2spidersMaterial
   m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -2111,7 +2123,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: f47775d9938244f19545220431b9046b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7e2f9c4f53bf4f7687bfff68c7c7554f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
@@ -2661,7 +2673,7 @@ Mesh:
     vertexCount: 4
     localAABB:
       m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 0.5, y: 0, z: 0.5}
+      m_Extent: {x: 0.5, y: 0, z: 0.28818446}
   m_Shapes:
     vertices: []
     shapes: []
@@ -2714,7 +2726,7 @@ Mesh:
       format: 0
       dimension: 0
     m_DataSize: 128
-    _typelessdata: 000000bf00000000000000bf000000000000803f000000000000000000000000000000bf000000000000003f000000000000803f00000000000000000000803f0000003f00000000000000bf000000000000803f000000000000803f000000000000003f000000000000003f000000000000803f000000000000803f0000803f
+    _typelessdata: 000000bf00000000ea8c93be000000000000803f000000000000000000000000000000bf00000000ea8c933e000000000000803f00000000000000000000803f0000003f00000000ea8c93be000000000000803f000000000000803f000000000000003f00000000ea8c933e000000000000803f000000000000803f0000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -3397,7 +3409,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1802923133}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -1770992566, guid: bab6fa851cf5a1a4bba3cec5f191cb8e, type: 3}
   m_Name: 
@@ -3408,7 +3420,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1802923133}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a917f0af64a6423093132dab321c15f, type: 3}
   m_Name: 
@@ -3419,20 +3431,20 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1802923133}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -1631628248, guid: bab6fa851cf5a1a4bba3cec5f191cb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTrackableName: bummarker
+  mTrackableName: 2spiders
   mPreserveChildSize: 0
   mInitializedInEditor: 1
   mDataSetPath: Vuforia/testar.xml
   mExtendedTracking: 0
-  mAspectRatio: 1
+  mAspectRatio: 0.5763689
   mImageTargetType: 0
   mWidth: 18
-  mHeight: 18
+  mHeight: 10.37464
 --- !u!4 &1802923139
 Transform:
   m_ObjectHideFlags: 0
@@ -3820,7 +3832,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2015531909
 Transform:
   m_ObjectHideFlags: 0
