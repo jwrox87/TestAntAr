@@ -88,9 +88,13 @@ public class AntGroup : MonoBehaviour
        
     }
 
-    void RotateUpdate()
+    void SetRenderQueue()
     {
-       
+        var renders = this.GetComponentsInChildren<SkinnedMeshRenderer>();
+        foreach (SkinnedMeshRenderer render in renders)
+        {
+            render.material.renderQueue = 2002;
+        }
     }
 
     // Use this for initialization
@@ -105,10 +109,12 @@ public class AntGroup : MonoBehaviour
 
         AntTeam = transform.GetComponentsInChildren<Ant>();
         AntLeader = AntTeam[0];
+
+        SetRenderQueue();
     }
 	
 	// Update is called once per frame
-	public void Update ()
+	void Update ()
     {
         PathUpdate();
 

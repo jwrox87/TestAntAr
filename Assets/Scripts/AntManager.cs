@@ -51,11 +51,5 @@ public class AntManager : MonoBehaviour
             ant.DetectSurface();
             ant.MoveUpdate();
         }
-
-        foreach (AntGroup antgroup in antgroups)
-        {
-            //antgroup.MoveUpdate();
-        }
-
 	}
 }
