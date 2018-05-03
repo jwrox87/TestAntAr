@@ -101,24 +101,26 @@ public class Ant : MonoBehaviour
         indexPt = resetValue;
     }
 
-    void MapToSurface(float distance)
-    {
-        var distanceToGround = distance;
-        var currPos = transform.position;
-        var newY = (currPos.y - distanceToGround) + transform.localScale.y * 6f;
-
-        transform.position = new Vector3(currPos.x, newY, currPos.z);
-    }
-
     public void DetectSurface()
     {
         RaycastHit hit;
-        var ray = new Ray(transform.position, Vector3.down);
-        if (Physics.Raycast(ray,out hit, 5f))
-        {
-            MapToSurface(hit.distance);
+        
+        Vector3 dir = -transform.up;
 
-            transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+        float posDetectSpeed = 10f;
+        float rotDetectSpeed = 10f;
+
+        var ray = new Ray(transform.position, dir);
+        Debug.DrawRay(transform.position, dir * 5f);
+
+        if (Physics.Raycast(ray, out hit, float.PositiveInfinity))
+        {
+            Vector3 pt = hit.point + hit.normal * 0.5f;
+            transform.position = Vector3.Lerp(transform.position, pt, Time.deltaTime * posDetectSpeed);
+
+            transform.rotation = Quaternion.Lerp(transform.rotation,
+                Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation,
+                Time.deltaTime * rotDetectSpeed);
         }
     }
 
@@ -127,7 +129,8 @@ public class Ant : MonoBehaviour
         Quaternion target_rot =
             Quaternion.FromToRotation(transform.right, target.normalized) * transform.rotation;
 
-        transform.rotation = Quaternion.Lerp(transform.rotation,target_rot, Time.deltaTime * turnSpeed);
+        transform.rotation = Quaternion.Lerp(transform.rotation, target_rot, Time.deltaTime * turnSpeed);
+       
     }
 
     void CheckCurrentPoint()
@@ -135,7 +138,7 @@ public class Ant : MonoBehaviour
         if (indexPt + 1 >= antgroup.CheckPoints.Count)
             return;
 
-       float dist = Vector3.Distance(this.transform.parent.position, antgroup.CheckPoints[indexPt + 1].position);
+        float dist = Vector3.Distance(this.transform.parent.position, antgroup.CheckPoints[indexPt + 1].position);
 
         if (dist < 0.5f)
         {

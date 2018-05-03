@@ -85,6 +85,12 @@ public class AntGroup : MonoBehaviour
     {
         movePercentage = Mathf.Clamp(movePercentage, 0, 1);
         iTween.PutOnPath(this.gameObject, checkPoints.ToArray(), movePercentage);
+       
+    }
+
+    void RotateUpdate()
+    {
+       
     }
 
     // Use this for initialization
