@@ -46,7 +46,7 @@ public class AntGroup : MonoBehaviour
         while (movePercentage < 1)
         {
             movePercentage += walkSpeed * Time.deltaTime;
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
@@ -112,7 +112,7 @@ public class AntGroup : MonoBehaviour
 
         SetRenderQueue();
     }
-	
+
 	// Update is called once per frame
 	void Update ()
     {

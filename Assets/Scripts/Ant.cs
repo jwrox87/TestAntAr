@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public struct randomNumbers
+{
+    public float randomSpeed;
+    public float randomX, randomY, randomZ;
+}
 /*
  *  Ant class in charge of 1 ant. Does its own rotation.
  * 
@@ -28,12 +34,14 @@ public class Ant : MonoBehaviour
     State antState = State.walk;
 
     Animator ant_animator;
-
     AntGroup antgroup;
 
     int indexPt = 0;
     float movePercentage;
     int currentPath_id;
+
+    randomNumbers randomVals;
+    Vector3 initialPos;
 
     public int CurrentPathId
     {
@@ -57,7 +65,7 @@ public class Ant : MonoBehaviour
         while (movePercentage < 1)
         {
             StartCoroutine(RotateBody());
-
+            StartCoroutine(RandomValues());
             yield return new WaitForSeconds(delayTurn);
         }
     }
@@ -65,9 +73,24 @@ public class Ant : MonoBehaviour
     public IEnumerator RotateBody()
     {
         if (indexPt + 1 < antgroup.CheckPoints.Count)
-            this.CorrectFacing(antgroup.CheckPoints[indexPt + 1].position - antgroup.CheckPoints[indexPt].position);
+        {
+            Vector3 diff = antgroup.CheckPoints[indexPt + 1].position - antgroup.CheckPoints[indexPt].position;
+            this.CorrectFacing(diff);
+        }
 
         yield return new WaitForSeconds(0.01f);
+    }
+
+    float RandomFunc(float x, float y)
+    {
+        return Random.Range(x, y);
+    }
+
+    public IEnumerator RandomValues()
+    {
+        randomVals.randomSpeed = RandomFunc(10f, 15f);
+
+        yield return new WaitForSeconds(0.5f);
     }
 
     void AntState()
@@ -94,6 +117,12 @@ public class Ant : MonoBehaviour
         currentPath_id = antgroup.path_id;
 
         AntState();
+
+        initialPos = transform.localPosition;
+        
+        randomVals.randomX = RandomFunc(10f, 15f);
+        randomVals.randomY = RandomFunc(10f, 15f);
+        randomVals.randomZ = RandomFunc(10f, 15f);
     }
 
     public void ResetIndex(int resetValue)
@@ -107,16 +136,22 @@ public class Ant : MonoBehaviour
         
         Vector3 dir = -transform.up;
 
-        float posDetectSpeed = 10f;
         float rotDetectSpeed = 10f;
 
+        Debug.DrawRay(transform.position, dir);
+
         var ray = new Ray(transform.position, dir);
-        Debug.DrawRay(transform.position, dir * 5f);
 
         if (Physics.Raycast(ray, out hit, float.PositiveInfinity))
         {
-            Vector3 pt = hit.point + hit.normal * 0.5f;
-            transform.position = Vector3.Lerp(transform.position, pt, Time.deltaTime * posDetectSpeed);
+            Vector3 destination = (antgroup.transform.InverseTransformPoint(hit.point) + hit.normal * 0.5f);
+
+            float x = Mathf.Clamp(destination.x, initialPos.x - randomVals.randomX, initialPos.x + randomVals.randomX);
+            float y = Mathf.Clamp(destination.y, initialPos.y - randomVals.randomY, initialPos.y + randomVals.randomY);
+            float z = Mathf.Clamp(destination.z, initialPos.z - randomVals.randomZ, initialPos.z + randomVals.randomZ);
+
+            transform.localPosition = Vector3.Lerp(transform.localPosition,
+                new Vector3(x, y, z), Time.smoothDeltaTime * randomVals.randomSpeed);
 
             transform.rotation = Quaternion.Lerp(transform.rotation,
                 Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation,
@@ -160,5 +195,6 @@ public class Ant : MonoBehaviour
 
         CheckCurrentPoint();
     }
+
 
 }

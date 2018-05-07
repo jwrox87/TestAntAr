@@ -19,32 +19,10 @@ public class Path
     public Type type = Type.Linear;
 
     List<Transform> cachedPoints;
-    Dictionary<int,Transform> pointsOfIntersection;
-
-    public Dictionary<int,Transform> PointsOfIntersection
-    {
-        get { return pointsOfIntersection; }
-    }
-
 
     public void Init()
     {
         cachedPoints = points;
-        InitIntersectionPts();
-    }
-
-    public void InitIntersectionPts()
-    {
-        pointsOfIntersection = new Dictionary<int, Transform>();
-
-        for (int i = 0; i < points.Count; i++)
-        {
-            foreach (Transform t2 in points2)
-            {
-                if (points[i].localPosition == t2.localPosition)
-                    pointsOfIntersection.Add(i, points[i]);
-            }
-        }
     }
 
     public void Switch(List<Transform> p)
