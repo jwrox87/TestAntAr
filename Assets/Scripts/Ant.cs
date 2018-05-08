@@ -132,10 +132,8 @@ public class Ant : MonoBehaviour
 
     public void DetectSurface()
     {
-        RaycastHit hit;
-        
+        RaycastHit hit;      
         Vector3 dir = -transform.up;
-
         float rotDetectSpeed = 10f;
 
         Debug.DrawRay(transform.position, dir);

@@ -20,7 +20,6 @@ public class AntGroup : MonoBehaviour
 
     //Ant relation variables
     Ant[] AntTeam;
-    Ant AntLeader;
 
     Path path;
 
@@ -108,7 +107,6 @@ public class AntGroup : MonoBehaviour
         checkPoints = Global.Instance.Path_Finder.paths[path_id].points;
 
         AntTeam = transform.GetComponentsInChildren<Ant>();
-        AntLeader = AntTeam[0];
 
         SetRenderQueue();
     }

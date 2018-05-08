@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 /*
  *  AntManager class. Does the update for all ants.
  * 
@@ -34,7 +33,6 @@ public class AntManager : MonoBehaviour
 
             StartCoroutine(ant.FirstRun());
         }
-
 
         foreach (AntGroup antgroup in antgroups)
         {

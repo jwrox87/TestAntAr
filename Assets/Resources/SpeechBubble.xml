@@ -1,0 +1,10 @@
+<SpeechBubbleCollection>
+<SpeechBubbles>
+	<SpeechBubble text = "He's daydreaming!">
+		<fadeTime> 2 </fadeTime>	
+	</SpeechBubble>
+  <SpeechBubble text = "He's a stupid boy, he would not pass his exam!">
+    <fadeTime> 3 </fadeTime>
+  </SpeechBubble>
+</SpeechBubbles>
+</SpeechBubbleCollection>
