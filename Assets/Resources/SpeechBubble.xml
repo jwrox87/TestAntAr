@@ -1,10 +1,13 @@
 <SpeechBubbleCollection>
 <SpeechBubbles>
 	<SpeechBubble text = "He's daydreaming!">
-		<fadeTime> 2 </fadeTime>	
+    <delay> 3 </delay>	
 	</SpeechBubble>
   <SpeechBubble text = "He's a stupid boy, he would not pass his exam!">
-    <fadeTime> 3 </fadeTime>
+    <delay> 3 </delay>
+  </SpeechBubble>
+  <SpeechBubble text = "Look, he is dozing off in class again">
+    <delay> 3 </delay>
   </SpeechBubble>
 </SpeechBubbles>
 </SpeechBubbleCollection>

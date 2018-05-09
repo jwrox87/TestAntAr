@@ -35,4 +35,10 @@ public class SpeechBubbleContainer
         var serializer = new XmlSerializer(typeof(SpeechBubbleContainer));
         return serializer.Deserialize(new StringReader(text)) as SpeechBubbleContainer;
     }
+
+
+    public SpeechBubble Access(int index)
+    {
+        return SpeechBubbles[index];
+    }
 }
