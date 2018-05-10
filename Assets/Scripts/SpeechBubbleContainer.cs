@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Xml.Serialization;
 using System.IO;
+using System.Text;
 
 [XmlRoot("SpeechBubbleCollection")]
 public class SpeechBubbleContainer
@@ -14,15 +15,23 @@ public class SpeechBubbleContainer
     public void Save(string path)
     {
         var serializer = new XmlSerializer(typeof(SpeechBubbleContainer));
-        using (var stream = new FileStream(path, FileMode.Create))
+        var encoding = Encoding.GetEncoding("UTF-8");
+        //using (var stream = new FileStream(path, FileMode.Create))
+        //{
+        //    serializer.Serialize(stream, this);
+        //}
+
+        using (var stream = new StreamWriter(path,false,encoding))
         {
             serializer.Serialize(stream, this);
         }
+
     }
 
     public static SpeechBubbleContainer Load(string path)
     {
         var serializer = new XmlSerializer(typeof(SpeechBubbleContainer));
+        var encoding = Encoding.GetEncoding("UTF-8");
         using (var stream = new FileStream(path, FileMode.Open))
         {
             return serializer.Deserialize(stream) as SpeechBubbleContainer;

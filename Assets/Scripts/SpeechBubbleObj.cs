@@ -49,7 +49,7 @@ public class SpeechBubbleObj : MonoBehaviour {
         {
             isFading = true;
 
-            SetAlphaValue(tmPro.color.a - (Time.deltaTime * 0.01f));
+            SetAlphaValue(GetAlphaValue() - (Time.deltaTime * 0.01f));
             yield return new WaitForSeconds(0.1f);
         }
 
@@ -62,12 +62,14 @@ public class SpeechBubbleObj : MonoBehaviour {
         {
             isAppearing = true;
 
-            SetAlphaValue(tmPro.color.a + (Time.deltaTime * 0.01f));
+            SetAlphaValue(GetAlphaValue() + (Time.deltaTime * 0.01f));
             yield return new WaitForSeconds(0.1f);
         }
 
         isAppearing = false;
     }
+
+
     
 	// Use this for initialization
 	void Awake ()

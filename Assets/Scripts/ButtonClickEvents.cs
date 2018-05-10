@@ -25,4 +25,8 @@ public class ButtonClickEvents : MonoBehaviour {
         SceneManager.LoadScene("speech_scene");
     }
 
+    public void GoToMenuScene()
+    {
+        SceneManager.LoadScene("Menu");
+    }
 }

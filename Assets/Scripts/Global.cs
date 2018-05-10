@@ -31,6 +31,8 @@ public class Global : MonoBehaviour
 
     Pathfinder pathfinder;
     AntManager antmanager;
+    SpeechBubbleManager speechbubblemanager;
+    DebugInfo debuginfo;
 
     public Pathfinder Path_Finder
     {
@@ -41,12 +43,34 @@ public class Global : MonoBehaviour
         get { return antmanager; }
     }
 
+    public SpeechBubbleManager SpeechBubble_Manager
+    {
+        get { return speechbubblemanager; }
+    }
+
+    public DebugInfo DebugInfo
+    {
+        get { return debuginfo; }
+    }
+
+
+
     // Use this for initialization
     void Awake ()
     {
+        if (GameObject.Find("PathFinder"))
         pathfinder = GameObject.Find("PathFinder").GetComponent<Pathfinder>();
-        antmanager = GameObject.Find("AntManager").GetComponent<AntManager>();    
-	}
+
+        if (GameObject.Find("AntManager"))
+        antmanager = GameObject.Find("AntManager").GetComponent<AntManager>();
+
+        if (GameObject.Find("Speech Bubble Points"))
+        speechbubblemanager = GameObject.Find("Speech Bubble Points").GetComponent<SpeechBubbleManager>();
+
+        if (GameObject.Find("DebugInfo"))
+        debuginfo = GameObject.Find("DebugInfo").GetComponent<DebugInfo>();
+
+    }
 	
 	// Update is called once per frame
 	void Update ()

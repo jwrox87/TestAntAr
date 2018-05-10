@@ -2,67 +2,77 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Xml;
 
 public class SpeechBubbleManager : MonoBehaviour
 {
-    int randomPointIndex;
+    int containerIndex;
+    int posIndex;
     SpeechBubbleContainer container;
     List<Transform> bubblePoints;
 
+    public Transform speechBubblePoints;
     public GameObject speechBubblePrefab;
 
     string currText;
     float delay;
 
+    public string GetCurrText
+    {
+        get { return currText; }
+    }
+
     // Use this for initialization
     void Start()
     {
-        container = SpeechBubbleContainer.Load(
-            System.IO.Path.Combine(Application.dataPath, "Resources/SpeechBubble.xml"));
+        TextAsset temp = Resources.Load("SpeechBubble") as TextAsset;
+        container = SpeechBubbleContainer.LoadFromText(temp.text);
 
         delay = container.Access(0).delay;
         currText = container.Access(0).text;
 
         bubblePoints = new List<Transform>();
-        foreach (Transform t in transform)
+        foreach (Transform t in speechBubblePoints)
         {
             bubblePoints.Add(t);
         }
 
-        randomPointIndex = 0;
-        //randomPointIndex = (int)ExtensionMethods<float>.Randomize(bubblePoints.Count);
+        containerIndex = 0;
+        posIndex = 0;
 
         GameObject speechBubble = CreateSpeechBubble(speechBubblePrefab);
-        speechBubble.transform.localEulerAngles = new Vector3(90, 0, 0);
-        speechBubble.GetComponent<SpeechBubbleObj>().ChangeText(currText);
+       speechBubble.transform.localPosition = new Vector3(0, 0, 0);
+       speechBubble.transform.localEulerAngles = new Vector3(90, 0, 0);
+       speechBubble.GetComponent<SpeechBubbleObj>().ChangeText(currText);
 
-        StartCoroutine(Logic(speechBubble.GetComponent<SpeechBubbleObj>()));
+        StartCoroutine(SpeechBubbleLogic(speechBubble.GetComponent<SpeechBubbleObj>()));
+       
     }
 
     void OnDrawGizmos()
     {    
-        foreach (Transform t in transform)
+        foreach (Transform t in speechBubblePoints)
         {
             if (t.gameObject.GetInstanceID() == GetInstanceID())
                 return;
 
             Gizmos.color = Color.red;
-            Gizmos.DrawCube(t.position,new Vector3(1f,1f,1f));
+            Gizmos.DrawCube(t.position,new Vector3(5f,5f,5f));
         }
     }
 
     
-    GameObject CreateSpeechBubble(GameObject obj)
+    public GameObject CreateSpeechBubble(GameObject obj)
     {
-        return Instantiate(speechBubblePrefab, 
-            transform.parent.TransformPoint(bubblePoints[randomPointIndex].localPosition),
-            bubblePoints[randomPointIndex].rotation,transform.parent);
+        return Instantiate(speechBubblePrefab,
+            speechBubblePoints.parent.TransformPoint(bubblePoints[posIndex].localPosition),
+            bubblePoints[posIndex].rotation, speechBubblePoints.parent);
     }
+
 
     void SpawnSpeechBubble(SpeechBubbleObj bubble)
     { 
-        bubble.transform.localPosition = bubblePoints[randomPointIndex].localPosition;
+        bubble.transform.localPosition = bubblePoints[containerIndex].localPosition;
     }
 
     SpeechBubble GetSpeechBubbleAtIndex(int index)
@@ -71,25 +81,30 @@ public class SpeechBubbleManager : MonoBehaviour
     }
 
 
-    IEnumerator Logic(SpeechBubbleObj speechbubble)
+    public IEnumerator SpeechBubbleLogic(SpeechBubbleObj speechbubble)
     {
+       
         const float MinAlpha = 0f;
         const float MaxAlpha = 1f;
 
         float changeDelay = 0.5f;
 
         while (true)
-        {
+        {         
             if (speechbubble.GetAlphaValue() <= MinAlpha)
             {
                 yield return new WaitForSeconds(changeDelay);
 
-                if (randomPointIndex < container.SpeechBubbles.Count - 1)
-                    randomPointIndex++;
+                if (containerIndex < container.SpeechBubbles.Count - 1)
+                    containerIndex++;
                 else
-                    randomPointIndex = 0;
+                    containerIndex = 0;
 
-                speechbubble.ChangeText(container.SpeechBubbles[randomPointIndex].text);
+                posIndex = (int)ExtensionMethods<float>.Randomize(bubblePoints.Count);
+                speechbubble.transform.localPosition 
+                    = speechBubblePoints.parent.InverseTransformPoint(bubblePoints[posIndex].position);
+
+                speechbubble.ChangeText(container.SpeechBubbles[containerIndex].text);
             }
 
             if (speechbubble.IsFading)
@@ -103,7 +118,7 @@ public class SpeechBubbleManager : MonoBehaviour
             //Reset logic
             if (speechbubble.GetAlphaValue() >= MaxAlpha)
             {
-                yield return new WaitForSeconds(delay);
+                yield return new WaitForSeconds(container.SpeechBubbles[containerIndex].delay);
                 speechbubble.IsAppearing = false;
             }
 
