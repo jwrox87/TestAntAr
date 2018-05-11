@@ -31,7 +31,6 @@ public class SpeechBubbleContainer
     public static SpeechBubbleContainer Load(string path)
     {
         var serializer = new XmlSerializer(typeof(SpeechBubbleContainer));
-        var encoding = Encoding.GetEncoding("UTF-8");
         using (var stream = new FileStream(path, FileMode.Open))
         {
             return serializer.Deserialize(stream) as SpeechBubbleContainer;

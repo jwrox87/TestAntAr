@@ -6,7 +6,6 @@ using TMPro;
 public class SpeechBubbleObj : MonoBehaviour {
 
     TextMeshPro tmPro;
-    ParticleSystem particleSys;
 
     bool isAppearing = true;
     bool isFading = false;
@@ -75,7 +74,6 @@ public class SpeechBubbleObj : MonoBehaviour {
 	void Awake ()
     {
         tmPro = GetComponentInChildren<TextMeshPro>();
-        particleSys = GetComponentInChildren<ParticleSystem>();
     }
 
 }

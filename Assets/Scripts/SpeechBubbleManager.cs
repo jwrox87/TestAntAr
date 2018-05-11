@@ -15,7 +15,6 @@ public class SpeechBubbleManager : MonoBehaviour
     public GameObject speechBubblePrefab;
 
     string currText;
-    float delay;
 
     public string GetCurrText
     {
@@ -28,7 +27,6 @@ public class SpeechBubbleManager : MonoBehaviour
         TextAsset temp = Resources.Load("SpeechBubble") as TextAsset;
         container = SpeechBubbleContainer.LoadFromText(temp.text);
 
-        delay = container.Access(0).delay;
         currText = container.Access(0).text;
 
         bubblePoints = new List<Transform>();

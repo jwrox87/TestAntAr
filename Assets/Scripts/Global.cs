@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Vuforia;
 
 public class Global : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class Global : MonoBehaviour
 
     #endregion
 
+    public bool EnableAR = true;
+
     Pathfinder pathfinder;
     AntManager antmanager;
     SpeechBubbleManager speechbubblemanager;
@@ -53,8 +56,6 @@ public class Global : MonoBehaviour
         get { return debuginfo; }
     }
 
-
-
     // Use this for initialization
     void Awake ()
     {
@@ -71,10 +72,10 @@ public class Global : MonoBehaviour
         debuginfo = GameObject.Find("DebugInfo").GetComponent<DebugInfo>();
 
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    private void Start()
     {
-      
-	}
+        VuforiaBehaviour.Instance.enabled = EnableAR;
+    }
+
 }
