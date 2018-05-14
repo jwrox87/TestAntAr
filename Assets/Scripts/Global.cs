@@ -56,21 +56,33 @@ public class Global : MonoBehaviour
         get { return debuginfo; }
     }
 
+    void Init()
+    {
+        /*
+        if (GameObject.Find("PathFinder"))
+            pathfinder = GameObject.Find("PathFinder").GetComponent<Pathfinder>();
+
+        if (GameObject.Find("AntManager"))
+            antmanager = GameObject.Find("AntManager").GetComponent<AntManager>();
+
+        if (GameObject.Find("Speech Bubble Points"))
+            speechbubblemanager = GameObject.Find("Speech Bubble Points").GetComponent<SpeechBubbleManager>();
+
+        if (GameObject.Find("DebugInfo"))
+            debuginfo = GameObject.Find("DebugInfo").GetComponent<DebugInfo>();
+            */
+    }
+
     // Use this for initialization
     void Awake ()
     {
-        if (GameObject.Find("PathFinder"))
-        pathfinder = GameObject.Find("PathFinder").GetComponent<Pathfinder>();
+        pathfinder = ExtensionMethods<Pathfinder>.FindObj("PathFinder");
 
-        if (GameObject.Find("AntManager"))
-        antmanager = GameObject.Find("AntManager").GetComponent<AntManager>();
+        antmanager = ExtensionMethods<AntManager>.FindObj("AntManager");
 
-        if (GameObject.Find("Speech Bubble Points"))
-        speechbubblemanager = GameObject.Find("Speech Bubble Points").GetComponent<SpeechBubbleManager>();
+        speechbubblemanager = ExtensionMethods<SpeechBubbleManager>.FindObj("Speech Bubble Points");
 
-        if (GameObject.Find("DebugInfo"))
-        debuginfo = GameObject.Find("DebugInfo").GetComponent<DebugInfo>();
-
+        debuginfo = ExtensionMethods<DebugInfo>.FindObj("DebugInfo");
     }
 
     private void Start()

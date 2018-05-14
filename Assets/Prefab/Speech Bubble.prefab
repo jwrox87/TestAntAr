@@ -178,8 +178,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 11
-  m_fontSizeBase: 11
+  m_fontSize: 8
+  m_fontSizeBase: 8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -316,7 +316,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -263818943
+  randomSeed: -208368382
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -468,7 +468,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 31.24
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -781,7 +781,7 @@ ParticleSystem:
     sphericalDirectionAmount: 1
     randomPositionAmount: 0
     radius:
-      value: 6.19
+      value: 3.4
       mode: 0
       spread: 0
       speed:

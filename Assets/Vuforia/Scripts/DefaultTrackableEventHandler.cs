@@ -87,17 +87,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
 
         if (Global.Instance.SpeechBubble_Manager)
         {
-            //GameObject speechBubble = Global.Instance.SpeechBubble_Manager.CreateSpeechBubble(
-            //     Global.Instance.SpeechBubble_Manager);
-            //Global.Instance.SpeechBubble_Manager.speechBubble.transform.localPosition = new Vector3(0, 0, 0);
-            //Global.Instance.SpeechBubble_Manager.speechBubble.transform.localEulerAngles = new Vector3(90, 0, 0);
-            //Global.Instance.SpeechBubble_Manager.speechBubble.GetComponent<SpeechBubbleObj>().ChangeText(
-            //    Global.Instance.SpeechBubble_Manager.GetCurrText);
-
-            //StartCoroutine(
-            //    Global.Instance.SpeechBubble_Manager.SpeechBubbleLogic(
-            //         Global.Instance.SpeechBubble_Manager.speechBubble.GetComponent<SpeechBubbleObj>()));
-
+  
             if (Global.Instance.DebugInfo)
                 Global.Instance.DebugInfo.SpeechBubbleManagerPresent = true;
         }

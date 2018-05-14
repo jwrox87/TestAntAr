@@ -14,20 +14,11 @@ public class SpeechBubbleManager : MonoBehaviour
     public Transform speechBubblePoints;
     public GameObject speechBubblePrefab;
 
-    string currText;
-
-    public string GetCurrText
-    {
-        get { return currText; }
-    }
-
     // Use this for initialization
     void Start()
     {
         TextAsset temp = Resources.Load("SpeechBubble") as TextAsset;
         container = SpeechBubbleContainer.LoadFromText(temp.text);
-
-        currText = container.Access(0).text;
 
         bubblePoints = new List<Transform>();
         foreach (Transform t in speechBubblePoints)
@@ -39,11 +30,11 @@ public class SpeechBubbleManager : MonoBehaviour
         posIndex = 0;
 
         GameObject speechBubble = CreateSpeechBubble(speechBubblePrefab);
-       speechBubble.transform.localPosition = new Vector3(0, 0, 0);
-       speechBubble.transform.localEulerAngles = new Vector3(90, 0, 0);
-       speechBubble.GetComponent<SpeechBubbleObj>().ChangeText(currText);
+        speechBubble.transform.localPosition = new Vector3(0, 0, 0);
+        speechBubble.transform.localEulerAngles = new Vector3(90, 0, 0);
+        speechBubble.GetComponent<SpeechBubbleObj>().ChangeText(container.Access(0).text);
 
-        StartCoroutine(SpeechBubbleLogic(speechBubble.GetComponent<SpeechBubbleObj>()));
+        StartCoroutine(SpeechBubbleUpdate(speechBubble.GetComponent<SpeechBubbleObj>()));
        
     }
 
@@ -79,14 +70,12 @@ public class SpeechBubbleManager : MonoBehaviour
     }
 
 
-    public IEnumerator SpeechBubbleLogic(SpeechBubbleObj speechbubble)
-    {
-       
-        const float MinAlpha = 0f;
-        const float MaxAlpha = 1f;
+    const float MinAlpha = 0f;
+    const float MaxAlpha = 1f; 
+    const float changeDelay = 0.5f;
 
-        float changeDelay = 0.5f;
-
+    public IEnumerator SpeechBubbleUpdate(SpeechBubbleObj speechbubble)
+    {      
         while (true)
         {         
             if (speechbubble.GetAlphaValue() <= MinAlpha)

@@ -81,14 +81,10 @@ public class Ant : MonoBehaviour
         yield return new WaitForSeconds(0.01f);
     }
 
-    float RandomFunc(float x, float y)
-    {
-        return Random.Range(x, y);
-    }
 
     public IEnumerator RandomValues()
     {
-        randomVals.randomSpeed = RandomFunc(10f, 15f);
+        randomVals.randomSpeed = ExtensionMethods<float>.Randomize(10f, 15f);
 
         yield return new WaitForSeconds(0.5f);
     }
@@ -120,9 +116,9 @@ public class Ant : MonoBehaviour
 
         initialPos = transform.localPosition;
         
-        randomVals.randomX = RandomFunc(10f, 15f);
-        randomVals.randomY = RandomFunc(10f, 15f);
-        randomVals.randomZ = RandomFunc(10f, 15f);
+        randomVals.randomX = ExtensionMethods<float>.Randomize(10f, 15f);
+        randomVals.randomY = ExtensionMethods<float>.Randomize(10f, 15f);
+        randomVals.randomZ = ExtensionMethods<float>.Randomize(10f, 15f);
     }
 
     public void ResetIndex(int resetValue)

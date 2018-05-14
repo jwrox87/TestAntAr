@@ -404,6 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c452d032c08334443bb1a83debf91373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnableAR: 1
 --- !u!21 &628195980
 Material:
   serializedVersion: 6

@@ -3,18 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ButtonClickEvents : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
+public class ButtonClickEvents : MonoBehaviour
+{
     public void GoToAntScene()
     {
         SceneManager.LoadScene("ants_scene_AR_2");   
@@ -25,8 +15,18 @@ public class ButtonClickEvents : MonoBehaviour {
         SceneManager.LoadScene("speech_scene");
     }
 
+    public void GoToHallucinationScene()
+    {
+        SceneManager.LoadScene("illusion_scene");
+    }
+
     public void GoToMenuScene()
     {
         SceneManager.LoadScene("Menu");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

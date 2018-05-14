@@ -6,5 +6,5 @@ public class SpeechBubble
     [XmlAttribute("text")]
     public string text;
     [XmlElement("delay")]
-    public int delay;
+    public int delay; //showtime
 }

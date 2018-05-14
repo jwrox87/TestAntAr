@@ -36,12 +36,6 @@ public class SpeechBubbleObj : MonoBehaviour {
         return tmPro.color.a;
     }
 
-    public void TurnOffParticle()
-    {
-       
-    }
-
-
     public IEnumerator Fade()
     {
         while (GetAlphaValue() > 0 && !isAppearing)
@@ -67,9 +61,7 @@ public class SpeechBubbleObj : MonoBehaviour {
 
         isAppearing = false;
     }
-
-
-    
+   
 	// Use this for initialization
 	void Awake ()
     {
