@@ -41,7 +41,7 @@ public static class ExtensionMethods<T>
     {
         GameObject obj = GameObject.Find(name);
 
-        if (obj)
+        if (obj && obj.GetComponent<T>() != null)
             return obj.GetComponent<T>();
         
         return default(T);
