@@ -1,33 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DebugInfo : MonoBehaviour
 {
 
-    TextMesh textmesh;
+    Text textObj;
 
+    [HideInInspector]
     public bool isTracking = false;
-    public bool SpeechBubbleManagerPresent = false;
-    public bool hasEnterCoroutine = false;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 
-        textmesh = GetComponent<TextMesh>();
-        
+        textObj = GetComponent<Text>();       
     }
 
-    public void AddMsg(string s)
+    void UpdateTrackinText()
     {
-     
+        if (isTracking)
+        {
+            textObj.color = Color.blue;
+            textObj.text = "Tracking";
+        }
+        else
+        {
+            textObj.color = Color.red;
+            textObj.text = "Not Tracking";
+        }
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        textmesh.text = "Tracking: " + isTracking + '\n' +
-                        "Speech Bubble Manager: " + SpeechBubbleManagerPresent + '\n' +
-                        "hasEnterCoroutine: " + hasEnterCoroutine;
+        UpdateTrackinText();
     }
 }

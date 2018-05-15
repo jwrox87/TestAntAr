@@ -46,4 +46,14 @@ public static class ExtensionMethods<T>
         
         return default(T);
     }
+
+    public static T FindObjWithComponent()
+    {      
+        GameObject obj = GameObject.FindObjectOfType(typeof(T)) as GameObject;
+
+        if (obj && obj.GetComponent<T>() != null)
+            return obj.GetComponent<T>();
+
+        return default(T);
+    }
 }

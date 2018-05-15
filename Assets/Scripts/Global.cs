@@ -82,7 +82,8 @@ public class Global : MonoBehaviour
 
         speechbubblemanager = ExtensionMethods<SpeechBubbleManager>.FindObj("Speech Bubble Points");
 
-        debuginfo = ExtensionMethods<DebugInfo>.FindObj("DebugInfo");
+        debuginfo = ExtensionMethods<DebugInfo>.FindObj("Text");
+        //debuginfo = ExtensionMethods<DebugInfo>.FindObjWithComponent();
     }
 
     private void Start()

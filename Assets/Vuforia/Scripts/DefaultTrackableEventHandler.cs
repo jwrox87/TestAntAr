@@ -85,18 +85,6 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
         foreach (var component in canvasComponents)
             component.enabled = true;
 
-        if (Global.Instance.SpeechBubble_Manager)
-        {
-  
-            if (Global.Instance.DebugInfo)
-                Global.Instance.DebugInfo.SpeechBubbleManagerPresent = true;
-        }
-        else
-        {
-            if (Global.Instance.DebugInfo)
-                Global.Instance.DebugInfo.SpeechBubbleManagerPresent = false;
-        }
-
         if (Global.Instance.DebugInfo)
             Global.Instance.DebugInfo.isTracking = true;
     }
