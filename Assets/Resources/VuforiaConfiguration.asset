@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: VuforiaConfiguration
   m_EditorClassIdentifier: 
   vuforia:
-    vuforiaLicenseKey: AUOET97/////AAABmRTCyvjvcU3vkI0zTshxTPAjLbocb+PN5vK32VAPXeKvyIo7ZZ9yNqSR9UzewDX22jUTAs6Z2Rj4oAys5thOQW+mRKUpkVo51MppikSdmOENAAxuKBlJGQGkKeVd1On1MV/ssq6Y2wElehm6jgsfn40N+KpuvzULpjUAGrF3ij7+k0ehZNqzFoZ73/qungVDC8wn+LyhSl+b538mXhJfY+kWfF8G9GzwfLTE3VrmsmSG0pAU1NhBRrXUHHZt9ko5R5J0wXwWwYCTmh1sEekcxx0QtC2QPB8q8gv2GIIxegb4QffXAsttJrcI9TmKoleke5JUpgcQyG3qIibDfiYn4qyVfAUCQuhNKEEILSi7szUU
+    vuforiaLicenseKey: AYzlg3P/////AAABGfvpNKoZEEG1k6GIw/avhVcdxk6vTQig0T31HORWUM0Fe4Ooad6VVLsFt6OEcNMVMeL+knptNGuE3FrIqivvXGTeFyM4oJ765fsTNc3AI6mS6uvVlD8eZoN4pT9svCLhn+RCoDeYpL6AdBeLtzyF/uW5PEnUdHCpUpQxkWqhFVCsjW4z1zk//XLospSy/IRivx2DD1LdJjU3ccGPZp0AJgtSBgnFv3AAQaYxiM8GRh5Y0HfmBBnZRfadHtEDgRKeaFvdi1XHSyjXtceP518fzEQhKJvPWlfMVVaeR16JxQxn3Zvl0RjCS3CdDrFLB/yCRxvv08n+dDGIZeigYQzcfWeuKoc8UQldlDQAtrBIe7ST
     ufoLicenseKey: QWN0WFF0ci8vLy8vQUFBQUtGNGlPN2RkT0V3WXRZb2M4Q3pua1ZkREV2dTBhOUdSUXVncnIxWGFHYm1qeVNTZmVUZzUyT252K1QvK2luLy9vTkZtT04vd29yemxWRk5YRnJDaHQ3SDJSWTAzR212VDIzclVyUVgzeVd0ZHJjTEhnNFdXS0Q5TXpqaGdnc0RmbEUzdEc0YWRadE51WXNFRzRHVlpVbGFFd3JFUHhsY3VCbFVTamVrc0RNdmZFazE4RCtFZkVxdXJTUkhGU2Q0WWZsVHdqOG1ud1dSSkpkTW43bFAwaDh3dlIyeFdHNE9OaHIvb0hPUDhlSzZLdjF5ak8ycUNJcVpKR0IrVnZJazZoNHl3NlNPNVE0Rk1aTUdVQXRybjJLcFlNQ0VuR0dDL3VNczFaR05WNHFUbENaNFRVRmQvb2s0ZEVHckZaQmlSVW9QU2RLTVpRZWJza0FFRWQzRnV5bCtxOXBLelZoSEtLbndHdUNKL0VTOGw=
     delayedInitialization: 0
     cameraDeviceModeSetting: -1
@@ -44,9 +44,9 @@ MonoBehaviour:
       ContainsMagnet: 0
   databaseLoad:
     dataSetsToLoad:
-    - testar
+    - nursing_ar_targets
     dataSetsToActivate:
-    - testar
+    - nursing_ar_targets
   videoBackground:
     clippingMode: 0
     numDivisions: 2

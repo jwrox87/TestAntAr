@@ -425,7 +425,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: d5a2a13745864363961f4da8679f168e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9d438778090a4db99254463417affe63, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
@@ -556,7 +556,7 @@ MonoBehaviour:
   mTrackableName: 2speechbubble
   mPreserveChildSize: 0
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/testar.xml
+  mDataSetPath: Vuforia/nursing_ar_targets.xml
   mExtendedTracking: 0
   mAspectRatio: 0.5763689
   mImageTargetType: 0
