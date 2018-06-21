@@ -30,12 +30,11 @@ public class Global : MonoBehaviour
 
     #endregion
 
-    public bool EnableAR = true;
-
     Pathfinder pathfinder;
     AntManager antmanager;
     SpeechBubbleManager speechbubblemanager;
     DebugInfo debuginfo;
+    UICanvasManager uICanvasManager;
 
     public Pathfinder Path_Finder
     {
@@ -54,6 +53,11 @@ public class Global : MonoBehaviour
     public DebugInfo DebugInfo
     {
         get { return debuginfo; }
+    }
+
+    public UICanvasManager UICanvasManager
+    {
+        get { return uICanvasManager; }
     }
 
     void Init()
@@ -80,15 +84,19 @@ public class Global : MonoBehaviour
 
         antmanager = ExtensionMethods<AntManager>.FindObj("AntManager");
 
-        speechbubblemanager = ExtensionMethods<SpeechBubbleManager>.FindObj("Speech Bubble Points");
+        speechbubblemanager = ExtensionMethods<SpeechBubbleManager>.FindObj("SpeechBubbleManager");
 
         debuginfo = ExtensionMethods<DebugInfo>.FindObj("Text");
         //debuginfo = ExtensionMethods<DebugInfo>.FindObjWithComponent();
+
+        uICanvasManager = ExtensionMethods<UICanvasManager>.FindObj("Global");
+
+        //LevelManager.LevelHandler();
     }
 
     private void Start()
     {
-        VuforiaBehaviour.Instance.enabled = EnableAR;
+        LevelManager.LevelHandler();    
     }
 
 }

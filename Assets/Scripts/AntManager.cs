@@ -14,8 +14,9 @@ public class AntManager : MonoBehaviour
 
     Pathfinder pathfinder;
 
-	// Use this for initialization
-	void Start ()
+
+    // Use this for initialization
+    void Start ()
     {
         ants = GameObject.FindObjectsOfType<Ant>();
         antgroups = GameObject.FindObjectsOfType<AntGroup>();
@@ -38,8 +39,8 @@ public class AntManager : MonoBehaviour
         {
             antgroup.Initialize();
         }
-		
-	}
+
+    }
 
     // Update is called once per frame
     void Update ()

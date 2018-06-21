@@ -84,9 +84,6 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
         // Enable canvas':
         foreach (var component in canvasComponents)
             component.enabled = true;
-
-        if (Global.Instance.DebugInfo)
-            Global.Instance.DebugInfo.isTracking = true;
     }
 
 
@@ -107,10 +104,6 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
         // Disable canvas':
         foreach (var component in canvasComponents)
             component.enabled = false;
-
-
-        if (Global.Instance.DebugInfo)
-            Global.Instance.DebugInfo.isTracking = false;
     }
 
     #endregion // PRIVATE_METHODS

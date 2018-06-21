@@ -14,6 +14,13 @@ public class SpeechBubbleManager : MonoBehaviour
     public Transform speechBubblePoints;
     public GameObject speechBubblePrefab;
 
+    private GameObject speechBubbleObj;
+    public GameObject SpeechBubbleObj
+    {
+        get { return speechBubbleObj; }
+        set { speechBubbleObj = value; }
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -33,6 +40,10 @@ public class SpeechBubbleManager : MonoBehaviour
         speechBubble.transform.localPosition = new Vector3(0, 0, 0);
         speechBubble.transform.localEulerAngles = new Vector3(90, 0, 0);
         speechBubble.GetComponent<SpeechBubbleObj>().ChangeText(container.Access(0).text);
+
+        speechBubbleObj = speechBubble;
+
+        StartCoroutine(ToggleBubbleVisibility(false, 0));
 
         StartCoroutine(SpeechBubbleUpdate(speechBubble.GetComponent<SpeechBubbleObj>()));
        
@@ -69,6 +80,15 @@ public class SpeechBubbleManager : MonoBehaviour
         return container.Access(index);
     }
 
+    public IEnumerator ToggleBubbleVisibility(bool b, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        foreach (Transform t in speechBubbleObj.transform)
+        {
+            t.gameObject.SetActive(b);
+        }
+    }
 
     const float MinAlpha = 0f;
     const float MaxAlpha = 1f; 

@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: d8c492b640ee74745a4591cf11fb9103
   - enabled: 1
-    path: Assets/Scenes/ants_scene_AR_2.unity
-    guid: 195bb426be813204f89192a39116478c
-  - enabled: 1
     path: Assets/Scenes/speech_scene.unity
     guid: f12f3089a54df194fa1fcabd513fca99
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/illusion_scene.unity
     guid: b10476e79dbfb714abf712d2860161bd
+  - enabled: 1
+    path: Assets/Scenes/ants_scene_AR_2.unity
+    guid: 195bb426be813204f89192a39116478c

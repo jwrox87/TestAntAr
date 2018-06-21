@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntAr.Plugins", "AntAr.Plugins.csproj", "{51D4767D-35D8-166A-608A-FBC1FA2638F2}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntAr", "AntAr.csproj", "{1B667395-90A8-821C-FFFE-73F00A094A1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntAr.Plugins", "AntAr.Plugins.csproj", "{51D4767D-35D8-166A-608A-FBC1FA2638F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntAr.Editor.Plugins", "AntAr.Editor.Plugins.csproj", "{D327CEE7-459F-B253-DC6D-86F59739EFE0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntAr.Editor", "AntAr.Editor.csproj", "{1486DBFD-CA2A-A81D-DD0C-C25584926BA3}"
 EndProject
@@ -13,14 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1B667395-90A8-821C-FFFE-73F00A094A1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B667395-90A8-821C-FFFE-73F00A094A1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B667395-90A8-821C-FFFE-73F00A094A1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B667395-90A8-821C-FFFE-73F00A094A1A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{51D4767D-35D8-166A-608A-FBC1FA2638F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{51D4767D-35D8-166A-608A-FBC1FA2638F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51D4767D-35D8-166A-608A-FBC1FA2638F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51D4767D-35D8-166A-608A-FBC1FA2638F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B667395-90A8-821C-FFFE-73F00A094A1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B667395-90A8-821C-FFFE-73F00A094A1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B667395-90A8-821C-FFFE-73F00A094A1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B667395-90A8-821C-FFFE-73F00A094A1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D327CEE7-459F-B253-DC6D-86F59739EFE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D327CEE7-459F-B253-DC6D-86F59739EFE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D327CEE7-459F-B253-DC6D-86F59739EFE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D327CEE7-459F-B253-DC6D-86F59739EFE0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1486DBFD-CA2A-A81D-DD0C-C25584926BA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1486DBFD-CA2A-A81D-DD0C-C25584926BA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1486DBFD-CA2A-A81D-DD0C-C25584926BA3}.Release|Any CPU.ActiveCfg = Release|Any CPU

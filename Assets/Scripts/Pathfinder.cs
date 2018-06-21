@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public class Path
+public class CPath
 {
     public enum Type
     {
@@ -61,7 +61,7 @@ public class Path
 public class Pathfinder : MonoBehaviour
 {
     [SerializeField]
-    public Path[] paths;
+    public CPath[] paths;
 
     // Use this for initialization
     void Start()

@@ -5,7 +5,6 @@ using Vuforia;
 
 public class CameraFocusController : MonoBehaviour
 {
-
     // code from  Vuforia Developer Library
     // https://library.vuforia.com/articles/Solution/Camera-Focus-Modes
     void Start()

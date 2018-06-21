@@ -21,7 +21,7 @@ public class AntGroup : MonoBehaviour
     //Ant relation variables
     Ant[] AntTeam;
 
-    Path path;
+    CPath path;
 
     //Getter Setters
     public float WalkSpeed
@@ -118,7 +118,7 @@ public class AntGroup : MonoBehaviour
 
         switch (path.type)
         {
-            case Path.Type.Loop:
+            case CPath.Type.Loop:
             {
                     if (movePercentage >= 1f)
                     {

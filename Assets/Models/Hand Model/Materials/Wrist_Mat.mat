@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Wrist_Mat
-  m_Shader: {fileID: 4800000, guid: 9cdc32e9dc32f2849b29f6fc67b30b9e, type: 3}
+  m_Shader: {fileID: 4800000, guid: d7d0e9c214350cb469b27c98d1ed6d97, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -56,7 +56,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
-    - _Cutoff: 0.5
+    - _Cutoff: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
@@ -72,5 +72,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.051470578, g: 0.051470578, b: 0.051470578, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

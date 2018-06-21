@@ -2,14 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using FaceTrackerExample;
+using Vuforia;
 
 public class DebugInfo : MonoBehaviour
 {
 
     Text textObj;
 
+    public bool tracker = true;
+
     [HideInInspector]
     public bool isTracking = false;
+
+    public FaceTrackerARExampleTest refObj;
+    public IllusionHandler refIH;
 
 	// Use this for initialization
 	void Awake () {
@@ -30,10 +37,52 @@ public class DebugInfo : MonoBehaviour
             textObj.text = "Not Tracking";
         }
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    void UpdateResolution()
     {
-        UpdateTrackinText();
+        if (!refObj)
+            return;
+
+        //textObj.text = "Width: " +refObj.requestedWidth + "\n"
+        //    + "Height: " +refObj.requestedHeight;
+
+
+        textObj.text = "Width: " + Screen.width
+            + " \n Height: " + Screen.height
+            + "\n Camera Size: " + Vuforia.VuforiaConfiguration.Instance.Vuforia.CameraDirection;
+    }
+
+    void UpdateIllusion()
+    {
+        if (!refIH)
+            return;
+
+        textObj.text = "Click position: " + refIH.debugmsg
+            + "\n Position tracker: " + refIH.postrackermsg
+            ;
+    }
+
+
+    void SimpleMsg()
+    {
+        textObj.text = VuforiaBehaviour.Instance.enabled.ToString();
+    }
+
+    // Update is called once per frame
+    void Update ()
+    {
+        if (!textObj)
+            return;
+
+        if (tracker)
+            UpdateTrackinText();
+        else
+        {
+            UpdateResolution();
+            UpdateIllusion();
+        }
+
+        //SimpleMsg();
+
     }
 }
