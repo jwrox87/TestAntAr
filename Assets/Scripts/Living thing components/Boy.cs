@@ -22,18 +22,23 @@ public class Boy : LivingObj, IAnimationHandler
 
             case State.move:
 
-                Vector2 time_parameters = time_allocator.TimeAllocation(4, 8);
-             
-                if (!GetAnimatorComponent().GetCurrentAnimatorStateInfo(0).IsName("Run") && time_parameters.y > 6)
+                //Vector2 time_parameters = time_allocator.TimeAllocation(4, 8);
+
+                if (!GetAnimatorComponent().GetCurrentAnimatorStateInfo(0).IsName("Walk"))
                 {
-                    GetAnimatorComponent().CrossFade("Run", 0f, 0, 0, 0);
+                    GetAnimatorComponent().CrossFade("Walk", 0f);
                 }
-                else if (!GetAnimatorComponent().GetCurrentAnimatorStateInfo(0).IsName("Walk") && time_parameters.y <= 6)
-                {
-                    GetAnimatorComponent().CrossFade("Walk", 0f, 0, 0, 0);
-                }
-                
-                break;
+
+                //if (!GetAnimatorComponent().GetCurrentAnimatorStateInfo(0).IsName("Run") && time_parameters.y > 6)
+                //{
+                //    GetAnimatorComponent().CrossFade("Run", 0f, 0, 0, 0);
+                //}
+                //else if (!GetAnimatorComponent().GetCurrentAnimatorStateInfo(0).IsName("Walk") && time_parameters.y <= 6)
+                //{
+                //    GetAnimatorComponent().CrossFade("Walk", 0f, 0, 0, 0);
+                //}
+
+                    break;
         }
     }
 

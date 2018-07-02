@@ -61,7 +61,6 @@ public class SpeechBubbleManager : MonoBehaviour
         }
     }
 
-    
     public GameObject CreateSpeechBubble(GameObject obj)
     {
         return Instantiate(speechBubblePrefab,
@@ -127,7 +126,11 @@ public class SpeechBubbleManager : MonoBehaviour
             {
                 yield return new WaitForSeconds(container.SpeechBubbles[containerIndex].delay);
                 speechbubble.IsAppearing = false;
+
+                if (speechbubble != null)
+                speechbubble.PlayAudio(container.SpeechBubbles[containerIndex].identifier);
             }
+            /*------------------------------------*/
 
             if (speechbubble.IsAppearing)
                 StartCoroutine(speechbubble.Appear());
@@ -141,10 +144,4 @@ public class SpeechBubbleManager : MonoBehaviour
         }
     }
 
-
-    // Update is called once per frame
-    void Update () {
-
-
-    }
 }

@@ -111,7 +111,6 @@ public class IllusionHandler : MonoBehaviour
         RotateTowardCamera(Objs);
         Objs.PositionAt(hitTestResult.Position);
 
-
         illusionStatus = IllusionStatus.deployed;
 
         //Boy.transform.LookAt(new Vector3(Camera.main.transform.position.x,

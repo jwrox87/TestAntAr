@@ -13,12 +13,14 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>2017.3.1p4</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -268,10 +270,10 @@
     <Compile Include="Assets\Scripts\Living thing components\LivingObj.cs" />
     <Compile Include="Assets\Scripts\Living thing components\LivingObjManager.cs" />
     <Compile Include="Assets\Scripts\Pathfinder.cs" />
-    <Compile Include="Assets\Scripts\SpeechBubble.cs" />
-    <Compile Include="Assets\Scripts\SpeechBubbleContainer.cs" />
-    <Compile Include="Assets\Scripts\SpeechBubbleManager.cs" />
-    <Compile Include="Assets\Scripts\SpeechBubbleObj.cs" />
+    <Compile Include="Assets\Scripts\SpeechBubble\SpeechBubble.cs" />
+    <Compile Include="Assets\Scripts\SpeechBubble\SpeechBubbleContainer.cs" />
+    <Compile Include="Assets\Scripts\SpeechBubble\SpeechBubbleManager.cs" />
+    <Compile Include="Assets\Scripts\SpeechBubble\SpeechBubbleObj.cs" />
     <Compile Include="Assets\Scripts\TimeAllocaterClass.cs" />
     <Compile Include="Assets\Scripts\TouchHandler.cs" />
     <Compile Include="Assets\Scripts\UICanvasManager.cs" />
@@ -317,7 +319,9 @@
     <None Include="Assets\Resources\Misc Shaders\AlwaysOnTop.shader" />
     <None Include="Assets\Resources\Misc Shaders\InvisibleMask.shader" />
     <None Include="Assets\Resources\Misc Shaders\InvisibleShadow.shader" />
-    <None Include="Assets\Resources\SpeechBubble.xml" />
+    <None Include="Assets\Resources\SpeechBubble.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Assets\StreamingAssets\Vuforia\nursing_ar_targets.xml" />
     <None Include="Assets\StreamingAssets\haarcascade_eye.xml" />
     <None Include="Assets\StreamingAssets\haarcascade_eye_tree_eyeglasses.xml" />

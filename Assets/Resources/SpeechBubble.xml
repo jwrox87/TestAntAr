@@ -2,12 +2,15 @@
 <SpeechBubbleCollection>
 <SpeechBubbles>
 	<SpeechBubble text = "He's daydreaming!">
+    <identifier>Daydreaming</identifier>
     <delay> 3 </delay>	
 	</SpeechBubble>
   <SpeechBubble text = "He's a stupid boy!">
+    <identifier>StupidBoy</identifier>
     <delay> 3 </delay>
   </SpeechBubble>
   <SpeechBubble text = "He is dozing off..">
+    <identifier>DozingOff</identifier>
     <delay> 3 </delay>
   </SpeechBubble>
 </SpeechBubbles>

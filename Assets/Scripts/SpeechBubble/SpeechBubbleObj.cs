@@ -6,6 +6,9 @@ using TMPro;
 public class SpeechBubbleObj : MonoBehaviour {
 
     TextMeshPro tmPro;
+    AudioSource audioSource;
+
+    public AudioClip[] audioClips;
 
     bool isAppearing = true;
     bool isFading = false;
@@ -24,6 +27,30 @@ public class SpeechBubbleObj : MonoBehaviour {
     public void ChangeText(string s)
     {
         tmPro.text = s;
+    }
+
+    public void PlayAudio(string audioName)
+    {
+        if (!audioSource)
+            return;
+
+        audioSource.clip = GetAudioClip(audioName);
+
+        if (!audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
+    }
+
+    public AudioClip GetAudioClip(string s)
+    {
+        foreach (AudioClip ac in audioClips)
+        {
+            if (ac.name == s)
+                return ac;
+        }
+
+        return null;
     }
 
     public void SetAlphaValue(float f)
@@ -61,11 +88,13 @@ public class SpeechBubbleObj : MonoBehaviour {
 
         isAppearing = false;
     }
-   
-	// Use this for initialization
-	void Awake ()
+
+
+    // Use this for initialization
+    void Awake ()
     {
         tmPro = GetComponentInChildren<TextMeshPro>();
+        audioSource = GetComponentInChildren<AudioSource>();
     }
 
 }

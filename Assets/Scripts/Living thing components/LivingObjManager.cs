@@ -57,6 +57,8 @@ public class LivingObjManager : MonoBehaviour
         obj.PointOnPath = 0;
         obj.CheckPoint = 0;
         obj.GetAnimatorComponent().SetFloat("walkSpeed", 0);
+
+        obj.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -85,14 +87,14 @@ public class LivingObjManager : MonoBehaviour
         StopAllCoroutines();
     }
 
-    void LivingObjSpeed(LivingObj obj, Vector2 distance_factor, float min_speed)
+    void LivingObjSpeed(LivingObj obj, Vector2 distance_factor, float min_speed,float maxspeed = Mathf.Infinity)
     {
         float pts_distance = distance_factor.y;
 
         float newSpeed
             = pts_distance + (obj.GetWalkSpeed()*Time.deltaTime);
 
-        newSpeed = Mathf.Clamp(newSpeed, min_speed, newSpeed);
+        newSpeed = Mathf.Clamp(newSpeed, min_speed, maxspeed);
         obj.GetAnimatorComponent().SetFloat("walkSpeed", newSpeed);
     }
 
@@ -252,7 +254,7 @@ public class LivingObjManager : MonoBehaviour
         if (!obj.isActiveAndEnabled)
             return false;
 
-        LivingObjSpeed(obj, ani_spd, min_speed);
+        LivingObjSpeed(obj, ani_spd, min_speed,1.5f);
 
         return true;
     }

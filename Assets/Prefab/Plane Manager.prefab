@@ -30928,6 +30928,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plane_finder: {fileID: 114275000813715154}
   Objs: {fileID: 1389750645625184}
+  livingObjManager: {fileID: 0}
+  select_image: {fileID: 0}
+  deployed_image: {fileID: 0}
   debugmsg: 
   postrackermsg: 
 --- !u!114 &114698693839723010
