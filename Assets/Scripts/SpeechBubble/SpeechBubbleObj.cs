@@ -3,46 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class SpeechBubbleObj : MonoBehaviour {
+public static class AudioManager
+{
+    static AudioClip[] audioClips;
 
-    TextMeshPro tmPro;
-    AudioSource audioSource;
-
-    public AudioClip[] audioClips;
-
-    bool isAppearing = true;
-    bool isFading = false;
-
-    public bool IsAppearing
+    public static void SetAudioClip(AudioClip[] audioclips)
     {
-        get { return isAppearing; }
-        set { isAppearing = value; }
-    }
-    public bool IsFading
-    {
-        get { return isFading; }
-        set { isFading = value; }
+        audioClips = audioclips;
     }
 
-    public void ChangeText(string s)
-    {
-        tmPro.text = s;
-    }
-
-    public void PlayAudio(string audioName)
-    {
-        if (!audioSource)
-            return;
-
-        audioSource.clip = GetAudioClip(audioName);
-
-        if (!audioSource.isPlaying)
-        {
-            audioSource.Play();
-        }
-    }
-
-    public AudioClip GetAudioClip(string s)
+    public static AudioClip GetAudioClip(string s)
     {
         foreach (AudioClip ac in audioClips)
         {
@@ -51,6 +21,37 @@ public class SpeechBubbleObj : MonoBehaviour {
         }
 
         return null;
+    }
+
+    public static void PlayAudio(AudioSource audioSource, string audioName)
+    {
+        if (!audioSource)
+            return;
+
+        audioSource.clip = GetAudioClip(audioName);
+
+        if (!audioSource.isPlaying)
+            audioSource.Play();
+    }
+}
+
+public class SpeechBubbleObj : MonoBehaviour{
+
+    //Components
+    TextMeshPro tmPro;
+    AudioSource audioSource;
+
+    //Audio Assistance
+    public AudioClip[] audioClips;
+    public AudioSource GetAudioSource() { return audioSource; }
+
+    //Attributes
+    public bool IsAppearing{ get; set; }
+    public bool IsFading { get; set; }
+
+    public void ChangeText(string s)
+    {
+        tmPro.text = s;
     }
 
     public void SetAlphaValue(float f)
@@ -63,30 +64,42 @@ public class SpeechBubbleObj : MonoBehaviour {
         return tmPro.color.a;
     }
 
+    //Coroutines for actions
     public IEnumerator Fade()
     {
-        while (GetAlphaValue() > 0 && !isAppearing)
+        while (GetAlphaValue() > 0 && !IsAppearing)
         {
-            isFading = true;
+            IsFading = true;
 
             SetAlphaValue(GetAlphaValue() - (Time.deltaTime * 0.01f));
             yield return new WaitForSeconds(0.1f);
         }
 
-        isFading = false;
+        IsFading = false;
     }
 
     public IEnumerator Appear()
     {
-        while (GetAlphaValue() <= 1f && !isFading)
+        while (GetAlphaValue() <= 1f && !IsFading)
         {
-            isAppearing = true;
+            IsAppearing = true;
 
             SetAlphaValue(GetAlphaValue() + (Time.deltaTime * 0.01f));
             yield return new WaitForSeconds(0.1f);
         }
 
-        isAppearing = false;
+        IsAppearing = false;
+    }
+
+    public IEnumerator MoveTo(Vector3 destination, float modifier)
+    {
+        while (Vector3.Distance(transform.position, destination) > 1f)
+        {
+            transform.position = Vector3.Lerp(transform.position, destination,
+                Time.deltaTime * modifier);
+
+            yield return null;
+        }
     }
 
 
@@ -95,6 +108,8 @@ public class SpeechBubbleObj : MonoBehaviour {
     {
         tmPro = GetComponentInChildren<TextMeshPro>();
         audioSource = GetComponentInChildren<AudioSource>();
+
+        AudioManager.SetAudioClip(audioClips);
     }
 
 }

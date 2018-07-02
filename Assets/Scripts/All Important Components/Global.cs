@@ -60,23 +60,6 @@ public class Global : MonoBehaviour
         get { return uICanvasManager; }
     }
 
-    void Init()
-    {
-        /*
-        if (GameObject.Find("PathFinder"))
-            pathfinder = GameObject.Find("PathFinder").GetComponent<Pathfinder>();
-
-        if (GameObject.Find("AntManager"))
-            antmanager = GameObject.Find("AntManager").GetComponent<AntManager>();
-
-        if (GameObject.Find("Speech Bubble Points"))
-            speechbubblemanager = GameObject.Find("Speech Bubble Points").GetComponent<SpeechBubbleManager>();
-
-        if (GameObject.Find("DebugInfo"))
-            debuginfo = GameObject.Find("DebugInfo").GetComponent<DebugInfo>();
-            */
-    }
-
     // Use this for initialization
     void Awake ()
     {
@@ -87,11 +70,9 @@ public class Global : MonoBehaviour
         speechbubblemanager = ExtensionMethods<SpeechBubbleManager>.FindObj("SpeechBubbleManager");
 
         debuginfo = ExtensionMethods<DebugInfo>.FindObj("Text");
-        //debuginfo = ExtensionMethods<DebugInfo>.FindObjWithComponent();
 
         uICanvasManager = ExtensionMethods<UICanvasManager>.FindObj("Global");
 
-        //LevelManager.LevelHandler();
     }
 
     private void Start()

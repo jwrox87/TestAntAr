@@ -160,7 +160,6 @@ namespace FaceTrackerExample
         /// </summary>
         private string haarcascade_frontalface_alt_xml_filepath;
 
-
         // Use this for initialization
         void Start()
         {
@@ -489,9 +488,12 @@ namespace FaceTrackerExample
                                             pointsList.RemoveAt(i);
                                             //                                                                                      Debug.Log ("remove " + i);
                                         }
-                                        
+
                                         if (drawRect)
-                                        Imgproc.rectangle(rgbaMat, new Point(trackRect.x, trackRect.y), new Point(trackRect.x + trackRect.width, trackRect.y + trackRect.height), new Scalar(0, 0, 255, 255), 2);
+                                            Imgproc.rectangle(rgbaMat, new Point(trackRect.x, trackRect.y), new Point(trackRect.x + trackRect.width, trackRect.y + trackRect.height), new Scalar(0, 0, 255, 255), 2);
+
+                                        Global.Instance.SpeechBubble_Manager.Face_Rect_Pos
+                                          = new Vector2(trackRect.x + trackRect.width, trackRect.y + trackRect.height);
                                     }
                                 }
                             }
@@ -509,7 +511,7 @@ namespace FaceTrackerExample
                                 Core.rectangle (rgbaMat, new Point (rectsLIst [i].x, rectsList [i].y), new Point (rectsList [i].x + rectsList [i].width, rectsList [i].y + rectsList [i].height), new Scalar (255, 0, 0, 255), 2);
 #else
                                     Imgproc.rectangle(rgbaMat, new Point(rectsList[i].x, rectsList[i].y), new Point(rectsList[i].x + rectsList[i].width, rectsList[i].y + rectsList[i].height), new Scalar(255, 0, 0, 255), 2);
-#endif
+#endif                             
                                 }
                             }
                         }

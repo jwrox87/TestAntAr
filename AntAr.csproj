@@ -13,14 +13,12 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>2017.3.1p4</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -252,17 +250,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Ant.cs" />
-    <Compile Include="Assets\Scripts\AntGroup.cs" />
-    <Compile Include="Assets\Scripts\AntManager.cs" />
+    <Compile Include="Assets\Scripts\All Important Components\ExtensionMethods.cs" />
+    <Compile Include="Assets\Scripts\All Important Components\Global.cs" />
+    <Compile Include="Assets\Scripts\All Important Components\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\Ant components\Ant.cs" />
+    <Compile Include="Assets\Scripts\Ant components\AntGroup.cs" />
+    <Compile Include="Assets\Scripts\Ant components\AntManager.cs" />
     <Compile Include="Assets\Scripts\ButtonClickEvents.cs" />
     <Compile Include="Assets\Scripts\CameraFocusController.cs" />
     <Compile Include="Assets\Scripts\DebugInfo.cs" />
-    <Compile Include="Assets\Scripts\ExtensionMethods.cs" />
-    <Compile Include="Assets\Scripts\FaceTrackerARExampleTest.cs" />
-    <Compile Include="Assets\Scripts\Global.cs" />
     <Compile Include="Assets\Scripts\IllusionHandler.cs" />
-    <Compile Include="Assets\Scripts\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\InputHandler.cs" />
     <Compile Include="Assets\Scripts\Living thing components\Boy.cs" />
     <Compile Include="Assets\Scripts\Living thing components\Cat.cs" />
     <Compile Include="Assets\Scripts\Living thing components\Dog.cs" />
@@ -270,6 +268,7 @@
     <Compile Include="Assets\Scripts\Living thing components\LivingObj.cs" />
     <Compile Include="Assets\Scripts\Living thing components\LivingObjManager.cs" />
     <Compile Include="Assets\Scripts\Pathfinder.cs" />
+    <Compile Include="Assets\Scripts\Speech Face Tracking\FaceTrackerARExampleTest.cs" />
     <Compile Include="Assets\Scripts\SpeechBubble\SpeechBubble.cs" />
     <Compile Include="Assets\Scripts\SpeechBubble\SpeechBubbleContainer.cs" />
     <Compile Include="Assets\Scripts\SpeechBubble\SpeechBubbleManager.cs" />
@@ -319,9 +318,7 @@
     <None Include="Assets\Resources\Misc Shaders\AlwaysOnTop.shader" />
     <None Include="Assets\Resources\Misc Shaders\InvisibleMask.shader" />
     <None Include="Assets\Resources\Misc Shaders\InvisibleShadow.shader" />
-    <None Include="Assets\Resources\SpeechBubble.xml">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="Assets\Resources\SpeechBubble.xml" />
     <None Include="Assets\StreamingAssets\Vuforia\nursing_ar_targets.xml" />
     <None Include="Assets\StreamingAssets\haarcascade_eye.xml" />
     <None Include="Assets\StreamingAssets\haarcascade_eye_tree_eyeglasses.xml" />

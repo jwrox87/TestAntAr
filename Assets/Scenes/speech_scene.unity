@@ -419,7 +419,7 @@ GameObject:
   - component: {fileID: 516598064}
   - component: {fileID: 516598063}
   - component: {fileID: 516598062}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -701,6 +701,7 @@ GameObject:
   m_Component:
   - component: {fileID: 606506689}
   - component: {fileID: 606506690}
+  - component: {fileID: 606506691}
   m_Layer: 0
   m_Name: SpeechBubbleManager
   m_TagString: Untagged
@@ -735,6 +736,18 @@ MonoBehaviour:
   speechBubblePoints: {fileID: 522650023}
   speechBubblePrefab: {fileID: 1672905014039348, guid: c3403e4dbc83470428396b8c8cd6f62b,
     type: 2}
+--- !u!114 &606506691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 606506688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c9d0f1d2e1c5234ebbaebfedf26b838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sb_manager: {fileID: 606506690}
 --- !u!1 &624513080
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,6 +883,7 @@ GameObject:
   - component: {fileID: 799173200}
   - component: {fileID: 799173199}
   - component: {fileID: 799173198}
+  - component: {fileID: 799173204}
   m_Layer: 0
   m_Name: ImageTarget
   m_TagString: Untagged
@@ -974,6 +988,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &799173204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 799173197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 647c5002f4ecce3499f308917f5b645a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speechBubblePoints: {fileID: 0}
+  speechBubblePrefab: {fileID: 0}
 --- !u!1 &811407865
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,6 +21,10 @@ public class SpeechBubbleManager : MonoBehaviour
         set { speechBubbleObj = value; }
     }
 
+    public Vector2 Face_Rect_Pos { get; set; }
+
+    bool audioPlaying = false;
+
     // Use this for initialization
     void Start()
     {
@@ -44,9 +48,7 @@ public class SpeechBubbleManager : MonoBehaviour
         speechBubbleObj = speechBubble;
 
         StartCoroutine(ToggleBubbleVisibility(false, 0));
-
-        StartCoroutine(SpeechBubbleUpdate(speechBubble.GetComponent<SpeechBubbleObj>()));
-       
+        StartCoroutine(SpeechBubbleUpdate(speechBubble.GetComponent<SpeechBubbleObj>()));   
     }
 
     void OnDrawGizmos()
@@ -79,16 +81,23 @@ public class SpeechBubbleManager : MonoBehaviour
         return container.Access(index);
     }
 
+    /// <summary>
+    /// Speechbubble objects cannot turn themselves on.
+    /// </summary>
+    /// <param name="b"> Toggle </param>
+    /// <param name="delay"> Delay time</param>
+    /// <returns></returns>
     public IEnumerator ToggleBubbleVisibility(bool b, float delay)
     {
         yield return new WaitForSeconds(delay);
 
         foreach (Transform t in speechBubbleObj.transform)
-        {
             t.gameObject.SetActive(b);
-        }
     }
 
+    /// <summary>
+    /// Update speech bubble actions
+    /// </summary>
     const float MinAlpha = 0f;
     const float MaxAlpha = 1f; 
     const float changeDelay = 0.5f;
@@ -111,6 +120,7 @@ public class SpeechBubbleManager : MonoBehaviour
                     = speechBubblePoints.parent.InverseTransformPoint(bubblePoints[posIndex].position);
 
                 speechbubble.ChangeText(container.SpeechBubbles[containerIndex].text);
+                audioPlaying = false;
             }
 
             if (speechbubble.IsFading)
@@ -122,15 +132,24 @@ public class SpeechBubbleManager : MonoBehaviour
             }
 
             //Reset logic
+            /*------------------------------------*/
+            /*------------------------------------*/
             if (speechbubble.GetAlphaValue() >= MaxAlpha)
             {
                 yield return new WaitForSeconds(container.SpeechBubbles[containerIndex].delay);
                 speechbubble.IsAppearing = false;
 
-                if (speechbubble != null)
-                speechbubble.PlayAudio(container.SpeechBubbles[containerIndex].identifier);
+                if (!audioPlaying)
+                {
+                    AudioManager.PlayAudio(speechbubble.GetAudioSource(),
+                        container.SpeechBubbles[containerIndex].identifier);
+                  
+                    audioPlaying = true;
+                }
             }
             /*------------------------------------*/
+            /*------------------------------------*/
+
 
             if (speechbubble.IsAppearing)
                 StartCoroutine(speechbubble.Appear());
@@ -142,6 +161,30 @@ public class SpeechBubbleManager : MonoBehaviour
 
             yield return null;
         }
+    }
+
+
+    void OnClickMove()
+    {
+        if (InputHandler.isMouseClicked(0))
+        {
+            Transform hitObj = InputHandler.Mouse_GetHitObj();
+
+            if (hitObj)
+            {
+                StopAllCoroutines();
+
+                Vector3 worldPos = Camera.main.
+                    ScreenToWorldPoint(Global.Instance.SpeechBubble_Manager.Face_Rect_Pos * 1.5f);
+
+                StartCoroutine(speechBubbleObj.GetComponent<SpeechBubbleObj>().MoveTo(worldPos, 2f));
+            }
+        }
+    }
+
+    private void Update()
+    {
+        OnClickMove();
     }
 
 }

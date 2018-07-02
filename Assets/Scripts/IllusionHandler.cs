@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using Vuforia;
 using UnityEngine.UI;
 
@@ -12,14 +11,12 @@ public enum IllusionStatus
 
 public class IllusionHandler : MonoBehaviour
 {
-
     enum PlaneMode
     {
         GROUND,
         MIDAIR,
         PLACEMENT
     }
-
 
     public PlaneFinderBehaviour plane_finder;
     public GameObject Objs;
