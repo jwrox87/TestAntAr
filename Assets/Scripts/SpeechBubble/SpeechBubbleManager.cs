@@ -4,32 +4,74 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
 
+public static class AudioManager
+{
+    static AudioClip[] audioClips;
+
+    public static void SetAudioClip(AudioClip[] audioclips)
+    {
+        audioClips = audioclips;
+    }
+
+    public static AudioClip GetAudioClip(string s)
+    {
+        foreach (AudioClip ac in audioClips)
+        {
+            if (ac.name == s)
+                return ac;
+        }
+
+        return null;
+    }
+
+    public static void PlayAudio(AudioSource audioSource, string audioName)
+    {
+        if (!audioSource)
+            return;
+
+        audioSource.clip = GetAudioClip(audioName);
+
+        if (!audioSource.isPlaying)
+            audioSource.Play();
+    }
+
+    public static void StopAudio(AudioSource audioSource)
+    {
+        if (!audioSource)
+            return;
+
+        audioSource.Stop();
+    }
+}
+
 public class SpeechBubbleManager : MonoBehaviour
 {
     int containerIndex;
     int posIndex;
+    bool audioPlaying = false;
+
     SpeechBubbleContainer container;
     List<Transform> bubblePoints;
 
     public Transform speechBubblePoints;
     public GameObject speechBubblePrefab;
 
-    private GameObject speechBubbleObj;
-    public GameObject SpeechBubbleObj
-    {
+    private SpeechBubbleObj speechBubbleObj;
+    public SpeechBubbleObj SpeechBubbleObj {
         get { return speechBubbleObj; }
-        set { speechBubbleObj = value; }
     }
 
-    public Vector2 Face_Rect_Pos { get; set; }
+    public AudioClip[] audioClips;
 
-    bool audioPlaying = false;
+    public Vector2 Face_Rect_Pos { get; set; }
 
     // Use this for initialization
     void Start()
     {
         TextAsset temp = Resources.Load("SpeechBubble") as TextAsset;
         container = SpeechBubbleContainer.LoadFromText(temp.text);
+
+        AudioManager.SetAudioClip(audioClips);
 
         bubblePoints = new List<Transform>();
         foreach (Transform t in speechBubblePoints)
@@ -45,21 +87,21 @@ public class SpeechBubbleManager : MonoBehaviour
         speechBubble.transform.localEulerAngles = new Vector3(90, 0, 0);
         speechBubble.GetComponent<SpeechBubbleObj>().ChangeText(container.Access(0).text);
 
-        speechBubbleObj = speechBubble;
+        speechBubbleObj = speechBubble.GetComponent<SpeechBubbleObj>();
 
         StartCoroutine(ToggleBubbleVisibility(false, 0));
-        StartCoroutine(SpeechBubbleUpdate(speechBubble.GetComponent<SpeechBubbleObj>()));   
+        StartCoroutine(SpeechBubbleVisualUpdate(speechBubbleObj));
     }
 
     void OnDrawGizmos()
-    {    
+    {
         foreach (Transform t in speechBubblePoints)
         {
             if (t.gameObject.GetInstanceID() == GetInstanceID())
                 return;
 
             Gizmos.color = Color.red;
-            Gizmos.DrawCube(t.position,new Vector3(5f,5f,5f));
+            Gizmos.DrawCube(t.position, new Vector3(5f, 5f, 5f));
         }
     }
 
@@ -72,7 +114,7 @@ public class SpeechBubbleManager : MonoBehaviour
 
 
     void SpawnSpeechBubble(SpeechBubbleObj bubble)
-    { 
+    {
         bubble.transform.localPosition = bubblePoints[containerIndex].localPosition;
     }
 
@@ -95,20 +137,23 @@ public class SpeechBubbleManager : MonoBehaviour
             t.gameObject.SetActive(b);
     }
 
+    //Helper variables
+    const float MinAlpha = 0f;
+    const float MaxAlpha = 1f;
+    const float changeDelay = 0.5f;
+    WaitForSeconds waitTime = new WaitForSeconds(changeDelay);
     /// <summary>
     /// Update speech bubble actions
     /// </summary>
-    const float MinAlpha = 0f;
-    const float MaxAlpha = 1f; 
-    const float changeDelay = 0.5f;
+    public IEnumerator SpeechBubbleVisualUpdate(SpeechBubbleObj speechbubble)
+    {
+        speechbubble.Speech_BubbleStatus = SpeechBubbleObj.SpeechBubbleStatus.None;
 
-    public IEnumerator SpeechBubbleUpdate(SpeechBubbleObj speechbubble)
-    {      
         while (true)
-        {         
-            if (speechbubble.GetAlphaValue() <= MinAlpha)
+        {
+            if (speechbubble.GetTextAlphaValue() <= MinAlpha)
             {
-                yield return new WaitForSeconds(changeDelay);
+                yield return waitTime;
 
                 if (containerIndex < container.SpeechBubbles.Count - 1)
                     containerIndex++;
@@ -116,7 +161,7 @@ public class SpeechBubbleManager : MonoBehaviour
                     containerIndex = 0;
 
                 posIndex = (int)ExtensionMethods<float>.Randomize(bubblePoints.Count);
-                speechbubble.transform.localPosition 
+                speechbubble.transform.localPosition
                     = speechBubblePoints.parent.InverseTransformPoint(bubblePoints[posIndex].position);
 
                 speechbubble.ChangeText(container.SpeechBubbles[containerIndex].text);
@@ -134,7 +179,7 @@ public class SpeechBubbleManager : MonoBehaviour
             //Reset logic
             /*------------------------------------*/
             /*------------------------------------*/
-            if (speechbubble.GetAlphaValue() >= MaxAlpha)
+            if (speechbubble.GetTextAlphaValue() >= MaxAlpha)
             {
                 yield return new WaitForSeconds(container.SpeechBubbles[containerIndex].delay);
                 speechbubble.IsAppearing = false;
@@ -143,13 +188,12 @@ public class SpeechBubbleManager : MonoBehaviour
                 {
                     AudioManager.PlayAudio(speechbubble.GetAudioSource(),
                         container.SpeechBubbles[containerIndex].identifier);
-                  
+
                     audioPlaying = true;
                 }
             }
             /*------------------------------------*/
             /*------------------------------------*/
-
 
             if (speechbubble.IsAppearing)
                 StartCoroutine(speechbubble.Appear());
@@ -163,28 +207,69 @@ public class SpeechBubbleManager : MonoBehaviour
         }
     }
 
+    delegate void Event_Handle();
+    Event_Handle event_handler;
 
-    void OnClickMove()
+    void Event_Movement()
     {
-        if (InputHandler.isMouseClicked(0))
-        {
-            Transform hitObj = InputHandler.Mouse_GetHitObj();
+        StopAllCoroutines();
+        AudioManager.StopAudio(speechBubbleObj.GetAudioSource());
 
-            if (hitObj)
-            {
-                StopAllCoroutines();
+        //Vector3 worldPos = Camera.main.
+        //    ScreenToWorldPoint(Global.Instance.SpeechBubble_Manager.Face_Rect_Pos * 1.2f);
 
-                Vector3 worldPos = Camera.main.
-                    ScreenToWorldPoint(Global.Instance.SpeechBubble_Manager.Face_Rect_Pos * 1.5f);
-
-                StartCoroutine(speechBubbleObj.GetComponent<SpeechBubbleObj>().MoveTo(worldPos, 2f));
-            }
-        }
+        StartCoroutine(speechBubbleObj.
+            MoveTo(Global.Instance.SpeechBubble_Manager.Face_Rect_Pos, 2f));
     }
+
+    void Event_Neutral()
+    {
+        speechBubbleObj.SetTextAlphaValue(0);
+        StartCoroutine(SpeechBubbleVisualUpdate(speechBubbleObj));
+    }
+
+
+    //Should not be here
+    void Event_Update()
+    {
+        switch (speechBubbleObj.Speech_BubbleStatus)
+        {
+            case SpeechBubbleObj.SpeechBubbleStatus.None:
+
+                event_handler = null;
+
+                if (InputHandler.isMouseClicked(0))
+                {
+                    //Put in hit obj with type of input
+                    Transform hitObj = InputHandler.Mouse_GetHitObj();
+
+                    if (hitObj)
+                        event_handler = Event_Movement;
+                }
+
+                //Transform hitObj = InputHandler.Touch_GetHitObj();
+
+                //if (hitObj)
+                //    event_handler = Event_Movement;
+
+                break;
+
+
+            case SpeechBubbleObj.SpeechBubbleStatus.Moved:
+
+                event_handler = Event_Neutral;
+
+                break;
+        }
+
+        if (event_handler != null)
+            event_handler();
+    }
+
 
     private void Update()
     {
-        OnClickMove();
+        Event_Update();
     }
 
 }

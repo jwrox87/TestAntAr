@@ -493,7 +493,7 @@ namespace FaceTrackerExample
                                             Imgproc.rectangle(rgbaMat, new Point(trackRect.x, trackRect.y), new Point(trackRect.x + trackRect.width, trackRect.y + trackRect.height), new Scalar(0, 0, 255, 255), 2);
 
                                         Global.Instance.SpeechBubble_Manager.Face_Rect_Pos
-                                          = new Vector2(trackRect.x + trackRect.width, trackRect.y + trackRect.height);
+                                          = new Vector2(trackRect.x, trackRect.y);
                                     }
                                 }
                             }
@@ -701,6 +701,7 @@ namespace FaceTrackerExample
                 if (seen)
                 {
                     if (timeStatus > 1f)
+                        Global.Instance.SpeechBubble_Manager.
                         StartCoroutine(Global.Instance.SpeechBubble_Manager.
                             ToggleBubbleVisibility(seen, 0.2f));
 
@@ -709,6 +710,7 @@ namespace FaceTrackerExample
                 }
                 else
                 {
+                    Global.Instance.SpeechBubble_Manager.
                     StartCoroutine(Global.Instance.SpeechBubble_Manager.
                             ToggleBubbleVisibility(seen, 1f));
 

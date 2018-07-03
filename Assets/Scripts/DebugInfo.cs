@@ -49,7 +49,10 @@ public class DebugInfo : MonoBehaviour
 
         textObj.text = "Width: " + Screen.width
             + " \n Height: " + Screen.height
-            + "\n Camera Size: " + Vuforia.VuforiaConfiguration.Instance.Vuforia.CameraDirection;
+            + "\n Camera Size: " + Vuforia.VuforiaConfiguration.Instance.Vuforia.CameraDirection
+            + "\n Face Rect: " + Camera.main.WorldToScreenPoint(Global.Instance.SpeechBubble_Manager.Face_Rect_Pos)
+            + "\n Touch Pos: " + Input.mousePosition;
+
     }
 
     void UpdateIllusion()

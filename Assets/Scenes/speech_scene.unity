@@ -736,6 +736,10 @@ MonoBehaviour:
   speechBubblePoints: {fileID: 522650023}
   speechBubblePrefab: {fileID: 1672905014039348, guid: c3403e4dbc83470428396b8c8cd6f62b,
     type: 2}
+  audioClips:
+  - {fileID: 8300000, guid: 4221e94c174af824d9b4844f047a4c0f, type: 3}
+  - {fileID: 8300000, guid: 1dd36c30aff3f854ab061a86a645180a, type: 3}
+  - {fileID: 8300000, guid: 45dcf7ac6f5fd504d902efcc1785e388, type: 3}
 --- !u!114 &606506691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,7 +751,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c9d0f1d2e1c5234ebbaebfedf26b838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sb_manager: {fileID: 606506690}
 --- !u!1 &624513080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,6 +1004,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speechBubblePoints: {fileID: 0}
   speechBubblePrefab: {fileID: 0}
+  audioClips: []
 --- !u!1 &811407865
 GameObject:
   m_ObjectHideFlags: 0
