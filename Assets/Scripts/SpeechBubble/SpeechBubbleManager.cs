@@ -140,14 +140,15 @@ public class SpeechBubbleManager : MonoBehaviour
     //Helper variables
     const float MinAlpha = 0f;
     const float MaxAlpha = 1f;
-    const float changeDelay = 0.5f;
-    WaitForSeconds waitTime = new WaitForSeconds(changeDelay);
+
     /// <summary>
     /// Update speech bubble actions
     /// </summary>
-    public IEnumerator SpeechBubbleVisualUpdate(SpeechBubbleObj speechbubble)
+    public IEnumerator SpeechBubbleVisualUpdate(SpeechBubbleObj speechbubble,
+        float changeDelay = 0.5f)
     {
-        speechbubble.Speech_BubbleStatus = SpeechBubbleObj.SpeechBubbleStatus.None;
+        speechbubble.Speech_BubbleStatus = SpeechBubbleStatus.None;
+        WaitForSeconds waitTime = new WaitForSeconds(changeDelay);
 
         while (true)
         {
@@ -215,8 +216,7 @@ public class SpeechBubbleManager : MonoBehaviour
         StopAllCoroutines();
         AudioManager.StopAudio(speechBubbleObj.GetAudioSource());
 
-        //Vector3 worldPos = Camera.main.
-        //    ScreenToWorldPoint(Global.Instance.SpeechBubble_Manager.Face_Rect_Pos * 1.2f);
+        speechBubbleObj.SetParticleTransparency(0, .4f * Time.deltaTime);
 
         StartCoroutine(speechBubbleObj.
             MoveTo(Global.Instance.SpeechBubble_Manager.Face_Rect_Pos, 2f));
@@ -224,8 +224,10 @@ public class SpeechBubbleManager : MonoBehaviour
 
     void Event_Neutral()
     {
+        speechBubbleObj.SetParticleColor(Color.white, 1f);
         speechBubbleObj.SetTextAlphaValue(0);
-        StartCoroutine(SpeechBubbleVisualUpdate(speechBubbleObj));
+        
+        StartCoroutine(SpeechBubbleVisualUpdate(speechBubbleObj,1f));
     }
 
 
@@ -234,7 +236,7 @@ public class SpeechBubbleManager : MonoBehaviour
     {
         switch (speechBubbleObj.Speech_BubbleStatus)
         {
-            case SpeechBubbleObj.SpeechBubbleStatus.None:
+            case SpeechBubbleStatus.None:
 
                 event_handler = null;
 
@@ -255,7 +257,7 @@ public class SpeechBubbleManager : MonoBehaviour
                 break;
 
 
-            case SpeechBubbleObj.SpeechBubbleStatus.Moved:
+            case SpeechBubbleStatus.Moved:
 
                 event_handler = Event_Neutral;
 

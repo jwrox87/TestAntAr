@@ -55,7 +55,7 @@ public class IllusionHandler : MonoBehaviour
         TrackerManager.Instance.InitTracker<PositionalDeviceTracker>();
         m_PositionalDeviceTracker = TrackerManager.Instance.GetTracker<PositionalDeviceTracker>();
 
-        StartCoroutine(ToggleImageCoroutine());
+        StartCoroutine(ToggleStateCoroutine());
     }
 
     void RotateTowardCamera(GameObject augmentation)
@@ -119,8 +119,7 @@ public class IllusionHandler : MonoBehaviour
         illusionStatus = IllusionStatus.select;
     }
 
-
-    void ToggleImageUI()
+    void ToggleStateLogic()
     {
         if (!deployed_image && !select_image)
             return;
@@ -128,6 +127,8 @@ public class IllusionHandler : MonoBehaviour
         switch (illusionStatus)
         {
             case IllusionStatus.select:
+
+                plane_finder.PlaneIndicator.SetActive(true);
 
                 if (deployed_image.color == Color.gray)
                     return;
@@ -146,6 +147,8 @@ public class IllusionHandler : MonoBehaviour
 
             case IllusionStatus.deployed:
 
+                plane_finder.PlaneIndicator.SetActive(false);
+
                 if (select_image.color == Color.gray)
                     return;
 
@@ -160,11 +163,11 @@ public class IllusionHandler : MonoBehaviour
         }
     }
 
-    IEnumerator ToggleImageCoroutine()
+    IEnumerator ToggleStateCoroutine()
     {
         while (true)
-        {            
-            ToggleImageUI();
+        {
+            ToggleStateLogic();
             yield return new WaitForSeconds(0.5f);
         }
     }

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class SpeechBubbleObj : MonoBehaviour{
+//State describing the current speech bubble's movements
+public enum SpeechBubbleStatus
+{
+    None,
+    Moving,
+    Moved,
+}
 
-    //State describing the current speech bubble's movements
-    public enum SpeechBubbleStatus
-    {
-        None,
-        Moving,
-        Moved,
-    }
+public class SpeechBubbleObj : MonoBehaviour{
 
     //Associated Components
     TextMeshPro tmPro;
@@ -29,7 +29,6 @@ public class SpeechBubbleObj : MonoBehaviour{
 
     //Helper functions
     /*=====================================================================================*/
-
     public void ChangeText(string s)
     {
         tmPro.text = s;
@@ -54,13 +53,22 @@ public class SpeechBubbleObj : MonoBehaviour{
     public void SetParticleTransparency(float target_opacity,float modifier)
     {
         target_opacity = Mathf.Clamp(target_opacity, 0, 1);
-
+        
         var main = particle_system.main;
         float alpha = main.startColor.color.a - modifier; //modifier *= Time.deltatime
+
         alpha = Mathf.Clamp(alpha, 0, 1);
 
         main.startColor = new Color(main.startColor.color.r,
           main.startColor.color.g, main.startColor.color.b, alpha);
+    }
+
+    public void SetParticleColor(Color color, float modifier)
+    {
+        var main = particle_system.main;
+        Color target_color= new Color(color.r, color.g, color.b, main.startColor.color.a);
+
+        main.startColor = Color.Lerp(main.startColor.color, target_color, modifier);
     }
 
     public void SetColliderStatus(bool b)
@@ -77,6 +85,7 @@ public class SpeechBubbleObj : MonoBehaviour{
     public IEnumerator Fade()
     {
         SetColliderStatus(false);
+        SetParticleColor(Color.white, .8f * Time.deltaTime);
 
         const float speed = 0.01f;
         while (GetTextAlphaValue() > 0 && !IsAppearing)
@@ -108,6 +117,8 @@ public class SpeechBubbleObj : MonoBehaviour{
         }
 
         IsAppearing = false;
+      
+        SetParticleColor(new Color32(236, 239, 241, 0), .8f * Time.deltaTime);
         SetColliderStatus(true);
     }
 
@@ -120,13 +131,8 @@ public class SpeechBubbleObj : MonoBehaviour{
         {
             Speech_BubbleStatus = SpeechBubbleStatus.Moving;
 
-            //transform.position = Vector3.Lerp(transform.position, destination,
-            //    Time.deltaTime * modifier);
-            
             screenPos = Vector2.Lerp(screenPos, screenpos_destination, Time.deltaTime * modifier);
             transform.position = Camera.main.ScreenToWorldPoint(screenPos);
-
-            SetParticleTransparency(0f, .4f * Time.deltaTime);
 
             yield return null;
         }

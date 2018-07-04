@@ -35,18 +35,22 @@ public class LivingObjManager : MonoBehaviour
 
     void Init()
     {
+        //Update living obj enumerators
         cat.enumerator = MoveIncrement(cat, 0.01f);
         dog.enumerator = MoveIncrement(dog, 0.01f);
         boy.enumerator = MoveIncrement(boy, 0.01f);
 
+        //Individual dropdowns
         TMPro.TMP_Dropdown boydropdown = textBoy.transform.GetChild(0).GetComponent<TMPro.TMP_Dropdown>();
         TMPro.TMP_Dropdown dogdropdown = textDog.transform.GetChild(0).GetComponent<TMPro.TMP_Dropdown>();
         TMPro.TMP_Dropdown catdropdown = textCat.transform.GetChild(0).GetComponent<TMPro.TMP_Dropdown>();
 
+        //UI Related 
+        //Dropdown
         ParseDropDownSelection(boy, boydropdown, boy.enumerator);
         ParseDropDownSelection(dog, dogdropdown, dog.enumerator);
         ParseDropDownSelection(cat, catdropdown, cat.enumerator);
-
+        //Checkbox
         ToggleLogic(cat, textCat, toggleCat);
         ToggleLogic(dog, textDog, toggleDog);
         ToggleLogic(boy, textBoy, toggleBoy);

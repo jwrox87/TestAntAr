@@ -4799,6 +4799,16 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 114185822439726952, guid: 9551f4aa1a0ce304a947506169ffd421,
+        type: 2}
+      propertyPath: mPlaneReference
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114185822439726952, guid: 9551f4aa1a0ce304a947506169ffd421,
+        type: 2}
+      propertyPath: mMidAirReference
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9551f4aa1a0ce304a947506169ffd421, type: 2}
   m_IsPrefabParent: 0

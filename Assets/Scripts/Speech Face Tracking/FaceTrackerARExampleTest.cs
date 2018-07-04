@@ -492,8 +492,21 @@ namespace FaceTrackerExample
                                         if (drawRect)
                                             Imgproc.rectangle(rgbaMat, new Point(trackRect.x, trackRect.y), new Point(trackRect.x + trackRect.width, trackRect.y + trackRect.height), new Scalar(0, 0, 255, 255), 2);
 
-                                        Global.Instance.SpeechBubble_Manager.Face_Rect_Pos
-                                          = new Vector2(trackRect.x, trackRect.y);
+
+                                        float widthScale = transform.localScale.x / 2;
+                                        if (Application.platform == RuntimePlatform.Android
+                                            || Application.platform == RuntimePlatform.IPhonePlayer)
+                                        {
+                                            float y_adjustment = Screen.height - transform.localScale.y;
+
+                                            Global.Instance.SpeechBubble_Manager.Face_Rect_Pos
+                                              = new Vector2(trackRect.x + widthScale, (y_adjustment - trackRect.y) + trackRect.height);
+                                        }
+                                        //PC
+                                        else
+                                            Global.Instance.SpeechBubble_Manager.Face_Rect_Pos
+                                            = new Vector2(trackRect.x + widthScale, (Screen.height - trackRect.y) + trackRect.height);
+
                                     }
                                 }
                             }
@@ -511,7 +524,8 @@ namespace FaceTrackerExample
                                 Core.rectangle (rgbaMat, new Point (rectsLIst [i].x, rectsList [i].y), new Point (rectsList [i].x + rectsList [i].width, rectsList [i].y + rectsList [i].height), new Scalar (255, 0, 0, 255), 2);
 #else
                                     Imgproc.rectangle(rgbaMat, new Point(rectsList[i].x, rectsList[i].y), new Point(rectsList[i].x + rectsList[i].width, rectsList[i].y + rectsList[i].height), new Scalar(255, 0, 0, 255), 2);
-#endif                             
+#endif
+                                    
                                 }
                             }
                         }
