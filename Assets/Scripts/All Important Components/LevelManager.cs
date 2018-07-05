@@ -9,7 +9,6 @@ public static class LevelManager
     static void LoadVuforiaConfig(Vuforia.CameraDevice.CameraDirection cd)
     {   
         VuforiaConfiguration.Instance.Vuforia.CameraDirection = cd;
-        //Debug.Log(VuforiaConfiguration.Instance.Vuforia.CameraDirection);
     }
 
     public static string GetCurrentLevel()

@@ -253,6 +253,7 @@
     <Compile Include="Assets\Scripts\All Important Components\ExtensionMethods.cs" />
     <Compile Include="Assets\Scripts\All Important Components\Global.cs" />
     <Compile Include="Assets\Scripts\All Important Components\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\All Important Components\LoadScreenMethods.cs" />
     <Compile Include="Assets\Scripts\Ant components\Ant.cs" />
     <Compile Include="Assets\Scripts\Ant components\AntGroup.cs" />
     <Compile Include="Assets\Scripts\Ant components\AntManager.cs" />
