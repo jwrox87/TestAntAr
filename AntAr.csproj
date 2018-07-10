@@ -257,7 +257,6 @@
     <Compile Include="Assets\Scripts\Ant components\Ant.cs" />
     <Compile Include="Assets\Scripts\Ant components\AntGroup.cs" />
     <Compile Include="Assets\Scripts\Ant components\AntManager.cs" />
-    <Compile Include="Assets\Scripts\ButtonClickEvents.cs" />
     <Compile Include="Assets\Scripts\CameraFocusController.cs" />
     <Compile Include="Assets\Scripts\DebugInfo.cs" />
     <Compile Include="Assets\Scripts\IllusionHandler.cs" />
@@ -276,7 +275,10 @@
     <Compile Include="Assets\Scripts\SpeechBubble\SpeechBubbleObj.cs" />
     <Compile Include="Assets\Scripts\TimeAllocaterClass.cs" />
     <Compile Include="Assets\Scripts\TouchHandler.cs" />
-    <Compile Include="Assets\Scripts\UICanvasManager.cs" />
+    <Compile Include="Assets\Scripts\UI\ButtonClickEvents.cs" />
+    <Compile Include="Assets\Scripts\UI\MenuPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\MenuPanelHandler.cs" />
+    <Compile Include="Assets\Scripts\UI\UICanvasManager.cs" />
     <Compile Include="Assets\Vuforia\Scripts\DefaultInitializationErrorHandler.cs" />
     <Compile Include="Assets\Vuforia\Scripts\DefaultTrackableEventHandler.cs" />
   </ItemGroup>

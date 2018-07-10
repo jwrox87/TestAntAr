@@ -6,9 +6,14 @@ using UnityEngine.SceneManagement;
 public class ButtonClickEvents : MonoBehaviour
 {
     LoadScreenMethods loadScreen;
+    public GameObject infoPanel;
+
     private void Awake()
     {
         loadScreen = LoadScreenMethods.Instance;
+
+        if (infoPanel)
+            infoPanel.SetActive(false);
     }
 
     public void GoToAntScene()
@@ -38,6 +43,17 @@ public class ButtonClickEvents : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void CloseInfoPanel()
+    {
+        infoPanel.SetActive(false);
+    }
+
+
+    public void OpenInfoPanel()
+    {
+        infoPanel.SetActive(true);
     }
 
 }

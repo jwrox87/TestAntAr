@@ -45,6 +45,10 @@ public static class LevelManager
                 LoadVuforiaConfig(CameraDevice.CameraDirection.CAMERA_DEFAULT);
                 break;
 
+            //case "loading_scene":
+            //    VuforiaBehaviour.Instance.enabled = false;
+            //    break;
+
         }
     }
 }

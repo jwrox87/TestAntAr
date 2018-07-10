@@ -1743,10 +1743,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_NormalColor: {r: 0.7941176, g: 0.9914807, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.66176474, g: 0.95801216, b: 1, a: 1}
+    m_PressedColor: {r: 0.4852941, g: 0.9361055, b: 1, a: 1}
+    m_DisabledColor: {r: 0.8455882, g: 0.8455882, b: 0.8455882, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -3106,7 +3106,7 @@ Prefab:
     - target: {fileID: 114046888286330346, guid: 9c7cfd78cd2d97149aedac82159474c0,
         type: 2}
       propertyPath: m_MatchWidthOrHeight
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 114046888286330346, guid: 9c7cfd78cd2d97149aedac82159474c0,
         type: 2}
@@ -3121,7 +3121,7 @@ Prefab:
     - target: {fileID: 224609129227654512, guid: 9c7cfd78cd2d97149aedac82159474c0,
         type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224564373018026216, guid: 9c7cfd78cd2d97149aedac82159474c0,
         type: 2}
@@ -3850,7 +3850,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.89300007, y: 0.61658025}
   m_AnchorMax: {x: 1, y: 0.7357407}
-  m_AnchoredPosition: {x: 2.8000488, y: -0.2999878}
+  m_AnchoredPosition: {x: 2.8000183, y: -0.30004883}
   m_SizeDelta: {x: -54.629997, y: -36.11}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1567260986
@@ -4636,7 +4636,7 @@ RectTransform:
   - {fileID: 977158418}
   - {fileID: 1123740131}
   m_Father: {fileID: 988645253}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.89300007, y: 0.74374074}
   m_AnchorMax: {x: 1, y: 0.86816055}

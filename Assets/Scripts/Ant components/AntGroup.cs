@@ -33,19 +33,18 @@ public class AntGroup : MonoBehaviour
         get { return checkPoints; }
     }
 
-    public IEnumerator FirstRun()
+    public void FirstRun()
     {
-        yield return new WaitForSeconds(1f);
-
         StartCoroutine(MoveIncrement());
     }
 
+    WaitForSeconds move_delay = new WaitForSeconds(0.01f);
     public IEnumerator MoveIncrement()
     {
         while (movePercentage < 1)
         {
             movePercentage += walkSpeed * Time.deltaTime;
-            yield return new WaitForSeconds(0.01f);
+            yield return move_delay;
         }
     }
 
@@ -99,7 +98,7 @@ public class AntGroup : MonoBehaviour
     // Use this for initialization
     public void Initialize()
     {
-        StartCoroutine(FirstRun());
+        Invoke("FirstRun", 1f);
 
         path = Global.Instance.Path_Finder.paths[path_id];
 

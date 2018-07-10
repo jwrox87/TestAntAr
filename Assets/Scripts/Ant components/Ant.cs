@@ -70,6 +70,7 @@ public class Ant : MonoBehaviour
         }
     }
 
+    WaitForSeconds rotate_delay = new WaitForSeconds(0.01f);
     public IEnumerator RotateBody()
     {
         if (indexPt + 1 < antgroup.CheckPoints.Count)
@@ -78,15 +79,15 @@ public class Ant : MonoBehaviour
             this.CorrectFacing(diff);
         }
 
-        yield return new WaitForSeconds(0.01f);
+        yield return rotate_delay;
     }
 
-
+    WaitForSeconds random_delay = new WaitForSeconds(0.5f);
     public IEnumerator RandomValues()
     {
         randomVals.randomSpeed = ExtensionMethods<float>.Randomize(10f, 15f);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return random_delay;
     }
 
     void AntState()
