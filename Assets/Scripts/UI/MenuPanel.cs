@@ -4,66 +4,106 @@ using UnityEngine;
 
 public class MenuPanel : MonoBehaviour
 {
-    public int counter;
-
     public GameObject beforePanel;
     public GameObject afterPanel;
-    public Vector2 localpos;
+    public Vector2 LocalPos { get; set; }
 
-    public void Move_ToForward(float amount)
+    public bool IsScrolling { get; set; }
+
+    MenuPanelState b4_state;
+    MenuPanelState aft_state;
+    public MenuPanelState state;
+
+    StateAdvisor stateAdvisor;
+
+    public void InitStates()
     {
-        Vector3 target = afterPanel.GetComponent<MenuPanel>().localpos;
-
-        Vector2 vec = transform.localPosition;
-        vec.x += amount * Time.deltaTime;
-
-        vec.x = Mathf.Clamp(vec.x, vec.x, target.x);
-
-        transform.localPosition = vec;
+        b4_state = beforePanel.GetComponent<MenuPanel>().state;
+        aft_state = afterPanel.GetComponent<MenuPanel>().state;
     }
-
-    public void Move_ToBack(float amount)
-    {
-        Vector3 target = beforePanel.GetComponent<MenuPanel>().localpos;
-
-        Vector2 vec = transform.localPosition;
-        vec.x -= amount * Time.deltaTime;
-
-        vec.x = Mathf.Clamp(vec.x, target.x, vec.x);
-
-        transform.localPosition = vec;
-    }
-
 
     public IEnumerator MoveForward(float amount)
     {
-        Vector3 target = afterPanel.GetComponent<MenuPanel>().localpos;
+        MenuPanel aft_panel = afterPanel.GetComponent<MenuPanel>();
+        Vector3 target = aft_panel.LocalPos;
+
+        IsScrolling = true;
 
         var i = 0.0f;
-        var rate = 1.0f;
-        while (i < 1.0f)
+        var rate = 0.9f;
+        while (i < 0.6f)
         {
             i += Time.deltaTime * rate;
-            transform.localPosition = Vector3.Lerp(transform.localPosition, target, i * 10f);
+            
+            if (state != MenuPanelState.Right)
+                transform.localPosition = Vector3.Lerp(transform.localPosition, target, i);
+
             yield return null;
         }
+       
+        ChangeState_AFT();
 
-        localpos = transform.localPosition;
+        transform.localPosition = target;
+        LocalPos = transform.localPosition;
+
+        IsScrolling = false;
+
     }
 
     public IEnumerator MoveBack(float amount)
     {
-        Vector3 target = beforePanel.GetComponent<MenuPanel>().localpos;
+        MenuPanel b4_panel = beforePanel.GetComponent<MenuPanel>();
+        Vector3 target = b4_panel.LocalPos;
+
+        IsScrolling = true;
 
         var i = 0.0f;
-        var rate = 1.0f;
-        while (i < 1f)
+        var rate = 0.9f;
+        while (i < 0.6f)
         {
             i += Time.deltaTime * rate;
-            transform.localPosition = Vector3.Lerp(transform.localPosition, target, i * 10f);
+
+            if (state != MenuPanelState.Left)
+                transform.localPosition = Vector3.Lerp(transform.localPosition, target, i);
+
             yield return null;
         }
 
-        localpos = transform.localPosition;
+        ChangeState_B4();
+
+        transform.localPosition = target;
+        LocalPos = transform.localPosition;
+
+        IsScrolling = false;
     }
+
+    public void CopyStates()
+    {
+        MenuPanel b4_panel = beforePanel.GetComponent<MenuPanel>();
+        stateAdvisor.tempb4_aft_state = b4_panel.aft_state;
+        stateAdvisor.tempb4_b4_state = b4_panel.b4_state;
+        stateAdvisor.tempb4_state = b4_panel.state;
+
+        MenuPanel aft_panel = afterPanel.GetComponent<MenuPanel>();
+        stateAdvisor.tempaft_aft_state = aft_panel.aft_state;
+        stateAdvisor.tempaft_b4_state = aft_panel.b4_state;
+        stateAdvisor.tempaft_state = aft_panel.state;
+    }
+
+    public void ChangeState_B4()
+    {
+        state = stateAdvisor.tempb4_state;
+        b4_state = stateAdvisor.tempb4_b4_state;
+        aft_state = stateAdvisor.tempb4_aft_state;
+    }
+
+    public void ChangeState_AFT()
+    {
+        state = stateAdvisor.tempaft_state;
+        b4_state = stateAdvisor.tempaft_b4_state;
+        aft_state = stateAdvisor.tempaft_aft_state;
+    }
+
+
+
 }

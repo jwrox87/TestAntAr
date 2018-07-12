@@ -61,23 +61,18 @@ public class InputHandler : MonoBehaviour
 
     static Vector3 first_press, last_press;
     static bool mousePressed = false;
-    public static Vector3 deltaWorldPos;
-    public static SwipeDirection Mouse_GetSwipeAmount()
+    public static SwipeDirection Mouse_GetSwipeDirection()
     {
-        if (Input.GetMouseButtonDown(0) && !mousePressed)
+        if (Input.GetMouseButtonDown(0))
         {
             first_press = Input.mousePosition;
             last_press = Input.mousePosition;
-
-            mousePressed = true;
         }
-        if (Input.mousePosition != first_press && Input.GetMouseButtonDown(0))
-        {
-            last_press = Input.mousePosition;
-            deltaWorldPos = last_press - first_press;
-        }
-
-        if (Input.GetMouseButtonUp(0) && mousePressed)
+        //if (Input.mousePosition != first_press && Input.GetMouseButtonDown(0))
+        //{
+        //    last_press = Input.mousePosition;
+        //}
+        else if (Input.GetMouseButtonUp(0))
         {
             last_press = Input.mousePosition;
             
@@ -86,8 +81,8 @@ public class InputHandler : MonoBehaviour
             {
                 if (Mathf.Abs(last_press.x - first_press.x) > Mathf.Abs(last_press.y - first_press.y))
                 {
-                    swipeAmount = Mathf.Abs(last_press.x - first_press.x);
-
+                    swipeAmount = Mathf.Abs((last_press - first_press).magnitude);
+                   
                     if (last_press.x > first_press.x)
                     {
                         //right swipe
@@ -99,6 +94,7 @@ public class InputHandler : MonoBehaviour
                         return SwipeDirection.left;
                     }
                 }
+           
             }
 
             else
@@ -107,7 +103,6 @@ public class InputHandler : MonoBehaviour
                 return SwipeDirection.none;
             }
 
-            mousePressed = false;
         }
 
         

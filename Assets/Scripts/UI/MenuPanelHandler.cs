@@ -2,27 +2,53 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum MenuPanelState : byte
+{
+    Middle, 
+    Left,
+    Right
+}
+
+struct StateAdvisor
+{
+    public MenuPanelState tempb4_b4_state, tempb4_aft_state, tempb4_state;
+    public MenuPanelState tempaft_b4_state, tempaft_aft_state, tempaft_state;
+}
+
 public class MenuPanelHandler : MonoBehaviour
 {
+    public UnityEngine.UI.Text debugtext;
     public List<MenuPanel> menuPanels;
-
 
     void Init()
     {
         for (int i = 0; i < menuPanels.Count; i++)
         {
-            menuPanels[i].localpos = menuPanels[i].transform.localPosition;
-            
+            menuPanels[i].LocalPos = menuPanels[i].transform.localPosition;
+            menuPanels[i].state = MenuPanelState.Middle;
+
             if (i - 1 < 0)
-                menuPanels[i].beforePanel = menuPanels[menuPanels.Count-1].gameObject;
+            {
+                menuPanels[i].beforePanel = menuPanels[menuPanels.Count - 1].gameObject;
+                menuPanels[i].state = MenuPanelState.Left;
+            }
             else
                 menuPanels[i].beforePanel = menuPanels[i - 1].gameObject;
 
             if (i + 1 > menuPanels.Count - 1)
+            {
                 menuPanels[i].afterPanel = menuPanels[0].gameObject;
+                menuPanels[i].state = MenuPanelState.Right;
+            }
             else
                 menuPanels[i].afterPanel = menuPanels[i + 1].gameObject;
         }
+
+        foreach (MenuPanel mp in menuPanels)
+            mp.InitStates();
+
+        foreach (MenuPanel mp in menuPanels)
+            mp.CopyStates();
     }
 
 	// Use this for initialization
@@ -33,66 +59,59 @@ public class MenuPanelHandler : MonoBehaviour
 
     void MovePanelsForward(float amount)
     {
-        for (int i = 0; i < menuPanels.Count; i++)
+        foreach (MenuPanel mp in menuPanels)
+            mp.CopyStates();
+
+        foreach (MenuPanel mp in menuPanels)
         {
-             menuPanels[i].StartCoroutine(menuPanels[i].MoveForward(amount));
+            if (!mp.IsScrolling)
+                mp.StartCoroutine(mp.MoveForward(amount));
         }
     }
 
     void MovePanelsBack(float amount)
     {
-        for (int i = 0; i < menuPanels.Count; i++)
+        foreach (MenuPanel mp in menuPanels)
+            mp.CopyStates();
+
+        foreach (MenuPanel mp in menuPanels)
         {
-            menuPanels[i].StartCoroutine(menuPanels[i].MoveBack(amount));
-            // menuPanels[i].Move_ToBack(amount);
+            if (!mp.IsScrolling)
+                mp.StartCoroutine(mp.MoveBack(amount));
         }
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
-        //if (InputHandler.isSwipe() == InputHandler.SwipeDirection.left)
+        //if (InputHandler.Mouse_GetSwipeDirection() != InputHandler.SwipeDirection.none)
         //{
-        //    float left_swipe = InputHandler.swipeAmount;
+        //    //print(InputHandler.swipeAmount);
+        //    if (InputHandler.Mouse_GetSwipeDirection() == InputHandler.SwipeDirection.left)
+        //    {
+        //        if (InputHandler.swipeAmount > 50)
+        //            MovePanelsBack(InputHandler.swipeAmount);
+        //    }
 
-        //    MovePanelsBack(left_swipe);            
+        //    if (InputHandler.Mouse_GetSwipeDirection() == InputHandler.SwipeDirection.right)
+        //    {
+        //        if (InputHandler.swipeAmount > 50)
+        //            MovePanelsForward(InputHandler.swipeAmount);
+        //    }
         //}
 
-        //if (InputHandler.isSwipe() == InputHandler.SwipeDirection.right)
-        //{
-        //    float right_swipe = InputHandler.swipeAmount;
+        //debugtext.text = InputHandler.swipeAmount.ToString();
 
-        //    MovePanelsForward(right_swipe);
-        //}
-
-      
-        if (InputHandler.Mouse_GetSwipeAmount() != InputHandler.SwipeDirection.none)
+        if (InputHandler.isSwipe() == InputHandler.SwipeDirection.left)
         {
-            if (InputHandler.Mouse_GetSwipeAmount() == InputHandler.SwipeDirection.left)
-            {
+            if (InputHandler.swipeAmount > 100)
                 MovePanelsBack(InputHandler.swipeAmount);
-                //print("Left: " +InputHandler.swipeAmount);
-
-            }
-
-            if (InputHandler.Mouse_GetSwipeAmount() == InputHandler.SwipeDirection.right)
-            {
-                MovePanelsForward(InputHandler.swipeAmount);
-                //print("Right: " +InputHandler.swipeAmount);
-            }
-
         }
-       
-
-        //if (Input.GetKeyDown(KeyCode.G))
-        //{
-        //    MovePanelsBack();
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.H))
-        //{
-        //    MovePanelsForward();
-        //}
-
+        else if (InputHandler.isSwipe() == InputHandler.SwipeDirection.right)
+        {
+            if (InputHandler.swipeAmount > 100)
+                MovePanelsForward(InputHandler.swipeAmount);
+        }
+        
     }
 }

@@ -28,21 +28,25 @@ public static class LevelManager
             case "ants_scene_AR_2":
                 VuforiaBehaviour.Instance.enabled = true;
                 LoadVuforiaConfig(CameraDevice.CameraDirection.CAMERA_DEFAULT);
+                Screen.orientation = ScreenOrientation.AutoRotation;
                 break;
 
             case "illusion_scene":
                 VuforiaBehaviour.Instance.enabled = true;
                 LoadVuforiaConfig(CameraDevice.CameraDirection.CAMERA_DEFAULT);
+                Screen.orientation = ScreenOrientation.AutoRotation;
                 break;
 
             case "speech_scene":
                 VuforiaBehaviour.Instance.enabled = false;
                 LoadVuforiaConfig(CameraDevice.CameraDirection.CAMERA_FRONT);
+                Screen.orientation = ScreenOrientation.AutoRotation;
                 break;
 
             case "Menu":
                 VuforiaBehaviour.Instance.enabled = false;
                 LoadVuforiaConfig(CameraDevice.CameraDirection.CAMERA_DEFAULT);
+                Screen.orientation = ScreenOrientation.Portrait;
                 break;
 
             //case "loading_scene":
