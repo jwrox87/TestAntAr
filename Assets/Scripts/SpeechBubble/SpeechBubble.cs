@@ -9,5 +9,5 @@ public class SpeechBubble
     public int delay; //showtime
 
     [XmlElement("identifier")]
-    public string identifier; //identifier for audio
+    public string identifier; //identifier for audio (audio name)
 }

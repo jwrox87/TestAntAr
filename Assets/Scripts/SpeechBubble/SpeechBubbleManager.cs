@@ -140,6 +140,7 @@ public class SpeechBubbleManager : MonoBehaviour
     //Helper variables
     const float MinAlpha = 0f;
     const float MaxAlpha = 1f;
+    float cached_containerIndex;
 
     /// <summary>
     /// Update speech bubble actions
@@ -156,10 +157,17 @@ public class SpeechBubbleManager : MonoBehaviour
             {
                 yield return waitTime;
 
-                if (containerIndex < container.SpeechBubbles.Count - 1)
-                    containerIndex++;
+                containerIndex = Random.Range(0, container.SpeechBubbles.Count - 1);
+
+                if (cached_containerIndex != containerIndex)
+                    cached_containerIndex = containerIndex;
                 else
-                    containerIndex = 0;
+                    containerIndex = Random.Range(0, container.SpeechBubbles.Count - 1);
+
+                //if (containerIndex < container.SpeechBubbles.Count - 1)
+                //    containerIndex++;
+                //else
+                //    containerIndex = 0;
 
                 posIndex = (int)ExtensionMethods<float>.Randomize(bubblePoints.Count);
                 speechbubble.transform.localPosition
@@ -222,7 +230,7 @@ public class SpeechBubbleManager : MonoBehaviour
             MoveTo(Global.Instance.SpeechBubble_Manager.Face_Rect_Pos, 2f));
     }
 
-    void Event_Neutral()
+    void Event_Idle()
     {
         speechBubbleObj.SetParticleColor(Color.white, 1f);
         speechBubbleObj.SetTextAlphaValue(0);
@@ -259,7 +267,7 @@ public class SpeechBubbleManager : MonoBehaviour
 
             case SpeechBubbleStatus.Moved:
 
-                event_handler = Event_Neutral;
+                event_handler = Event_Idle;
 
                 break;
         }
