@@ -139,6 +139,11 @@ public class IllusionHandler : MonoBehaviour
                 select_image.color = Color.white;
 
                 Global.Instance.UICanvasManager.Toggle_UI_ByType(typeof(Toggle), false);
+
+                Global.Instance.UICanvasManager.Toggle_UI_ByName("ButtonDog", false);
+                Global.Instance.UICanvasManager.Toggle_UI_ByName("ButtonBoy", false);
+                Global.Instance.UICanvasManager.Toggle_UI_ByName("ButtonCat", false);
+
                 Global.Instance.UICanvasManager.Toggle_UI_ByType(typeof(Text), false);
 
                 livingObjManager.enabled = false;

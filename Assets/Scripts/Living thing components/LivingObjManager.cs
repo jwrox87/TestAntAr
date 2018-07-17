@@ -18,6 +18,10 @@ public class LivingObjManager : MonoBehaviour
     public Dog dog;
     public Boy boy;
 
+    public Button btnDog;
+    public Button btnBoy;
+    public Button btnCat;
+
     public Toggle toggleCat;
     public Toggle toggleDog;
     public Toggle toggleBoy;
@@ -207,6 +211,36 @@ public class LivingObjManager : MonoBehaviour
             obj.gameObject.SetActive(true);
             text.gameObject.SetActive(true);
         }
+    }
+
+    public void DogButtonLogic()
+    {
+        ToggleLogic(btnDog, ref toggleDog);
+    }
+
+    public void CatButtonLogic()
+    {
+        ToggleLogic(btnCat, ref toggleCat);
+    }
+
+    public void BoyButtonLogic()
+    {
+        ToggleLogic(btnBoy, ref toggleBoy);
+    }
+
+    void ToggleLogic(Button btn, ref Toggle toggle)
+    {
+        Image temp_image = btn.GetComponent<Image>();
+
+        Sprite normalSprite = temp_image.sprite;
+        temp_image.sprite = btn.spriteState.pressedSprite;
+
+        SpriteState spriteState = btn.spriteState;
+
+        spriteState.pressedSprite = normalSprite;
+        btn.spriteState = spriteState;
+
+        toggle.isOn = !toggle.isOn;
     }
 
    

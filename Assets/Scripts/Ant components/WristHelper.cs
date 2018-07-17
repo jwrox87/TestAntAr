@@ -39,7 +39,7 @@ public class WristHelper : MonoBehaviour
 
     void ToggleAlphaSlider()
     {
-        alphaSlider.gameObject.SetActive(defaultTrackable.IsTracking);
+        //alphaSlider.gameObject.SetActive(defaultTrackable.IsTracking);
         Global.Instance.EyeTracker.ToggleEye(defaultTrackable.IsTracking);
     }
 	
@@ -48,7 +48,7 @@ public class WristHelper : MonoBehaviour
     {
         ToggleAlphaSlider();
 
-        if (defaultTrackable.IsTracking)
-         ControlWristColor();
+        //if (defaultTrackable.IsTracking)
+        // ControlWristColor();
 	}
 }
