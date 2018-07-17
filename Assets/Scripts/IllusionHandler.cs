@@ -105,13 +105,15 @@ public class IllusionHandler : MonoBehaviour
             debugmsg = anchorCount.ToString();
         }
 
+        //Make obj turn towards main camera
         RotateTowardCamera(Objs);
+
+        //Place obj at location
+        //Objs may need to be individual placed in the future
         Objs.PositionAt(hitTestResult.Position);
 
+        //Set illusion status
         illusionStatus = IllusionStatus.deployed;
-
-        //Boy.transform.LookAt(new Vector3(Camera.main.transform.position.x,
-        //   Boy.transform.position.y, Camera.main.transform.position.z));
     }
 
     public void ToggleSelectIllusionStatus()

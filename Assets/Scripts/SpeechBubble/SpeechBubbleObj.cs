@@ -39,6 +39,12 @@ public class SpeechBubbleObj : MonoBehaviour{
         tmPro.color = new Color(tmPro.color.r, tmPro.color.g, tmPro.color.b, f);
     }
 
+    public void FadeTextOneByOne(string sentence)
+    {
+        string[] str_array = sentence.Split(' ');
+      
+    }
+
     public float GetTextAlphaValue()
     {
         return tmPro.color.a;
@@ -86,6 +92,8 @@ public class SpeechBubbleObj : MonoBehaviour{
     {
         SetColliderStatus(false);
         SetParticleColor(Color.white, .8f * Time.deltaTime);
+
+        FadeTextOneByOne(tmPro.text);
 
         const float speed = 0.01f;
         while (GetTextAlphaValue() > 0 && !IsAppearing)

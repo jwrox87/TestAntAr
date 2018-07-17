@@ -730,8 +730,7 @@ namespace FaceTrackerExample
                         StartCoroutine(Global.Instance.SpeechBubble_Manager.
                             ToggleBubbleVisibility(seen, 0.2f));
 
-                    if (Global.Instance.DebugInfo)
-                        Global.Instance.DebugInfo.isTracking = true;
+                    Global.Instance.EyeTracker.ToggleEye(true);
                 }
                 else
                 {
@@ -739,8 +738,7 @@ namespace FaceTrackerExample
                     StartCoroutine(Global.Instance.SpeechBubble_Manager.
                             ToggleBubbleVisibility(seen, 1f));
 
-                    if (Global.Instance.DebugInfo)
-                        Global.Instance.DebugInfo.isTracking = false;
+                    Global.Instance.EyeTracker.ToggleEye(false);
                 }
             }
 

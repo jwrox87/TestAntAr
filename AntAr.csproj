@@ -277,6 +277,7 @@
     <Compile Include="Assets\Scripts\TimeAllocaterClass.cs" />
     <Compile Include="Assets\Scripts\TouchHandler.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonClickEvents.cs" />
+    <Compile Include="Assets\Scripts\UI\EyeTracker.cs" />
     <Compile Include="Assets\Scripts\UI\MenuPanel.cs" />
     <Compile Include="Assets\Scripts\UI\MenuPanelHandler.cs" />
     <Compile Include="Assets\Scripts\UI\UICanvasManager.cs" />

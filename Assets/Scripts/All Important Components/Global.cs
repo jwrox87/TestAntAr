@@ -36,6 +36,8 @@ public class Global : MonoBehaviour
     DebugInfo debuginfo;
     UICanvasManager uICanvasManager;
 
+    EyeTracker eyeTracker;
+
     public Pathfinder Path_Finder
     {
         get { return pathfinder; }
@@ -60,6 +62,11 @@ public class Global : MonoBehaviour
         get { return uICanvasManager; }
     }
 
+    public EyeTracker EyeTracker
+    {
+        get { return eyeTracker; }
+    }
+
     // Use this for initialization
     void Awake ()
     {
@@ -73,6 +80,7 @@ public class Global : MonoBehaviour
 
         uICanvasManager = ExtensionMethods<UICanvasManager>.FindObj("Global");
 
+        eyeTracker = ExtensionMethods<EyeTracker>.FindObj("EyeTracker");
     }
 
     private void Start()

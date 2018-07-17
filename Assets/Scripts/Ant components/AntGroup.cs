@@ -63,6 +63,9 @@ public class AntGroup : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method that allows ants to split. This requires 2 paths.
+    /// </summary>
     void Split()
     {
         float splitVal = Random.value;

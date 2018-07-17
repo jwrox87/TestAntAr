@@ -39,7 +39,8 @@ public class WristHelper : MonoBehaviour
 
     void ToggleAlphaSlider()
     {
-        alphaSlider.gameObject.SetActive(defaultTrackable.IsTracking);    
+        alphaSlider.gameObject.SetActive(defaultTrackable.IsTracking);
+        Global.Instance.EyeTracker.ToggleEye(defaultTrackable.IsTracking);
     }
 	
 	// Update is called once per frame

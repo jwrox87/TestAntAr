@@ -60,7 +60,6 @@ public class InputHandler : MonoBehaviour
     }
 
     static Vector3 first_press, last_press;
-    static bool mousePressed = false;
     public static SwipeDirection Mouse_GetSwipeDirection()
     {
         if (Input.GetMouseButtonDown(0))
