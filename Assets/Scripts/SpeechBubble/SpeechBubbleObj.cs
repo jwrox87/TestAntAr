@@ -88,14 +88,13 @@ public class SpeechBubbleObj : MonoBehaviour{
     WaitForSeconds waitTime = new WaitForSeconds(0.1f);
 
     //Coroutines for actions
-    public IEnumerator Fade()
+    public IEnumerator Fade(float speed)
     {
         SetColliderStatus(false);
         SetParticleColor(Color.white, .8f * Time.deltaTime);
 
         FadeTextOneByOne(tmPro.text);
 
-        const float speed = 0.01f;
         while (GetTextAlphaValue() > 0 && !IsAppearing)
         {
             IsFading = true;
@@ -110,9 +109,8 @@ public class SpeechBubbleObj : MonoBehaviour{
         IsFading = false;
     }
 
-    public IEnumerator Appear()
+    public IEnumerator Appear(float speed)
     {
-        const float speed = 0.01f;
         while (GetTextAlphaValue() <= 1f && !IsFading)
         {
             IsAppearing = true;

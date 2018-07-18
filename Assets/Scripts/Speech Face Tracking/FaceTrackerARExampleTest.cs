@@ -718,7 +718,6 @@ namespace FaceTrackerExample
                 //Core.putText (rgbaMat, "W:" + rgbaMat.width () + " H:" + rgbaMat.height () + " SO:" + Screen.orientation, new Point (5, rgbaMat.rows () - 10), Core.FONT_HERSHEY_SIMPLEX, 1.0, new Scalar (255, 255, 255, 255), 2, Core.LINE_AA, false);
 
                 Utils.matToTexture2D(rgbaMat, texture, webCamTextureToMatHelper.GetBufferColors());
-
             }
 
             if (Global.Instance.SpeechBubble_Manager)

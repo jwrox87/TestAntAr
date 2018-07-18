@@ -8,7 +8,7 @@ public static class AudioManager
 {
     static AudioClip[] audioClips;
 
-    public static void SetAudioClip(AudioClip[] audioclips)
+    public static void SetAudioClips(AudioClip[] audioclips)
     {
         audioClips = audioclips;
     }
@@ -71,7 +71,7 @@ public class SpeechBubbleManager : MonoBehaviour
         TextAsset temp = Resources.Load("SpeechBubble") as TextAsset;
         container = SpeechBubbleContainer.LoadFromText(temp.text);
 
-        AudioManager.SetAudioClip(audioClips);
+        AudioManager.SetAudioClips(audioClips);
 
         bubblePoints = new List<Transform>();
         foreach (Transform t in speechBubblePoints)
@@ -85,9 +85,9 @@ public class SpeechBubbleManager : MonoBehaviour
         GameObject speechBubble = CreateSpeechBubble(speechBubblePrefab);
         speechBubble.transform.localPosition = new Vector3(0, 0, 0);
         speechBubble.transform.localEulerAngles = new Vector3(90, 0, 0);
-        speechBubble.GetComponent<SpeechBubbleObj>().ChangeText(container.Access(0).text);
 
         speechBubbleObj = speechBubble.GetComponent<SpeechBubbleObj>();
+        speechBubbleObj.ChangeText(container.Access(0).text);
 
         StartCoroutine(ToggleBubbleVisibility(false, 0));
         StartCoroutine(SpeechBubbleVisualUpdate(speechBubbleObj));
@@ -178,7 +178,7 @@ public class SpeechBubbleManager : MonoBehaviour
             }
 
             if (speechbubble.IsFading)
-                StartCoroutine(speechbubble.Fade());
+                StartCoroutine(speechbubble.Fade(0.05f));
             else
             {
                 speechbubble.IsAppearing = true;
@@ -192,7 +192,9 @@ public class SpeechBubbleManager : MonoBehaviour
             {
                 yield return new WaitForSeconds(container.SpeechBubbles[containerIndex].delay);
                 speechbubble.IsAppearing = false;
-
+            }
+            else if (speechbubble.GetTextAlphaValue() >= 0.3f)
+            {
                 if (!audioPlaying)
                 {
                     AudioManager.PlayAudio(speechbubble.GetAudioSource(),
@@ -205,7 +207,7 @@ public class SpeechBubbleManager : MonoBehaviour
             /*------------------------------------*/
 
             if (speechbubble.IsAppearing)
-                StartCoroutine(speechbubble.Appear());
+                StartCoroutine(speechbubble.Appear(0.05f));
             else
             {
                 speechbubble.IsAppearing = false;
@@ -226,8 +228,7 @@ public class SpeechBubbleManager : MonoBehaviour
 
         speechBubbleObj.SetParticleTransparency(0, .4f * Time.deltaTime);
 
-        StartCoroutine(speechBubbleObj.
-            MoveTo(Global.Instance.SpeechBubble_Manager.Face_Rect_Pos, 2f));
+        StartCoroutine(speechBubbleObj.MoveTo(Face_Rect_Pos, 2f));
     }
 
     void Event_Idle()
@@ -237,7 +238,6 @@ public class SpeechBubbleManager : MonoBehaviour
         
         StartCoroutine(SpeechBubbleVisualUpdate(speechBubbleObj,1f));
     }
-
 
     //Should not be here
     void Event_Update()
@@ -256,19 +256,12 @@ public class SpeechBubbleManager : MonoBehaviour
                     if (hitObj)
                         event_handler = Event_Movement;
                 }
-
-                //Transform hitObj = InputHandler.Touch_GetHitObj();
-
-                //if (hitObj)
-                //    event_handler = Event_Movement;
-
                 break;
 
 
             case SpeechBubbleStatus.Moved:
 
                 event_handler = Event_Idle;
-
                 break;
         }
 

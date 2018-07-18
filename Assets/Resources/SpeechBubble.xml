@@ -4,57 +4,57 @@
   
 	<SpeechBubble text = "No one likes you">
     <identifier>HF2 - no one likes u</identifier>
-    <delay> 3 </delay>	
+    <delay> 2 </delay>	
 	</SpeechBubble>
   
   <SpeechBubble text = "You're so stupid">
     <identifier>HF2 - you're so stupid</identifier>
-    <delay> 3 </delay>
+    <delay> 2 </delay>
   </SpeechBubble>
   
   <SpeechBubble text = "You're so ugly">
     <identifier>HF2 - you're so ugly</identifier>
-    <delay> 3 </delay>
+    <delay> 2 </delay>
   </SpeechBubble>
   
   <SpeechBubble text = "Why are you so useless?">
     <identifier>HF3 - why r u so useless</identifier>
-    <delay> 3 </delay>
+    <delay> 2 </delay>
   </SpeechBubble>
 
   <SpeechBubble text = "Go and die!">
     <identifier>HF3 - go n die</identifier>
-    <delay> 3 </delay>
+    <delay> 2 </delay>
   </SpeechBubble>
     
    <SpeechBubble text = "You're so ugly">
     <identifier>HF3 - you're so ugly</identifier>
-    <delay> 3 </delay>
+    <delay> 2 </delay>
   </SpeechBubble>
 
    <SpeechBubble text = "Go and die!">
     <identifier>J1 - go n die</identifier>
-    <delay> 3 </delay>
+    <delay> 2 </delay>
   </SpeechBubble>  
     
    <SpeechBubble text = "No one likes you">
     <identifier>J1 - no one likes u</identifier>
-    <delay> 3 </delay>	
+    <delay> 2 </delay>	
 	</SpeechBubble>
 
    <SpeechBubble text = "You're so stupid">
     <identifier>J1 - you're so stupid</identifier>
-    <delay> 3 </delay>
+    <delay> 2 </delay>
   </SpeechBubble> 
   
    <SpeechBubble text = "Why are you so useless?">
     <identifier>J2 - why r u so useless</identifier>
-    <delay> 3 </delay>
+    <delay> 2 </delay>
   </SpeechBubble>
     
    <SpeechBubble text = "You're so ugly">
     <identifier>J2 - you're so ugly</identifier>
-    <delay> 3 </delay>
+    <delay> 2 </delay>
   </SpeechBubble>
  
   

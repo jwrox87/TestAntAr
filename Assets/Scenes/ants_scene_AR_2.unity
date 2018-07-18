@@ -137,7 +137,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 24013745}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.8590006, y: 0.42999995, z: 1.9870014}
+  m_LocalPosition: {x: 1.0370002, y: 0.42999995, z: 1.9830009}
   m_LocalScale: {x: 0.027777804, y: 0.027777784, z: 0.027777804}
   m_Children:
   - {fileID: 1400975697}
@@ -265,7 +265,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 91568852}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.578, y: 0.20861107, z: -4.266}
+  m_LocalPosition: {x: -0.40000048, y: 0.20861107, z: -4.2700005}
   m_LocalScale: {x: 0.02777782, y: 0.027777784, z: 0.02777782}
   m_Children:
   - {fileID: 1985273343}
@@ -304,7 +304,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 114954926}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.57800007, y: 0.20861107, z: -4.2660017}
+  m_LocalPosition: {x: -0.40000054, y: 0.20861107, z: -4.2700024}
   m_LocalScale: {x: 0.027777804, y: 0.027777784, z: 0.027777804}
   m_Children:
   - {fileID: 1955827903}
@@ -564,7 +564,7 @@ Mesh:
     vertexCount: 4
     localAABB:
       m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 0.5, y: 0, z: 0.28818446}
+      m_Extent: {x: 0.5, y: 0, z: 0.22833334}
   m_Shapes:
     vertices: []
     shapes: []
@@ -617,7 +617,7 @@ Mesh:
       format: 0
       dimension: 0
     m_DataSize: 128
-    _typelessdata: 000000bf00000000ea8c93be000000000000803f000000000000000000000000000000bf00000000ea8c933e000000000000803f00000000000000000000803f0000003f00000000ea8c93be000000000000803f000000000000803f000000000000003f00000000ea8c933e000000000000803f000000000000803f0000803f
+    _typelessdata: 000000bf0000000037d069be000000000000803f000000000000000000000000000000bf0000000037d0693e000000000000803f00000000000000000000803f0000003f0000000037d069be000000000000803f000000000000803f000000000000003f0000000037d0693e000000000000803f000000000000803f0000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -1039,7 +1039,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 298956146}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.32099974, y: 0.42999995, z: 2.064001}
+  m_LocalPosition: {x: -0.14300022, y: 0.42999995, z: 2.0600004}
   m_LocalScale: {x: 0.027777804, y: 0.027777784, z: 0.027777804}
   m_Children:
   - {fileID: 1402143409}
@@ -1376,7 +1376,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 511622836}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.2340004, y: 0.42999995, z: 1.9560013}
+  m_LocalPosition: {x: 0.4119999, y: 0.42999995, z: 1.9520007}
   m_LocalScale: {x: 0.027777804, y: 0.027777784, z: 0.027777804}
   m_Children:
   - {fileID: 2125051198}
@@ -1579,12 +1579,12 @@ MonoBehaviour:
   m_Script: {fileID: -1631628248, guid: bab6fa851cf5a1a4bba3cec5f191cb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTrackableName: 2spiders
+  mTrackableName: logo
   mPreserveChildSize: 0
   mInitializedInEditor: 1
   mDataSetPath: Vuforia/nursing_ar_targets.xml
   mExtendedTracking: 0
-  mAspectRatio: 0.5763689
+  mAspectRatio: 0.45666668
   mImageTargetType: 0
   mWidth: 18
   mHeight: 10.37464
@@ -2107,7 +2107,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 122973402}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.077999525, y: -0.68005574, z: -0.09599942}
+  m_LocalPosition: {x: 0.1, y: -0.68005574, z: -0.1}
   m_LocalScale: {x: 0.030000014, y: 0.03, z: 0.030000014}
   m_Children:
   - {fileID: 623919569}
@@ -3572,7 +3572,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1594318433}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.8870005, y: 0.42999995, z: 1.3170016}
+  m_LocalPosition: {x: 1.065, y: 0.42999995, z: 1.313001}
   m_LocalScale: {x: 0.02777782, y: 0.027777784, z: 0.02777782}
   m_Children:
   - {fileID: 493880182}
@@ -4243,7 +4243,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1778125294}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.32700115, y: 0.349, z: -5.2111144}
+  m_LocalPosition: {x: 0.50500065, y: 0.349, z: -5.215115}
   m_LocalScale: {x: 0.02777782, y: 0.027777784, z: 0.02777782}
   m_Children:
   - {fileID: 1248783964}
@@ -4479,7 +4479,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: 2spidersMaterial
+  m_Name: logoMaterial
   m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -4492,7 +4492,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 4658f67a4d39412491e9c628a024a76e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 13f8296e9bfb4ca18e4febaf9c28d509, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
@@ -4677,7 +4677,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1959765778}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.3120004, y: 0.42999995, z: 1.5680015}
+  m_LocalPosition: {x: 0.48999992, y: 0.42999995, z: 1.564001}
   m_LocalScale: {x: 0.02777782, y: 0.027777784, z: 0.02777782}
   m_Children:
   - {fileID: 1083764534}
@@ -4889,7 +4889,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2095566447}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.65799975, y: 0.43, z: 1.3260014}
+  m_LocalPosition: {x: -0.48000023, y: 0.43, z: 1.3220009}
   m_LocalScale: {x: 0.02777782, y: 0.027777784, z: 0.02777782}
   m_Children:
   - {fileID: 825445168}
