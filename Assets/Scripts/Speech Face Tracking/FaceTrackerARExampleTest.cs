@@ -724,20 +724,16 @@ namespace FaceTrackerExample
             {
                 if (seen)
                 {
-                    if (timeStatus > 1f)
+                    if (timeStatus > 0.5f)
                         Global.Instance.SpeechBubble_Manager.
                         StartCoroutine(Global.Instance.SpeechBubble_Manager.
                             ToggleBubbleVisibility(seen, 0.2f));
-
-                    Global.Instance.EyeTracker.ToggleEye(true);
                 }
                 else
                 {
                     Global.Instance.SpeechBubble_Manager.
                     StartCoroutine(Global.Instance.SpeechBubble_Manager.
                             ToggleBubbleVisibility(seen, 1f));
-
-                    Global.Instance.EyeTracker.ToggleEye(false);
                 }
             }
 

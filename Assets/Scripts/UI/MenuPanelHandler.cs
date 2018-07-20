@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public enum MenuPanelState : byte
 {
@@ -20,7 +21,7 @@ public class MenuPanelHandler : MonoBehaviour
     public UnityEngine.UI.Text debugtext;
     public List<MenuPanel> menuPanels;
 
-    void Init()
+    void Init_Menu()
     {
         for (int i = 0; i < menuPanels.Count; i++)
         {
@@ -47,17 +48,18 @@ public class MenuPanelHandler : MonoBehaviour
         foreach (MenuPanel mp in menuPanels)
             mp.InitStates();
 
+
         foreach (MenuPanel mp in menuPanels)
             mp.CopyStates();
     }
-
-	// Use this for initialization
-	void Start ()
+    
+    // Use this for initialization
+    void Start ()
     {
-        Init();
+        Init_Menu();
     }
 
-    void MovePanelsForward(float amount)
+    public void MovePanelsForward(float amount)
     {
         foreach (MenuPanel mp in menuPanels)
             mp.CopyStates();
@@ -69,7 +71,7 @@ public class MenuPanelHandler : MonoBehaviour
         }
     }
 
-    void MovePanelsBack(float amount)
+    public void MovePanelsBack(float amount)
     {
         foreach (MenuPanel mp in menuPanels)
             mp.CopyStates();
@@ -86,7 +88,6 @@ public class MenuPanelHandler : MonoBehaviour
 
         //if (InputHandler.Mouse_GetSwipeDirection() != InputHandler.SwipeDirection.none)
         //{
-        //    //print(InputHandler.swipeAmount);
         //    if (InputHandler.Mouse_GetSwipeDirection() == InputHandler.SwipeDirection.left)
         //    {
         //        if (InputHandler.swipeAmount > 50)
@@ -100,8 +101,6 @@ public class MenuPanelHandler : MonoBehaviour
         //    }
         //}
 
-        //debugtext.text = InputHandler.swipeAmount.ToString();
-
         if (InputHandler.isSwipe() == InputHandler.SwipeDirection.left)
         {
             if (InputHandler.swipeAmount > 100)
@@ -112,6 +111,6 @@ public class MenuPanelHandler : MonoBehaviour
             if (InputHandler.swipeAmount > 100)
                 MovePanelsForward(InputHandler.swipeAmount);
         }
-        
+
     }
 }

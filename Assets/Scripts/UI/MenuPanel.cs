@@ -16,6 +16,8 @@ public class MenuPanel : MonoBehaviour
 
     StateAdvisor stateAdvisor;
 
+    public UnityEngine.UI.Image Navi_Image { get; set; }
+
     public void InitStates()
     {
         b4_state = beforePanel.GetComponent<MenuPanel>().state;

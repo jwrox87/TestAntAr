@@ -133,6 +133,8 @@ public class SpeechBubbleManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
+        Global.Instance.EyeTracker.ToggleEye(b);
+
         foreach (Transform t in speechBubbleObj.transform)
             t.gameObject.SetActive(b);
     }
@@ -193,7 +195,7 @@ public class SpeechBubbleManager : MonoBehaviour
                 yield return new WaitForSeconds(container.SpeechBubbles[containerIndex].delay);
                 speechbubble.IsAppearing = false;
             }
-            else if (speechbubble.GetTextAlphaValue() >= 0.3f)
+            else if (speechbubble.GetTextAlphaValue() >= 0.4f)
             {
                 if (!audioPlaying)
                 {
