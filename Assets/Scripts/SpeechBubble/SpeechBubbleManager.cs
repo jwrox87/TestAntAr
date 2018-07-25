@@ -164,7 +164,15 @@ public class SpeechBubbleManager : MonoBehaviour
                 if (cached_containerIndex != containerIndex)
                     cached_containerIndex = containerIndex;
                 else
-                    containerIndex = Random.Range(0, container.SpeechBubbles.Count - 1);
+                {
+                    do
+                    {
+                        containerIndex = Random.Range(0, container.SpeechBubbles.Count - 1);
+                    }
+                    while (cached_containerIndex == containerIndex);
+
+                    //print("Faaazzz");
+                }
 
                 //if (containerIndex < container.SpeechBubbles.Count - 1)
                 //    containerIndex++;
