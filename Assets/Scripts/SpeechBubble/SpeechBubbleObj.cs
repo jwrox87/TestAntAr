@@ -41,7 +41,7 @@ public class SpeechBubbleObj : MonoBehaviour{
 
     public void FadeTextOneByOne(string sentence)
     {
-        string[] str_array = sentence.Split(' ');
+     //   string[] str_array = sentence.Split(' ');
       
     }
 

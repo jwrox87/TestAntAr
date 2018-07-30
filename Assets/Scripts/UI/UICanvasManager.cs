@@ -12,6 +12,7 @@ public class UICanvasManager : MonoBehaviour
     { 
         foreach (UIBehaviour ui in list_of_ui)
         {
+            if (ui)
             ui.gameObject.SetActive(b);
         }       
     }
@@ -20,7 +21,7 @@ public class UICanvasManager : MonoBehaviour
     {
         foreach (UIBehaviour ui in list_of_ui)
         {
-            if (ui.GetType() == type)
+            if (ui && ui.GetType() == type)
             {
                 ui.gameObject.SetActive(b);
             }
@@ -32,7 +33,7 @@ public class UICanvasManager : MonoBehaviour
     {
         foreach (UIBehaviour ui in list_of_ui)
         {
-            if (ui.name == name)
+            if (ui && ui.name == name)
             {
                 ui.gameObject.SetActive(b);
             }

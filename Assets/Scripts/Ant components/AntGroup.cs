@@ -125,7 +125,9 @@ public class AntGroup : MonoBehaviour
                     if (movePercentage >= 1f)
                     {
                         Loop();
-                        Split();
+                        
+                        if (path.points2.Count > 0)
+                            Split();
                     }
             }
             break;

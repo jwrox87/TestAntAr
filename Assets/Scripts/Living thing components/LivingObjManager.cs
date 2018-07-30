@@ -26,9 +26,9 @@ public class LivingObjManager : MonoBehaviour
     public Toggle toggleDog;
     public Toggle toggleBoy;
 
-    public Text textCat;
-    public Text textDog;
-    public Text textBoy;
+    public Button btnDog_play;
+    public Button btnCat_play;
+    public Button btnBoy_play;
 
     private void OnDrawGizmos()
     {
@@ -44,20 +44,10 @@ public class LivingObjManager : MonoBehaviour
         dog.enumerator = MoveIncrement(dog, 0.01f);
         boy.enumerator = MoveIncrement(boy, 0.01f);
 
-        //Individual dropdowns
-        TMPro.TMP_Dropdown boydropdown = textBoy.transform.GetChild(0).GetComponent<TMPro.TMP_Dropdown>();
-        TMPro.TMP_Dropdown dogdropdown = textDog.transform.GetChild(0).GetComponent<TMPro.TMP_Dropdown>();
-        TMPro.TMP_Dropdown catdropdown = textCat.transform.GetChild(0).GetComponent<TMPro.TMP_Dropdown>();
-
-        //UI Related 
-        //Dropdown
-        ParseDropDownSelection(boy, boydropdown, boy.enumerator);
-        ParseDropDownSelection(dog, dogdropdown, dog.enumerator);
-        ParseDropDownSelection(cat, catdropdown, cat.enumerator);
         //Checkbox
-        ToggleLogic(cat, textCat, toggleCat);
-        ToggleLogic(dog, textDog, toggleDog);
-        ToggleLogic(boy, textBoy, toggleBoy);
+        ToggleLogic(cat, toggleCat);
+        ToggleLogic(dog, toggleDog);
+        ToggleLogic(boy, toggleBoy);
     }
 
     void ResetParameters(LivingObj obj)
@@ -186,30 +176,28 @@ public class LivingObjManager : MonoBehaviour
 
     public void Toggle_Cat(Toggle toggle)
     {
-        ToggleLogic(cat, textCat, toggle);
+        ToggleLogic(cat, toggle);
     }
 
     public void Toggle_Dog(Toggle toggle)
     {
-        ToggleLogic(dog, textDog, toggle);
+        ToggleLogic(dog, toggle);
     }
 
     public void Toggle_Boy(Toggle toggle)
     {
-        ToggleLogic(boy, textBoy, toggle);
+        ToggleLogic(boy, toggle);
     }
 
-    void ToggleLogic(LivingObj obj, Text text, Toggle toggle, IEnumerator enumerator = null)
+    void ToggleLogic(LivingObj obj, Toggle toggle, IEnumerator enumerator = null)
     {
         if (!toggle.isOn)
         {
             obj.gameObject.SetActive(false);
-            text.gameObject.SetActive(false);
         }
         else
         {
             obj.gameObject.SetActive(true);
-            text.gameObject.SetActive(true);
         }
     }
 
@@ -228,6 +216,11 @@ public class LivingObjManager : MonoBehaviour
         ToggleLogic(btnBoy, ref toggleBoy);
     }
 
+    public void DogPlayButtonLogic()
+    {
+      //  ToggleLogic(btnDog_play, ref )
+    }
+
     void ToggleLogic(Button btn, ref Toggle toggle)
     {
         Image temp_image = btn.GetComponent<Image>();
@@ -243,44 +236,6 @@ public class LivingObjManager : MonoBehaviour
         toggle.isOn = !toggle.isOn;
     }
 
-   
-    void ParseDropDownSelection(LivingObj obj, TMPro.TMP_Dropdown dropdown, IEnumerator enumerator)
-    {
-        if (!dropdown)
-            return;
-
-        string s = dropdown.options[dropdown.value].text;
-        
-        switch (s)
-        {
-            case "Move":
-                StartCoroutine(enumerator);
-                obj.CurrentState = State.move;
-                break;
-
-            case "Idle":
-                StopCoroutine(enumerator);
-                obj.CurrentState = State.idle;
-                break;
-        }
-
-    }
-
-
-    public void Cat_DropDownList(TMPro.TMP_Dropdown dropdown)
-    {
-        ParseDropDownSelection(cat, dropdown, cat.enumerator);
-    }
-
-    public void Dog_DropDownList(TMPro.TMP_Dropdown dropdown)
-    {
-        ParseDropDownSelection(dog, dropdown, dog.enumerator);
-    }
-
-    public void Boy_DropDownList(TMPro.TMP_Dropdown dropdown)
-    {
-        ParseDropDownSelection(boy, dropdown, boy.enumerator);
-    }
 
 
     bool ObjUpdate(LivingObj obj, float reactionSpeed, float min_speed,bool loop)

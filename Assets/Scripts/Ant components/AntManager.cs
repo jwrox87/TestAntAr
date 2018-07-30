@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Vuforia;
 /*
  *  AntManager class. Does the update for all ants.
  * 
@@ -13,7 +13,6 @@ public class AntManager : MonoBehaviour
     AntGroup[] antgroups;
 
     Pathfinder pathfinder;
-
 
     // Use this for initialization
     void Start ()
@@ -39,7 +38,6 @@ public class AntManager : MonoBehaviour
         {
             antgroup.Initialize();
         }
-
     }
 
     // Update is called once per frame

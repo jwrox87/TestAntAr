@@ -46,7 +46,6 @@ public class IllusionHandler : MonoBehaviour
         initialObjPosition = Objs.transform.position;
 
         Global.Instance.UICanvasManager.Toggle_UI_ByType(typeof(Toggle), false);
-        Global.Instance.UICanvasManager.Toggle_UI_ByType(typeof(Text), false);
 
         livingObjManager.enabled = false;
 
@@ -144,7 +143,9 @@ public class IllusionHandler : MonoBehaviour
                 Global.Instance.UICanvasManager.Toggle_UI_ByName("ButtonBoy", false);
                 Global.Instance.UICanvasManager.Toggle_UI_ByName("ButtonCat", false);
 
-                Global.Instance.UICanvasManager.Toggle_UI_ByType(typeof(Text), false);
+                Global.Instance.UICanvasManager.Toggle_UI_ByName("ButtonPlayDog", false);
+                Global.Instance.UICanvasManager.Toggle_UI_ByName("ButtonPlayBoy", false);
+                Global.Instance.UICanvasManager.Toggle_UI_ByName("ButtonPlayCat", false);
 
                 livingObjManager.enabled = false;
 

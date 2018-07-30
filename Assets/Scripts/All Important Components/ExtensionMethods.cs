@@ -14,16 +14,31 @@ public static class ExtensionMethods<T>
         return Random.Range(0, size);
     }
 
-    public static float RandomUntilNoRepeat(int compare,int Count)
+    public static float RandomizeIgnore(float size, float ignored_val)
     {
-        float first_val = Randomize(Count);
-
-        while (first_val == compare)
+        float r;
+        do
         {
-            first_val = Randomize(Count);
-        }
+            r = Random.Range(0, size);
+        } while (r == ignored_val);
 
-        return first_val;
+        return r;
+    }
+
+
+    public static void RandomUntilNoRepeat(ref int previous, ref int rand_pos, int size)
+    {
+        rand_pos = (int)ExtensionMethods<float>.Randomize(size);
+        
+        if (previous != rand_pos)
+            previous = rand_pos;
+        else
+        {
+            while (previous == rand_pos)
+                previous = (int)ExtensionMethods<float>.Randomize(size);
+        
+            rand_pos = previous;
+        }
     }
 
     public static void RandomizeList(ref List<T> randomList)

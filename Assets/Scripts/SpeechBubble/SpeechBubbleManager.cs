@@ -83,7 +83,7 @@ public class SpeechBubbleManager : MonoBehaviour
         posIndex = 0;
 
         GameObject speechBubble = CreateSpeechBubble(speechBubblePrefab);
-        speechBubble.transform.localPosition = new Vector3(0, 0, 0);
+        speechBubble.transform.localPosition = bubblePoints[0].localPosition;
         speechBubble.transform.localEulerAngles = new Vector3(90, 0, 0);
 
         speechBubbleObj = speechBubble.GetComponent<SpeechBubbleObj>();
@@ -142,8 +142,8 @@ public class SpeechBubbleManager : MonoBehaviour
     //Helper variables
     const float MinAlpha = 0f;
     const float MaxAlpha = 1f;
-    float cached_containerIndex;
-
+    int cached_speechIndex;
+    int cached_posIndex;
     /// <summary>
     /// Update speech bubble actions
     /// </summary>
@@ -155,31 +155,16 @@ public class SpeechBubbleManager : MonoBehaviour
 
         while (true)
         {
-            if (speechbubble.GetTextAlphaValue() <= MinAlpha)
+            if (speechbubble.GetTextAlphaValue() <= MinAlpha && audioPlaying)
             {
                 yield return waitTime;
 
-                containerIndex = Random.Range(0, container.SpeechBubbles.Count - 1);
+                ExtensionMethods<float>.RandomUntilNoRepeat(ref cached_speechIndex,
+                     ref containerIndex, container.SpeechBubbles.Count);
 
-                if (cached_containerIndex != containerIndex)
-                    cached_containerIndex = containerIndex;
-                else
-                {
-                    do
-                    {
-                        containerIndex = Random.Range(0, container.SpeechBubbles.Count - 1);
-                    }
-                    while (cached_containerIndex == containerIndex);
+                ExtensionMethods<float>.RandomUntilNoRepeat(ref cached_posIndex, ref posIndex,
+                    bubblePoints.Count);
 
-                    //print("Faaazzz");
-                }
-
-                //if (containerIndex < container.SpeechBubbles.Count - 1)
-                //    containerIndex++;
-                //else
-                //    containerIndex = 0;
-
-                posIndex = (int)ExtensionMethods<float>.Randomize(bubblePoints.Count);
                 speechbubble.transform.localPosition
                     = speechBubblePoints.parent.InverseTransformPoint(bubblePoints[posIndex].position);
 

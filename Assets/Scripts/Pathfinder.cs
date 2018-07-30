@@ -38,10 +38,13 @@ public class CPath
 
         points[0].localPosition = points[points.Count - 1].localPosition;
 
-        if (points2.Count > 2)
-        {
-            points2[0].localPosition = points2[points2.Count - 1].localPosition;
-        }
+
+      
+       if (points2.Count > 2)
+       {
+           points2[0].localPosition = points2[points2.Count - 1].localPosition;
+       }
+        
 
         initLoop = true;
     }
