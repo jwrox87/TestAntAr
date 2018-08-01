@@ -45,10 +45,19 @@ public class LivingObjManager : MonoBehaviour
         boy.enumerator = MoveIncrement(boy, 0.01f);
 
         //Checkbox
-        ToggleLogic(cat, toggleCat);
-        ToggleLogic(dog, toggleDog);
-        ToggleLogic(boy, toggleBoy);
+        ToggleLivingObj(cat, toggleCat);
+        ToggleLivingObj(dog, toggleDog);
+        ToggleLivingObj(boy, toggleBoy);
+
+        StartCoroutine(cat.enumerator);
+        StartCoroutine(dog.enumerator);
+        StartCoroutine(boy.enumerator);
+
+        cat.CurrentState = State.move;
+        dog.CurrentState = State.move;
+        boy.CurrentState = State.move;
     }
+
 
     void ResetParameters(LivingObj obj)
     {
@@ -174,54 +183,75 @@ public class LivingObjManager : MonoBehaviour
         }
     }
 
-    public void Toggle_Cat(Toggle toggle)
+    public void Toggle_Cat_CheckBox(Toggle toggle)
     {
-        ToggleLogic(cat, toggle);
+        ToggleLivingObj(cat, toggle);
     }
 
-    public void Toggle_Dog(Toggle toggle)
+    public void Toggle_Dog_CheckBox(Toggle toggle)
     {
-        ToggleLogic(dog, toggle);
+        ToggleLivingObj(dog, toggle);
     }
 
-    public void Toggle_Boy(Toggle toggle)
+    public void Toggle_Boy_CheckBox(Toggle toggle)
     {
-        ToggleLogic(boy, toggle);
+        ToggleLivingObj(boy, toggle);
     }
 
-    void ToggleLogic(LivingObj obj, Toggle toggle, IEnumerator enumerator = null)
+    void ToggleLivingObj(LivingObj obj, Toggle toggle, IEnumerator enumerator = null)
     {
         if (!toggle.isOn)
-        {
             obj.gameObject.SetActive(false);
-        }
         else
-        {
             obj.gameObject.SetActive(true);
-        }
     }
 
     public void DogButtonLogic()
     {
-        ToggleLogic(btnDog, ref toggleDog);
+        ToggleButtonState(btnDog);
+        toggleDog.isOn = !toggleDog.isOn;
+        btnDog_play.gameObject.SetActive(toggleDog.isOn);
     }
 
     public void CatButtonLogic()
     {
-        ToggleLogic(btnCat, ref toggleCat);
+        ToggleButtonState(btnCat);
+        toggleCat.isOn = !toggleCat.isOn;
+        btnCat_play.gameObject.SetActive(toggleCat.isOn);
     }
 
     public void BoyButtonLogic()
     {
-        ToggleLogic(btnBoy, ref toggleBoy);
+        ToggleButtonState(btnBoy);
+        toggleBoy.isOn = !toggleBoy.isOn;
+        btnBoy_play.gameObject.SetActive(toggleBoy.isOn);
     }
 
+    bool dog_isPlaying = true;
     public void DogPlayButtonLogic()
     {
-      //  ToggleLogic(btnDog_play, ref )
+        ToggleButtonState(btnDog_play);
+        dog_isPlaying = !dog_isPlaying;
+        SwitchAnimation(dog, dog.enumerator, dog_isPlaying);
     }
 
-    void ToggleLogic(Button btn, ref Toggle toggle)
+    bool cat_isPlaying = true;
+    public void CatPlayButtonLogic()
+    {
+        ToggleButtonState(btnCat_play);
+        cat_isPlaying = !cat_isPlaying;
+        SwitchAnimation(cat, cat.enumerator, cat_isPlaying);
+    }
+
+    bool boy_isPlaying = true;
+    public void BoyPlayButtonLogic()
+    {
+        ToggleButtonState(btnBoy_play);
+        boy_isPlaying = !boy_isPlaying;
+        SwitchAnimation(boy, boy.enumerator, boy_isPlaying);
+    }
+
+    void ToggleButtonState(Button btn)
     {
         Image temp_image = btn.GetComponent<Image>();
 
@@ -232,10 +262,21 @@ public class LivingObjManager : MonoBehaviour
 
         spriteState.pressedSprite = normalSprite;
         btn.spriteState = spriteState;
-
-        toggle.isOn = !toggle.isOn;
     }
 
+    void SwitchAnimation(LivingObj obj, IEnumerator enumerator, bool isPlaying)
+    {
+        if (isPlaying == false)
+        {
+            StopCoroutine(enumerator);
+            obj.CurrentState = State.idle;
+        }
+        else
+        {
+            StartCoroutine(enumerator);
+            obj.CurrentState = State.move;
+        }
+    }
 
 
     bool ObjUpdate(LivingObj obj, float reactionSpeed, float min_speed,bool loop)

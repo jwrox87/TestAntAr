@@ -402,7 +402,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 246763446}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 465347519}
+        m_MethodName: BoyPlayButtonLogic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &246763446
@@ -781,7 +792,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 456735924}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 465347519}
+        m_MethodName: CatPlayButtonLogic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &456735924
@@ -1576,7 +1598,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1166442040}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 465347519}
+        m_MethodName: DogPlayButtonLogic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1166442040
@@ -1691,7 +1724,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 465347519}
-        m_MethodName: Toggle_Boy
+        m_MethodName: Toggle_Boy_CheckBox
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1195569551}
@@ -1993,7 +2026,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 465347519}
-        m_MethodName: Toggle_Cat
+        m_MethodName: Toggle_Cat_CheckBox
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1567260986}
@@ -2569,7 +2602,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 465347519}
-        m_MethodName: Toggle_Dog
+        m_MethodName: Toggle_Dog_CheckBox
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1817907361}
