@@ -49,6 +49,12 @@ public static class LevelManager
                 Screen.orientation = ScreenOrientation.Portrait;
                 break;
 
+            case "molecule_scene":
+                VuforiaBehaviour.Instance.enabled = true;
+                LoadVuforiaConfig(CameraDevice.CameraDirection.CAMERA_DEFAULT);
+                Screen.orientation = ScreenOrientation.AutoRotation;
+                break;
+
             //case "loading_scene":
             //    VuforiaBehaviour.Instance.enabled = false;
             //    break;

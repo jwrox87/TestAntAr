@@ -269,6 +269,7 @@
     <Compile Include="Assets\Scripts\Living thing components\LivingObj.cs" />
     <Compile Include="Assets\Scripts\Living thing components\LivingObjManager.cs" />
     <Compile Include="Assets\Scripts\Molecule\MoleculeHandler.cs" />
+    <Compile Include="Assets\Scripts\Molecule\MoleculeObj.cs" />
     <Compile Include="Assets\Scripts\Pathfinder.cs" />
     <Compile Include="Assets\Scripts\Speech Face Tracking\FaceTrackerARExampleTest.cs" />
     <Compile Include="Assets\Scripts\SpeechBubble\SpeechBubble.cs" />

@@ -14,15 +14,12 @@ public class WristHelper : MonoBehaviour
 
     Material wristMat_mat;
     Color wristMat_color;
-    DefaultTrackableEventHandler defaultTrackable;
 
 	// Use this for initialization
 	void Start ()
     {
         wristMat_mat = wristMat_obj.GetComponent<Renderer>().material;
         wristMat_color = wristMat_mat.color;
-
-        defaultTrackable = GetComponent<DefaultTrackableEventHandler>();
 
         alphaSlider.gameObject.SetActive(false);
         wristMat_mat.color = new Color(wristMat_color.r, wristMat_color.g, wristMat_color.b,0f);
@@ -40,7 +37,6 @@ public class WristHelper : MonoBehaviour
     void ToggleAlphaSlider()
     {
         //alphaSlider.gameObject.SetActive(defaultTrackable.IsTracking);
-        Global.Instance.EyeTracker.ToggleEye(defaultTrackable.IsTracking);
     }
 	
 	// Update is called once per frame

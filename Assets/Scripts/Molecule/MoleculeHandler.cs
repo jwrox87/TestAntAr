@@ -8,20 +8,22 @@ public enum MoleculeState
     inserted
 }
 
-class Molecule
+public enum MoleculeType
 {
-    string name;
-
+    diamond,
+    square
 }
 
 public class MoleculeHandler : MonoBehaviour
 {
-    public Transform square_molecule;
-    public Transform square_molecule_placement;
-    public Transform placeholder;
-    public Transform destination;
+    //Can only take 1 molecule at a time
+    public MoleculeObj current_molecule { get; set; }
 
-    MoleculeState moleculeState = MoleculeState.idle;
+    MoleculeType accepted_moleculeType = MoleculeType.diamond;
+
+    public Transform placeholder;
+    public Transform success_target;
+    public Transform failure_target;
 
     delegate void MoleculeEvent();
     MoleculeEvent Current_Event;
@@ -42,43 +44,53 @@ public class MoleculeHandler : MonoBehaviour
     {
         placeholder.gameObject.SetActive(false);
 
-        square_molecule.parent = destination.parent.parent;
-        square_molecule.position = placeholder.position;
-        square_molecule.localEulerAngles = destination.localEulerAngles;
+        current_molecule.transform.parent = success_target.parent.parent;
+        current_molecule.transform.position = placeholder.position;
+        current_molecule.transform.localEulerAngles = success_target.localEulerAngles;
         
         yield return initialdelay;
 
-        while (GetDistanceBetweenTargets(square_molecule.position,destination.position) > 0.1f)
+        Transform target;
+        if (accepted_moleculeType == current_molecule.moleculeType)
+            target = success_target;
+        else
+            target = failure_target;
+
+        while (GetDistanceBetweenTargets(current_molecule.transform.position, target.position) > 0.1f)
         {
-            square_molecule.position = Vector3.Lerp(square_molecule.position, destination.position, Time.deltaTime * 2f);
+            current_molecule.transform.position = Vector3.Lerp(current_molecule.transform.position, target.position, Time.deltaTime * 2f);
             yield return null;
         }
 
-        square_molecule.position = destination.position;
-        square_molecule.localEulerAngles = destination.localEulerAngles;
+        current_molecule.transform.position = target.position;
+        current_molecule.transform.localEulerAngles = target.localEulerAngles;
 
-        moleculeState = MoleculeState.inserted;
+        current_molecule.moleculeState = MoleculeState.inserted;
 
+        current_molecule.ToggleIndicator(true);
     }
 
     IEnumerator RemoveMolecule()
     {
         yield return initialdelay;
 
-        square_molecule.parent = square_molecule_placement.parent;
+        current_molecule.transform.parent = current_molecule.placement.parent;
 
-        while (GetDistanceBetweenTargets(square_molecule.position,square_molecule_placement.position) > 0.1f)
+        while (GetDistanceBetweenTargets(current_molecule.transform.position, current_molecule.placement.position) > 0.1f)
         {
-            square_molecule.position = Vector3.Lerp(square_molecule.position, square_molecule_placement.position, Time.deltaTime * 2f);
+            current_molecule.transform.position = Vector3.Lerp(current_molecule.transform.position,
+                current_molecule.placement.position, Time.deltaTime * 2f);
             yield return null;
         }
 
-        square_molecule.position = square_molecule_placement.position;
-        square_molecule.localEulerAngles = square_molecule_placement.localEulerAngles;
+        current_molecule.transform.position = current_molecule.placement.position;
+        current_molecule.transform.localEulerAngles = current_molecule.placement.localEulerAngles;
 
         placeholder.gameObject.SetActive(true);
 
-        moleculeState = MoleculeState.idle;
+        current_molecule.moleculeState = MoleculeState.idle;
+
+        current_molecule.ToggleIndicator(false);
     }
 
     bool is_Insert = false;
@@ -86,36 +98,41 @@ public class MoleculeHandler : MonoBehaviour
     {
         if (!is_Insert)
         {
-            is_Remove = false;
             is_Insert = true;
-
             StartCoroutine(InsertMolecule());
         }
     }
 
-    bool is_Remove = false;
     void Event_RemoveMolecule()
     {
-        if (!is_Remove)
+        if (is_Insert)
         {
             is_Insert = false;
-            is_Remove = true;
-
             StartCoroutine(RemoveMolecule());
         }
     }
 
     void Event_Handler()
     {
-        if (moleculeState == MoleculeState.idle)
+        if (!current_molecule)
+            return;
+
+        switch (current_molecule.moleculeState)
         {
-            if (GetDistanceBetweenTargets(square_molecule.position, placeholder.position) < 10f)
-                Current_Event = Event_InsertMolecule;
-        }
-        else
-        {
-            if (GetDistanceBetweenTargets(square_molecule_placement.position, square_molecule.position) < 20f)
-                Current_Event = Event_RemoveMolecule;
+            case MoleculeState.idle:
+
+                if (GetDistanceBetweenTargets(current_molecule.transform.position, placeholder.position) < 10f)
+                    Current_Event = Event_InsertMolecule;
+
+                break;
+
+            case MoleculeState.inserted:
+
+                if (GetDistanceBetweenTargets(current_molecule.placement.position,
+                    current_molecule.transform.position) < 15f)
+                    Current_Event = Event_RemoveMolecule;
+
+                break;
         }
 
         if (Current_Event != null)
@@ -123,7 +140,7 @@ public class MoleculeHandler : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         Event_Handler();
     }

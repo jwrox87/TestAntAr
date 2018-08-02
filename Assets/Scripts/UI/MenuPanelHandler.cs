@@ -86,21 +86,6 @@ public class MenuPanelHandler : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate () {
 
-        //if (InputHandler.Mouse_GetSwipeDirection() != InputHandler.SwipeDirection.none)
-        //{
-        //    if (InputHandler.Mouse_GetSwipeDirection() == InputHandler.SwipeDirection.left)
-        //    {
-        //        if (InputHandler.swipeAmount > 50)
-        //            MovePanelsBack(InputHandler.swipeAmount);
-        //    }
-
-        //    if (InputHandler.Mouse_GetSwipeDirection() == InputHandler.SwipeDirection.right)
-        //    {
-        //        if (InputHandler.swipeAmount > 50)
-        //            MovePanelsForward(InputHandler.swipeAmount);
-        //    }
-        //}
-
         if (InputHandler.isSwipe() == InputHandler.SwipeDirection.left)
         {
             if (InputHandler.swipeAmount > 100)
