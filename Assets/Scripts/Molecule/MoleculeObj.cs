@@ -8,16 +8,20 @@ public class MoleculeObj : MonoBehaviour
     public Transform placement;
     public Transform indicator;
 
+    [HideInInspector]
     public MoleculeState moleculeState = MoleculeState.idle;
     public MoleculeType moleculeType = MoleculeType.diamond;
 
     Renderer moleculeRender;
 
+    public DefaultTrackableEventHandler defaultTrackable { get; set; }
+
 	// Use this for initialization
 	void Start ()
     {
         moleculeRender = GetComponent<Renderer>();
-	}
+        defaultTrackable = transform.parent.GetComponent<DefaultTrackableEventHandler>();
+    }
 
     void OnTriggerEnter(Collider col)
     {
@@ -25,6 +29,11 @@ public class MoleculeObj : MonoBehaviour
         {
             handler.current_molecule = this;
         }
+    }
+
+    public void SetRendererState(bool b)
+    {
+        moleculeRender.enabled = b;
     }
 
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public enum MoleculeState
 {
@@ -25,13 +26,20 @@ public class MoleculeHandler : MonoBehaviour
     public Transform success_target;
     public Transform failure_target;
 
+    public MoleculeMsgHandler msgHandler;
+
     delegate void MoleculeEvent();
     MoleculeEvent Current_Event;
+
+    DefaultTrackableEventHandler surface_defaultTrackable;
 
     // Use this for initialization
     void Start()
     {
-       
+        surface_defaultTrackable = placeholder.root.GetComponent<DefaultTrackableEventHandler>();
+
+        if (!msgHandler)
+            throw new Exception("No msg handler found");
     }
 
     float GetDistanceBetweenTargets(Vector3 pos, Vector3 target)
@@ -44,17 +52,25 @@ public class MoleculeHandler : MonoBehaviour
     {
         placeholder.gameObject.SetActive(false);
 
-        current_molecule.transform.parent = success_target.parent.parent;
-        current_molecule.transform.position = placeholder.position;
+        current_molecule.SetRendererState(true);
+
+        current_molecule.transform.parent = success_target.root;
+        //current_molecule.transform.position = placeholder.position;
         current_molecule.transform.localEulerAngles = success_target.localEulerAngles;
         
         yield return initialdelay;
 
         Transform target;
         if (accepted_moleculeType == current_molecule.moleculeType)
+        {
             target = success_target;
+            msgHandler.ShowMsg(MoleculeMsgHandler.MsgState.correct, true);
+        }
         else
+        {
             target = failure_target;
+            msgHandler.ShowMsg(MoleculeMsgHandler.MsgState.wrong, true);
+        }
 
         while (GetDistanceBetweenTargets(current_molecule.transform.position, target.position) > 0.1f)
         {
@@ -68,6 +84,8 @@ public class MoleculeHandler : MonoBehaviour
         current_molecule.moleculeState = MoleculeState.inserted;
 
         current_molecule.ToggleIndicator(true);
+
+        msgHandler.ShowMsg(false);
     }
 
     IEnumerator RemoveMolecule()
@@ -79,9 +97,13 @@ public class MoleculeHandler : MonoBehaviour
         while (GetDistanceBetweenTargets(current_molecule.transform.position, current_molecule.placement.position) > 0.1f)
         {
             current_molecule.transform.position = Vector3.Lerp(current_molecule.transform.position,
-                current_molecule.placement.position, Time.deltaTime * 2f);
+                current_molecule.placement.position, Time.deltaTime * 4f);
             yield return null;
         }
+
+        //If user hides image target at last minute, make current molecule disappear
+        if (!current_molecule.defaultTrackable.IsTracking)
+            current_molecule.SetRendererState(false);
 
         current_molecule.transform.position = current_molecule.placement.position;
         current_molecule.transform.localEulerAngles = current_molecule.placement.localEulerAngles;
@@ -91,6 +113,7 @@ public class MoleculeHandler : MonoBehaviour
         current_molecule.moleculeState = MoleculeState.idle;
 
         current_molecule.ToggleIndicator(false);
+
     }
 
     bool is_Insert = false;
@@ -112,6 +135,7 @@ public class MoleculeHandler : MonoBehaviour
         }
     }
 
+
     void Event_Handler()
     {
         if (!current_molecule)
@@ -128,8 +152,10 @@ public class MoleculeHandler : MonoBehaviour
 
             case MoleculeState.inserted:
 
-                if (GetDistanceBetweenTargets(current_molecule.placement.position,
-                    current_molecule.transform.position) < 15f)
+                if (!surface_defaultTrackable.IsTracking)
+                    return;
+
+                if (current_molecule.defaultTrackable.IsTracking)
                     Current_Event = Event_RemoveMolecule;
 
                 break;
