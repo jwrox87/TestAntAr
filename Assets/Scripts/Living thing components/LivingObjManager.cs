@@ -11,7 +11,6 @@ public static class DrawPaths
     }
 }
 
-
 public class LivingObjManager : MonoBehaviour
 {
     public Cat cat;
@@ -66,11 +65,6 @@ public class LivingObjManager : MonoBehaviour
         obj.GetAnimatorComponent().SetFloat("walkSpeed", 0);
 
         obj.gameObject.SetActive(false);
-    }
-
-    private void Start()
-    {
-        
     }
 
     // Use this for initialization
@@ -296,13 +290,13 @@ public class LivingObjManager : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        if (ObjUpdate(cat, 3f,0.5f, true))
+        if (ObjUpdate(cat, 3f,0.8f, true))
             cat.UpdateAnimationState();
 
         if (ObjUpdate(dog, 3f,0f, true))
             dog.UpdateAnimationState();
 
-        if (ObjUpdate(boy, 10f,0f, true))
+        if (ObjUpdate(boy, 10f,0.8f, true))
             boy.UpdateAnimationState();
     }
 }

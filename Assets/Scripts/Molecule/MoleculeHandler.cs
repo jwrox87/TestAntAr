@@ -53,9 +53,10 @@ public class MoleculeHandler : MonoBehaviour
         placeholder.gameObject.SetActive(false);
 
         current_molecule.SetRendererState(true);
+        current_molecule.StopCoroutine(current_molecule.enumerator);
+        current_molecule.SetKinematic(true);
 
         current_molecule.transform.parent = success_target.root;
-        //current_molecule.transform.position = placeholder.position;
         current_molecule.transform.localEulerAngles = success_target.localEulerAngles;
         
         yield return initialdelay;
@@ -81,38 +82,38 @@ public class MoleculeHandler : MonoBehaviour
         current_molecule.transform.position = target.position;
         current_molecule.transform.localEulerAngles = target.localEulerAngles;
 
-        current_molecule.moleculeState = MoleculeState.inserted;
-
         current_molecule.ToggleIndicator(true);
 
         msgHandler.ShowMsg(false);
+
+        current_molecule.moleculeState = MoleculeState.inserted;
     }
 
     IEnumerator RemoveMolecule()
     {
+        current_molecule.transform.parent = null;
+
         yield return initialdelay;
 
-        current_molecule.transform.parent = current_molecule.placement.parent;
-
-        while (GetDistanceBetweenTargets(current_molecule.transform.position, current_molecule.placement.position) > 0.1f)
+        while (GetDistanceBetweenTargets(current_molecule.transform.position, current_molecule.placement.position) > 2f)
         {
             current_molecule.transform.position = Vector3.Lerp(current_molecule.transform.position,
                 current_molecule.placement.position, Time.deltaTime * 4f);
+
             yield return null;
         }
 
-        //If user hides image target at last minute, make current molecule disappear
-        if (!current_molecule.defaultTrackable.IsTracking)
-            current_molecule.SetRendererState(false);
-
-        current_molecule.transform.position = current_molecule.placement.position;
-        current_molecule.transform.localEulerAngles = current_molecule.placement.localEulerAngles;
+        //current_molecule.transform.position = current_molecule.placement.position;
+        current_molecule.transform.localEulerAngles = current_molecule.initialRotation;
 
         placeholder.gameObject.SetActive(true);
 
-        current_molecule.moleculeState = MoleculeState.idle;
-
         current_molecule.ToggleIndicator(false);
+
+        current_molecule.SetKinematic(false);
+        current_molecule.StartCoroutine(current_molecule.enumerator);
+        
+        current_molecule.moleculeState = MoleculeState.idle;
 
     }
 
@@ -135,10 +136,9 @@ public class MoleculeHandler : MonoBehaviour
         }
     }
 
-
     void Event_Handler()
     {
-        if (!current_molecule)
+        if (!current_molecule || !surface_defaultTrackable.IsTracking)
             return;
 
         switch (current_molecule.moleculeState)
@@ -147,13 +147,10 @@ public class MoleculeHandler : MonoBehaviour
 
                 if (GetDistanceBetweenTargets(current_molecule.transform.position, placeholder.position) < 10f)
                     Current_Event = Event_InsertMolecule;
-
+                
                 break;
 
             case MoleculeState.inserted:
-
-                if (!surface_defaultTrackable.IsTracking)
-                    return;
 
                 if (current_molecule.defaultTrackable.IsTracking)
                     Current_Event = Event_RemoveMolecule;
