@@ -40,6 +40,11 @@ public class ButtonClickEvents : MonoBehaviour
         //loadScreen.StartCoroutine(loadScreen.LoadActivityIcon("Menu"));
     }
 
+    public void GoToMoleculeScene()
+    {
+        loadScreen.StartCoroutine(loadScreen.LoadSceneInOrder("molecule_scene"));
+    }
+
     public void Quit()
     {
         Application.Quit();
